@@ -1,0 +1,6 @@
+.env
+secrets/
+*.pyc
+__pycache__/
+.claude/
+.DS_Store

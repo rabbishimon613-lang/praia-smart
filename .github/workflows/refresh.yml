@@ -1,0 +1,76 @@
+name: refresh site
+
+on:
+  schedule:
+    # Every 15 min — GitHub may delay 5-10 min under load, fine for our use case
+    - cron: '*/15 * * * *'
+  workflow_dispatch:  # manual trigger button in Actions tab
+
+permissions:
+  contents: write     # allows the bot to commit refreshed data + HTML
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false  # let an in-flight run finish
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: install deps
+        run: pip install websockets certifi
+
+      - name: conditions (weather/surf/water/air/tides)
+        run: python workers/conditions.py
+
+      - name: agito (movimento estimate)
+        run: python workers/agito.py
+
+      - name: alerts (INMET)
+        run: python workers/alerts.py
+        continue-on-error: true
+
+      - name: news (RSS aggregation)
+        run: python workers/news.py
+        continue-on-error: true
+
+      - name: ships (AIS — one-shot 90s collect)
+        env:
+          AISSTREAM_KEY: ${{ secrets.AISSTREAM_KEY }}
+        run: python workers/ships.py --once
+        continue-on-error: true
+
+      - name: satellite (only every ~6h, Sentinel passes every 5 days)
+        run: |
+          if [ ! -f data/satellite.json ] || \
+             [ $(( $(date +%s) - $(stat -c %Y data/satellite.json 2>/dev/null || echo 0) )) -gt 21600 ]; then
+            python workers/satellite.py
+          else
+            echo "satellite still fresh, skipping"
+          fi
+        continue-on-error: true
+
+      - name: build static site
+        run: |
+          python web/build.py
+          python web/detail.py
+
+      - name: commit refreshed snapshot
+        run: |
+          git config user.name "praia-smart-bot"
+          git config user.email "bot@praiasmart.local"
+          git add data/ web/index.html web/beach/ web/satellite/ 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "no changes"
+          else
+            git commit -m "refresh $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi

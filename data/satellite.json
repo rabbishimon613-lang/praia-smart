@@ -1,0 +1,525 @@
+{
+  "fetched_at": 1779131620,
+  "by_beach": {
+    "copa-p5": [
+      {
+        "label": "hoje",
+        "target": "2026-05-18",
+        "status": "ok",
+        "date": "2026-05-12",
+        "cloud": 6.9,
+        "item": "S2C_MSIL2A_20260512T130251_R095_T23KPQ_20260512T173107",
+        "image": "satellite/copa-p5/hoje.png"
+      },
+      {
+        "label": "3d",
+        "target": "2026-05-15",
+        "status": "ok",
+        "image": "satellite/copa-p5/hoje.png",
+        "date": "2026-05-12",
+        "cloud": 6.9,
+        "item": "S2C_MSIL2A_20260512T130251_R095_T23KPQ_20260512T173107",
+        "dedup": true
+      },
+      {
+        "label": "7d",
+        "target": "2026-05-11",
+        "status": "ok",
+        "image": "satellite/copa-p5/hoje.png",
+        "date": "2026-05-12",
+        "cloud": 6.9,
+        "item": "S2C_MSIL2A_20260512T130251_R095_T23KPQ_20260512T173107",
+        "dedup": true
+      },
+      {
+        "label": "14d",
+        "target": "2026-05-04",
+        "status": "ok",
+        "date": "2026-05-02",
+        "cloud": 24.0,
+        "item": "S2C_MSIL2A_20260502T130251_R095_T23KPQ_20260502T174410",
+        "image": "satellite/copa-p5/14d.png"
+      },
+      {
+        "label": "30d",
+        "target": "2026-04-18",
+        "status": "ok",
+        "date": "2026-04-17",
+        "cloud": 3.4,
+        "item": "S2B_MSIL2A_20260417T130239_R095_T23KPQ_20260417T162758",
+        "image": "satellite/copa-p5/30d.png"
+      }
+    ],
+    "morro-terceira": [
+      {
+        "label": "hoje",
+        "target": "2026-05-18",
+        "status": "no_data"
+      },
+      {
+        "label": "3d",
+        "target": "2026-05-15",
+        "status": "no_data"
+      },
+      {
+        "label": "7d",
+        "target": "2026-05-11",
+        "status": "ok",
+        "date": "2026-05-04",
+        "cloud": 15.9,
+        "item": "S2B_MSIL2A_20260504T125309_R052_T24LWL_20260504T161550",
+        "image": "satellite/morro-terceira/7d.png"
+      },
+      {
+        "label": "14d",
+        "target": "2026-05-04",
+        "status": "ok",
+        "image": "satellite/morro-terceira/7d.png",
+        "date": "2026-05-04",
+        "cloud": 15.9,
+        "item": "S2B_MSIL2A_20260504T125309_R052_T24LWL_20260504T161550",
+        "dedup": true
+      },
+      {
+        "label": "30d",
+        "target": "2026-04-18",
+        "status": "ok",
+        "date": "2026-04-11",
+        "cloud": 26.2,
+        "item": "S2A_MSIL2A_20260411T125331_R052_T24LWL_20260411T204316",
+        "image": "satellite/morro-terceira/30d.png"
+      }
+    ],
+    "sao-conrado": [
+      {
+        "label": "hoje",
+        "target": "2026-05-18",
+        "status": "ok",
+        "date": "2026-05-12",
+        "cloud": 6.9,
+        "item": "S2C_MSIL2A_20260512T130251_R095_T23KPQ_20260512T173107",
+        "image": "satellite/sao-conrado/hoje.png"
+      },
+      {
+        "label": "3d",
+        "target": "2026-05-15",
+        "status": "ok",
+        "image": "satellite/sao-conrado/hoje.png",
+        "date": "2026-05-12",
+        "cloud": 6.9,
+        "item": "S2C_MSIL2A_20260512T130251_R095_T23KPQ_20260512T173107",
+        "dedup": true
+      },
+      {
+        "label": "7d",
+        "target": "2026-05-11",
+        "status": "ok",
+        "image": "satellite/sao-conrado/hoje.png",
+        "date": "2026-05-12",
+        "cloud": 6.9,
+        "item": "S2C_MSIL2A_20260512T130251_R095_T23KPQ_20260512T173107",
+        "dedup": true
+      },
+      {
+        "label": "14d",
+        "target": "2026-05-04",
+        "status": "ok",
+        "date": "2026-05-02",
+        "cloud": 24.0,
+        "item": "S2C_MSIL2A_20260502T130251_R095_T23KPQ_20260502T174410",
+        "image": "satellite/sao-conrado/14d.png"
+      },
+      {
+        "label": "30d",
+        "target": "2026-04-18",
+        "status": "ok",
+        "date": "2026-04-17",
+        "cloud": 3.4,
+        "item": "S2B_MSIL2A_20260417T130239_R095_T23KPQ_20260417T162758",
+        "image": "satellite/sao-conrado/30d.png"
+      }
+    ],
+    "leblon-mirante": [
+      {
+        "label": "hoje",
+        "target": "2026-05-18",
+        "status": "ok",
+        "date": "2026-05-12",
+        "cloud": 6.9,
+        "item": "S2C_MSIL2A_20260512T130251_R095_T23KPQ_20260512T173107",
+        "image": "satellite/leblon-mirante/hoje.png"
+      },
+      {
+        "label": "3d",
+        "target": "2026-05-15",
+        "status": "ok",
+        "image": "satellite/leblon-mirante/hoje.png",
+        "date": "2026-05-12",
+        "cloud": 6.9,
+        "item": "S2C_MSIL2A_20260512T130251_R095_T23KPQ_20260512T173107",
+        "dedup": true
+      },
+      {
+        "label": "7d",
+        "target": "2026-05-11",
+        "status": "ok",
+        "image": "satellite/leblon-mirante/hoje.png",
+        "date": "2026-05-12",
+        "cloud": 6.9,
+        "item": "S2C_MSIL2A_20260512T130251_R095_T23KPQ_20260512T173107",
+        "dedup": true
+      },
+      {
+        "label": "14d",
+        "target": "2026-05-04",
+        "status": "ok",
+        "date": "2026-05-02",
+        "cloud": 24.0,
+        "item": "S2C_MSIL2A_20260502T130251_R095_T23KPQ_20260502T174410",
+        "image": "satellite/leblon-mirante/14d.png"
+      },
+      {
+        "label": "30d",
+        "target": "2026-04-18",
+        "status": "ok",
+        "date": "2026-04-17",
+        "cloud": 3.4,
+        "item": "S2B_MSIL2A_20260417T130239_R095_T23KPQ_20260417T162758",
+        "image": "satellite/leblon-mirante/30d.png"
+      }
+    ],
+    "balneario-rincao": [
+      {
+        "label": "hoje",
+        "target": "2026-05-18",
+        "status": "ok",
+        "date": "2026-05-10",
+        "cloud": 10.4,
+        "item": "S2A_MSIL2A_20260510T132251_R038_T22JFP_20260511T000409",
+        "image": "satellite/balneario-rincao/hoje.png"
+      },
+      {
+        "label": "3d",
+        "target": "2026-05-15",
+        "status": "ok",
+        "image": "satellite/balneario-rincao/hoje.png",
+        "date": "2026-05-10",
+        "cloud": 10.4,
+        "item": "S2A_MSIL2A_20260510T132251_R038_T22JFP_20260511T000409",
+        "dedup": true
+      },
+      {
+        "label": "7d",
+        "target": "2026-05-11",
+        "status": "ok",
+        "image": "satellite/balneario-rincao/hoje.png",
+        "date": "2026-05-10",
+        "cloud": 10.4,
+        "item": "S2A_MSIL2A_20260510T132251_R038_T22JFP_20260511T000409",
+        "dedup": true
+      },
+      {
+        "label": "14d",
+        "target": "2026-05-04",
+        "status": "ok",
+        "date": "2026-05-03",
+        "cloud": 2.5,
+        "item": "S2B_MSIL2A_20260503T132229_R038_T22JFP_20260503T154032",
+        "image": "satellite/balneario-rincao/14d.png"
+      },
+      {
+        "label": "30d",
+        "target": "2026-04-18",
+        "status": "ok",
+        "date": "2026-04-18",
+        "cloud": 1.7,
+        "item": "S2C_MSIL2A_20260418T132231_R038_T22JFP_20260418T164911",
+        "image": "satellite/balneario-rincao/30d.png"
+      }
+    ],
+    "praia-grande-boqueirao": [
+      {
+        "label": "hoje",
+        "target": "2026-05-18",
+        "status": "no_data"
+      },
+      {
+        "label": "3d",
+        "target": "2026-05-15",
+        "status": "ok",
+        "date": "2026-05-07",
+        "cloud": 4.9,
+        "item": "S2A_MSIL2A_20260507T131251_R138_T23KLP_20260507T224213",
+        "image": "satellite/praia-grande-boqueirao/3d.png"
+      },
+      {
+        "label": "7d",
+        "target": "2026-05-11",
+        "status": "ok",
+        "image": "satellite/praia-grande-boqueirao/3d.png",
+        "date": "2026-05-07",
+        "cloud": 4.9,
+        "item": "S2A_MSIL2A_20260507T131251_R138_T23KLP_20260507T224213",
+        "dedup": true
+      },
+      {
+        "label": "14d",
+        "target": "2026-05-04",
+        "status": "ok",
+        "date": "2026-05-05",
+        "cloud": 0.1,
+        "item": "S2C_MSIL2A_20260505T131241_R138_T23KLP_20260505T163354",
+        "image": "satellite/praia-grande-boqueirao/14d.png"
+      },
+      {
+        "label": "30d",
+        "target": "2026-04-18",
+        "status": "ok",
+        "date": "2026-04-17",
+        "cloud": 0.1,
+        "item": "S2A_MSIL2A_20260417T131301_R138_T23KLP_20260417T224715",
+        "image": "satellite/praia-grande-boqueirao/30d.png"
+      }
+    ],
+    "cabo-frio-forte": [
+      {
+        "label": "hoje",
+        "target": "2026-05-18",
+        "status": "ok",
+        "date": "2026-05-12",
+        "cloud": 12.8,
+        "item": "S2C_MSIL2A_20260512T130251_R095_T23KRQ_20260512T173107",
+        "image": "satellite/cabo-frio-forte/hoje.png"
+      },
+      {
+        "label": "3d",
+        "target": "2026-05-15",
+        "status": "ok",
+        "image": "satellite/cabo-frio-forte/hoje.png",
+        "date": "2026-05-12",
+        "cloud": 12.8,
+        "item": "S2C_MSIL2A_20260512T130251_R095_T23KRQ_20260512T173107",
+        "dedup": true
+      },
+      {
+        "label": "7d",
+        "target": "2026-05-11",
+        "status": "ok",
+        "image": "satellite/cabo-frio-forte/hoje.png",
+        "date": "2026-05-12",
+        "cloud": 12.8,
+        "item": "S2C_MSIL2A_20260512T130251_R095_T23KRQ_20260512T173107",
+        "dedup": true
+      },
+      {
+        "label": "14d",
+        "target": "2026-05-04",
+        "status": "ok",
+        "date": "2026-05-04",
+        "cloud": 27.2,
+        "item": "S2B_MSIL2A_20260504T125309_R052_T23KRQ_20260504T161550",
+        "image": "satellite/cabo-frio-forte/14d.png"
+      },
+      {
+        "label": "30d",
+        "target": "2026-04-18",
+        "status": "ok",
+        "date": "2026-04-19",
+        "cloud": 2.7,
+        "item": "S2C_MSIL2A_20260419T125311_R052_T23KRQ_20260419T173008",
+        "image": "satellite/cabo-frio-forte/30d.png"
+      }
+    ],
+    "balneario-camboriu": [
+      {
+        "label": "hoje",
+        "target": "2026-05-18",
+        "status": "no_data"
+      },
+      {
+        "label": "3d",
+        "target": "2026-05-15",
+        "status": "no_data"
+      },
+      {
+        "label": "7d",
+        "target": "2026-05-11",
+        "status": "no_data"
+      },
+      {
+        "label": "14d",
+        "target": "2026-05-04",
+        "status": "no_data"
+      },
+      {
+        "label": "30d",
+        "target": "2026-04-18",
+        "status": "ok",
+        "date": "2026-04-18",
+        "cloud": 4.4,
+        "item": "S2C_MSIL2A_20260418T132231_R038_T22JGR_20260418T164911",
+        "image": "satellite/balneario-camboriu/30d.png"
+      }
+    ],
+    "santos-gonzaga": [
+      {
+        "label": "hoje",
+        "target": "2026-05-18",
+        "status": "no_data"
+      },
+      {
+        "label": "3d",
+        "target": "2026-05-15",
+        "status": "ok",
+        "date": "2026-05-07",
+        "cloud": 4.9,
+        "item": "S2A_MSIL2A_20260507T131251_R138_T23KLP_20260507T224213",
+        "image": "satellite/santos-gonzaga/3d.png"
+      },
+      {
+        "label": "7d",
+        "target": "2026-05-11",
+        "status": "ok",
+        "image": "satellite/santos-gonzaga/3d.png",
+        "date": "2026-05-07",
+        "cloud": 4.9,
+        "item": "S2A_MSIL2A_20260507T131251_R138_T23KLP_20260507T224213",
+        "dedup": true
+      },
+      {
+        "label": "14d",
+        "target": "2026-05-04",
+        "status": "ok",
+        "date": "2026-05-05",
+        "cloud": 0.1,
+        "item": "S2C_MSIL2A_20260505T131241_R138_T23KLP_20260505T163354",
+        "image": "satellite/santos-gonzaga/14d.png"
+      },
+      {
+        "label": "30d",
+        "target": "2026-04-18",
+        "status": "ok",
+        "date": "2026-04-17",
+        "cloud": 0.1,
+        "item": "S2A_MSIL2A_20260417T131301_R138_T23KLP_20260417T224715",
+        "image": "satellite/santos-gonzaga/30d.png"
+      }
+    ],
+    "guaruja-enseada": [
+      {
+        "label": "hoje",
+        "target": "2026-05-18",
+        "status": "no_data"
+      },
+      {
+        "label": "3d",
+        "target": "2026-05-15",
+        "status": "ok",
+        "date": "2026-05-07",
+        "cloud": 4.9,
+        "item": "S2A_MSIL2A_20260507T131251_R138_T23KLP_20260507T224213",
+        "image": "satellite/guaruja-enseada/3d.png"
+      },
+      {
+        "label": "7d",
+        "target": "2026-05-11",
+        "status": "ok",
+        "image": "satellite/guaruja-enseada/3d.png",
+        "date": "2026-05-07",
+        "cloud": 4.9,
+        "item": "S2A_MSIL2A_20260507T131251_R138_T23KLP_20260507T224213",
+        "dedup": true
+      },
+      {
+        "label": "14d",
+        "target": "2026-05-04",
+        "status": "ok",
+        "date": "2026-05-05",
+        "cloud": 0.1,
+        "item": "S2C_MSIL2A_20260505T131241_R138_T23KLP_20260505T163354",
+        "image": "satellite/guaruja-enseada/14d.png"
+      },
+      {
+        "label": "30d",
+        "target": "2026-04-18",
+        "status": "ok",
+        "date": "2026-04-17",
+        "cloud": 0.1,
+        "item": "S2A_MSIL2A_20260417T131301_R138_T23KLP_20260417T224715",
+        "image": "satellite/guaruja-enseada/30d.png"
+      }
+    ],
+    "floripa-barra-lagoa": [
+      {
+        "label": "hoje",
+        "target": "2026-05-18",
+        "status": "no_data"
+      },
+      {
+        "label": "3d",
+        "target": "2026-05-15",
+        "status": "ok",
+        "date": "2026-05-05",
+        "cloud": 4.1,
+        "item": "S2C_MSIL2A_20260505T131241_R138_T22JGQ_20260505T163354",
+        "image": "satellite/floripa-barra-lagoa/3d.png"
+      },
+      {
+        "label": "7d",
+        "target": "2026-05-11",
+        "status": "ok",
+        "image": "satellite/floripa-barra-lagoa/3d.png",
+        "date": "2026-05-05",
+        "cloud": 4.1,
+        "item": "S2C_MSIL2A_20260505T131241_R138_T22JGQ_20260505T163354",
+        "dedup": true
+      },
+      {
+        "label": "14d",
+        "target": "2026-05-04",
+        "status": "ok",
+        "image": "satellite/floripa-barra-lagoa/3d.png",
+        "date": "2026-05-05",
+        "cloud": 4.1,
+        "item": "S2C_MSIL2A_20260505T131241_R138_T22JGQ_20260505T163354",
+        "dedup": true
+      },
+      {
+        "label": "30d",
+        "target": "2026-04-18",
+        "status": "ok",
+        "date": "2026-04-18",
+        "cloud": 3.6,
+        "item": "S2C_MSIL2A_20260418T132231_R038_T22JGQ_20260418T164911",
+        "image": "satellite/floripa-barra-lagoa/30d.png"
+      }
+    ],
+    "natal-ponta-negra": [
+      {
+        "label": "hoje",
+        "target": "2026-05-18",
+        "status": "no_data"
+      },
+      {
+        "label": "3d",
+        "target": "2026-05-15",
+        "status": "no_data"
+      },
+      {
+        "label": "7d",
+        "target": "2026-05-11",
+        "status": "no_data"
+      },
+      {
+        "label": "14d",
+        "target": "2026-05-04",
+        "status": "no_data"
+      },
+      {
+        "label": "30d",
+        "target": "2026-04-18",
+        "status": "no_data"
+      }
+    ]
+  }
+}

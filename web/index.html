@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a1620">
+<title>praia smart — Brasil agora</title>
+<style>
+:root {
+  --bg: #0a1620; --card: #14283a; --line: #1f3a52;
+  --text: #e7eef5; --muted: #7d97b0;
+  --accent: #4fc4ff; --hi: #ffb86b; --lo: #5fe0a0;
+  --surf: #ffb86b; --swim: #5fe0a0; --sun: #ffd966; --warm: #ff9088;
+  --good: #5fe0a0; --ok: #8bd9d3; --warn: #ffc14d; --bad: #ff7a8a;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased; }
+body { padding-bottom: env(safe-area-inset-bottom); }
+
+.topbar { position: sticky; top: 0; z-index: 10; background: rgba(10,22,32,0.94);
+  backdrop-filter: blur(12px); padding: 12px 16px 10px;
+  padding-top: calc(12px + env(safe-area-inset-top));
+  border-bottom: 1px solid var(--line); }
+.topbar h1 { margin: 0; font-size: 18px; font-weight: 700; }
+.topbar h1 .em { color: var(--accent); }
+.topbar .sub { color: var(--muted); font-size: 12px; margin-top: 4px; }
+
+.pills { display: flex; gap: 6px; margin-top: 10px; overflow-x: auto;
+  -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+.pills::-webkit-scrollbar { display: none; }
+.pill { flex: 0 0 auto; background: transparent; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px;
+  font: inherit; font-size: 12px; font-weight: 600; letter-spacing: 0.3px;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: all 0.15s; }
+.pill:hover { color: var(--text); border-color: var(--muted); }
+.pill.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.pill.nav { text-decoration: none; color: var(--text); border-color: transparent;
+  background: rgba(255,255,255,0.04); }
+.pill.nav:hover, .pill.nav:active { background: rgba(79,196,255,0.15); color: var(--accent); }
+.pill.nav-first { margin-left: auto; }
+
+.hero { padding: 14px 12px 4px; }
+.hero-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+@media (min-width: 600px) { .hero-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; } }
+.hero-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 12px 14px; display: flex; flex-direction: column; gap: 2px;
+  border-left: 3px solid var(--accent);
+  text-decoration: none; color: inherit; -webkit-tap-highlight-color: transparent; }
+.hero-card:active { transform: scale(0.98); }
+.hero-card.surf { border-left-color: var(--surf); }
+.hero-card.swim { border-left-color: var(--swim); }
+.hero-card.sun { border-left-color: var(--sun); }
+.hero-card .ico { font-size: 18px; }
+.hero-card .h { font-size: 11px; color: var(--muted); text-transform: uppercase;
+  letter-spacing: 0.5px; font-weight: 600; }
+.hero-card .name { font-size: 17px; font-weight: 700; margin-top: 2px; }
+.hero-card .why { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+main { padding: 12px; display: grid; gap: 14px; grid-template-columns: 1fr; }
+@media (min-width: 720px) { main { grid-template-columns: repeat(2, 1fr); padding: 16px; gap: 16px; } }
+@media (min-width: 1100px) { main { grid-template-columns: repeat(3, 1fr); max-width: 1400px; margin: 0 auto; } }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  overflow: hidden; display: flex; flex-direction: column; }
+.card-h { display: flex; justify-content: space-between; align-items: center;
+  gap: 8px; padding: 12px 14px 8px; }
+.card-h h2 { margin: 0; font-size: 16px; font-weight: 700; }
+.card-h .posto { color: var(--muted); font-weight: 500; margin-left: 4px; font-size: 14px; }
+.badges { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+.badge { font-size: 10px; padding: 3px 7px; border-radius: 999px; font-weight: 600;
+  white-space: nowrap; }
+.badge.surf { background: rgba(255,184,107,0.18); color: var(--surf); }
+.badge.swim { background: rgba(95,224,160,0.18); color: var(--swim); }
+.badge.warm { background: rgba(255,144,136,0.18); color: var(--warm); }
+
+.media { aspect-ratio: 16/9; background: #000; position: relative; }
+.media iframe { width: 100%; height: 100%; border: 0; display: block; }
+.no-cam { position: absolute; inset: 0; display: grid; place-items: center;
+  color: var(--muted); font-size: 13px; background: linear-gradient(135deg, #1a2f44, #0f2030); }
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: var(--line); border-top: 1px solid var(--line); }
+.stat { background: var(--card); padding: 10px 12px; display: flex; flex-direction: column;
+  align-items: flex-start; gap: 2px; min-height: 70px; }
+.stat .lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.stat .val { font-size: 20px; font-weight: 700; line-height: 1.1; }
+.stat .val small { font-size: 11px; font-weight: 500; color: var(--muted); }
+.stat .val.hi { color: var(--hi); }
+.stat .val.lo { color: var(--lo); }
+.stat .val.muted { color: var(--muted); font-weight: 500; }
+.stat .val.mv { font-size: 14px; padding: 3px 9px; border-radius: 999px;
+  font-weight: 700; text-transform: lowercase; letter-spacing: 0.2px;
+  display: inline-block; line-height: 1.4; align-self: flex-start; }
+.stat .val.mv-v { background: rgba(95,224,160,0.18); color: var(--good); }
+.stat .val.mv-m { background: rgba(139,217,211,0.18); color: var(--ok); }
+.stat .val.mv-c { background: rgba(255,193,77,0.18); color: var(--warn); }
+.stat .val.mv-l { background: rgba(255,122,138,0.18); color: var(--bad); }
+
+.ad-slot { background: rgba(255,255,255,0.03); border: 1px solid var(--line);
+  border-radius: 12px; padding: 8px; text-align: center;
+  grid-column: 1 / -1; }
+.ad-slot iframe { max-width: 600px; margin: 0 auto; }
+.stat .sub { font-size: 11px; color: var(--muted); }
+
+.card-link { color: inherit; text-decoration: none; display: block;
+  -webkit-tap-highlight-color: transparent; }
+.card-link:active { background: rgba(79,196,255,0.04); }
+.card-cta { padding: 8px 14px 12px; font-size: 11px; color: var(--accent);
+  font-weight: 600; letter-spacing: 0.3px; }
+
+.tide { padding: 9px 14px; font-size: 12px; color: var(--text);
+  display: flex; gap: 10px; align-items: center; border-top: 1px solid var(--line); }
+.tide .lbl { font-size: 10px; color: var(--muted); text-transform: uppercase;
+  letter-spacing: 0.5px; font-weight: 600; }
+.tide small { color: var(--muted); margin-left: 2px; }
+
+.alert-banner { background: rgba(255,122,138,0.12);
+  border-bottom: 1px solid rgba(255,122,138,0.3);
+  padding: 10px 16px; font-size: 13px; color: var(--bad);
+  display: flex; gap: 8px; align-items: center; }
+.alert-banner .ev { color: var(--text); font-weight: 600; }
+.alert-banner .area { color: var(--muted); font-size: 11px; }
+
+.footer { text-align: center; padding: 24px 16px; color: var(--muted); font-size: 11px; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <h1>praia <span class="em">smart</span></h1>
+  <div class="sub">Brasil · atualizado 03:17 · ar ok · uv 0.0 · nuvens 83%</div>
+  <div class="pills"><button class="pill active" data-st="all">todas</button><button class="pill" data-st="BA">BA</button><button class="pill" data-st="RJ">RJ</button><button class="pill" data-st="RN">RN</button><button class="pill" data-st="SC">SC</button><button class="pill" data-st="SP">SP</button><a class="pill nav nav-first" href="melhores.html">melhores</a><a class="pill nav" href="sobre.html">sobre</a></div>
+</header>
+
+<main id="grid">
+
+<article class="card" data-state="RJ" data-surf="0.636" data-swim="0.489" data-sun="0.276">
+  <a class="card-link" href="beach/copa-p5.html">
+  <header class="card-h">
+    <h2>Copacabana <span class="posto">P5</span></h2>
+    <div class="badges"><span class="badge surf">🏄 melhor onda</span></div>
+  </header>
+  </a>
+  <div class="media"><iframe src="https://www.youtube.com/embed/qShdkqvyCww?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">onda</span>
+      <span class="val">1.1m</span>
+      <span class="sub">11s período</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">água</span>
+      <span class="val">24°</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">vento</span>
+      <span class="val">3<small> km/h</small></span>
+      <span class="sub">↓ 356°</span>
+    </div>
+    <div class="stat"><span class="lbl">movimento</span><span class="val mv mv-v">vazia</span></div>
+  </div>
+  <a class="card-link" href="beach/copa-p5.html"><div class="tide"><span class="lbl">maré</span><span>↑ 16:00 <small>+0.6m</small> · ↓ 09:00 <small>-0.5m</small></span></div><div class="card-cta">ver detalhes →</div></a>
+</article>
+
+
+<article class="card" data-state="RJ" data-surf="0.636" data-swim="0.489" data-sun="0.276">
+  <a class="card-link" href="beach/leblon-mirante.html">
+  <header class="card-h">
+    <h2>Leblon <span class="posto">Mirante</span></h2>
+    <div class="badges"></div>
+  </header>
+  </a>
+  <div class="media"><div class="no-cam">imagem indisponível</div></div>
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">onda</span>
+      <span class="val">1.1m</span>
+      <span class="sub">11s período</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">água</span>
+      <span class="val">24°</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">vento</span>
+      <span class="val">3<small> km/h</small></span>
+      <span class="sub">↓ 356°</span>
+    </div>
+    <div class="stat"><span class="lbl">movimento</span><span class="val mv mv-v">vazia</span></div>
+  </div>
+  <a class="card-link" href="beach/leblon-mirante.html"><div class="tide"><span class="lbl">maré</span><span>↑ 16:00 <small>+0.6m</small> · ↓ 09:00 <small>-0.5m</small></span></div><div class="card-cta">ver detalhes →</div></a>
+</article>
+
+
+<div class="ad-slot">
+  <iframe data-aa='2438112' src='//acceptable.a-ads.com/2438112/?size=Adaptive'
+    style='border:0;padding:0;width:100%;height:90px;overflow:hidden;display:block;'></iframe>
+</div>
+
+
+<article class="card" data-state="SC" data-surf="0.629" data-swim="0.361" data-sun="0.069">
+  <a class="card-link" href="beach/balneario-rincao.html">
+  <header class="card-h">
+    <h2>Balneário Rinção <span class="posto">Orla</span></h2>
+    <div class="badges"></div>
+  </header>
+  </a>
+  <div class="media"><iframe src="https://www.youtube.com/embed/mWsPnnbHKE0?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">onda</span>
+      <span class="val hi">1.5m</span>
+      <span class="sub">7s período</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">água</span>
+      <span class="val">22°</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">vento</span>
+      <span class="val">20<small> km/h</small></span>
+      <span class="sub">↗ 225°</span>
+    </div>
+    <div class="stat"><span class="lbl">movimento</span><span class="val mv mv-v">vazia</span></div>
+  </div>
+  <a class="card-link" href="beach/balneario-rincao.html"><div class="tide"><span class="lbl">maré</span><span>↑ 19:00 <small>+0.7m</small> · ↓ 09:00 <small>-0.1m</small></span></div><div class="card-cta">ver detalhes →</div></a>
+</article>
+
+
+<article class="card" data-state="RJ" data-surf="0.609" data-swim="0.486" data-sun="0.284">
+  <a class="card-link" href="beach/sao-conrado.html">
+  <header class="card-h">
+    <h2>São Conrado <span class="posto">Praia do Pepino</span></h2>
+    <div class="badges"></div>
+  </header>
+  </a>
+  <div class="media"><iframe src="https://www.youtube.com/embed/yugTx66OKu4?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">onda</span>
+      <span class="val">1.1m</span>
+      <span class="sub">11s período</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">água</span>
+      <span class="val">24°</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">vento</span>
+      <span class="val lo">1<small> km/h</small></span>
+      <span class="sub">↓ 349°</span>
+    </div>
+    <div class="stat"><span class="lbl">movimento</span><span class="val mv mv-v">vazia</span></div>
+  </div>
+  <a class="card-link" href="beach/sao-conrado.html"><div class="tide"><span class="lbl">maré</span><span>↑ 16:00 <small>+0.6m</small> · ↓ 09:00 <small>-0.5m</small></span></div><div class="card-cta">ver detalhes →</div></a>
+</article>
+
+
+<article class="card" data-state="SP" data-surf="0.563" data-swim="0.522" data-sun="0.196">
+  <a class="card-link" href="beach/guaruja-enseada.html">
+  <header class="card-h">
+    <h2>Guarujá <span class="posto">Enseada P11</span></h2>
+    <div class="badges"></div>
+  </header>
+  </a>
+  <div class="media"><iframe src="https://www.youtube.com/embed/v5Y6WsD577M?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">onda</span>
+      <span class="val">0.9m</span>
+      <span class="sub">10s período</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">água</span>
+      <span class="val">24°</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">vento</span>
+      <span class="val">6<small> km/h</small></span>
+      <span class="sub">↘ 309°</span>
+    </div>
+    <div class="stat"><span class="lbl">movimento</span><span class="val mv mv-v">vazia</span></div>
+  </div>
+  <a class="card-link" href="beach/guaruja-enseada.html"><div class="tide"><span class="lbl">maré</span><span>↑ 15:00 <small>+0.8m</small> · ↓ 10:00 <small>-0.6m</small></span></div><div class="card-cta">ver detalhes →</div></a>
+</article>
+
+
+<article class="card" data-state="SP" data-surf="0.56" data-swim="0.519" data-sun="0.175">
+  <a class="card-link" href="beach/santos-gonzaga.html">
+  <header class="card-h">
+    <h2>Santos <span class="posto">Gonzaga Canal 2</span></h2>
+    <div class="badges"></div>
+  </header>
+  </a>
+  <div class="media"><iframe src="https://www.youtube.com/embed/l69Dc4s9qxk?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">onda</span>
+      <span class="val">0.9m</span>
+      <span class="sub">10s período</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">água</span>
+      <span class="val">24°</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">vento</span>
+      <span class="val">4<small> km/h</small></span>
+      <span class="sub">↘ 337°</span>
+    </div>
+    <div class="stat"><span class="lbl">movimento</span><span class="val mv mv-v">vazia</span></div>
+  </div>
+  <a class="card-link" href="beach/santos-gonzaga.html"><div class="tide"><span class="lbl">maré</span><span>↑ 15:00 <small>+0.8m</small> · ↓ 10:00 <small>-0.6m</small></span></div><div class="card-cta">ver detalhes →</div></a>
+</article>
+
+
+<article class="card" data-state="SP" data-surf="0.553" data-swim="0.516" data-sun="0.177">
+  <a class="card-link" href="beach/praia-grande-boqueirao.html">
+  <header class="card-h">
+    <h2>Praia Grande <span class="posto">Boqueirão</span></h2>
+    <div class="badges"></div>
+  </header>
+  </a>
+  <div class="media"><iframe src="https://www.youtube.com/embed/afk7Axyf6vI?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">onda</span>
+      <span class="val">0.9m</span>
+      <span class="sub">10s período</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">água</span>
+      <span class="val">24°</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">vento</span>
+      <span class="val">3<small> km/h</small></span>
+      <span class="sub">↘ 328°</span>
+    </div>
+    <div class="stat"><span class="lbl">movimento</span><span class="val mv mv-v">vazia</span></div>
+  </div>
+  <a class="card-link" href="beach/praia-grande-boqueirao.html"><div class="tide"><span class="lbl">maré</span><span>↑ 15:00 <small>+0.8m</small> · ↓ 10:00 <small>-0.5m</small></span></div><div class="card-cta">ver detalhes →</div></a>
+</article>
+
+
+<div class="ad-slot">
+  <iframe data-aa='2438112' src='//acceptable.a-ads.com/2438112/?size=Adaptive'
+    style='border:0;padding:0;width:100%;height:90px;overflow:hidden;display:block;'></iframe>
+</div>
+
+
+<article class="card" data-state="RJ" data-surf="0.514" data-swim="0.516" data-sun="0.468">
+  <a class="card-link" href="beach/cabo-frio-forte.html">
+  <header class="card-h">
+    <h2>Cabo Frio <span class="posto">Praia do Forte</span></h2>
+    <div class="badges"></div>
+  </header>
+  </a>
+  <div class="media"><iframe src="https://www.youtube.com/embed/p6ppa-V3-KQ?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">onda</span>
+      <span class="val">0.9m</span>
+      <span class="sub">10s período</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">água</span>
+      <span class="val">24°</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">vento</span>
+      <span class="val">1<small> km/h</small></span>
+      <span class="sub">← 81°</span>
+    </div>
+    <div class="stat"><span class="lbl">movimento</span><span class="val mv mv-v">vazia</span></div>
+  </div>
+  <a class="card-link" href="beach/cabo-frio-forte.html"><div class="tide"><span class="lbl">maré</span><span>↑ 16:00 <small>+0.6m</small> · ↓ 09:00 <small>-0.6m</small></span></div><div class="card-cta">ver detalhes →</div></a>
+</article>
+
+
+<article class="card" data-state="RN" data-surf="0.423" data-swim="0.68" data-sun="0.452">
+  <a class="card-link" href="beach/natal-ponta-negra.html">
+  <header class="card-h">
+    <h2>Natal <span class="posto">Ponta Negra</span></h2>
+    <div class="badges"><span class="badge warm">🌡 água quente</span></div>
+  </header>
+  </a>
+  <div class="media"><iframe src="https://www.youtube.com/embed/yenIUzAsiBY?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">onda</span>
+      <span class="val">0.8m</span>
+      <span class="sub">7s período</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">água</span>
+      <span class="val hi">28°</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">vento</span>
+      <span class="val">11<small> km/h</small></span>
+      <span class="sub">↖ 147°</span>
+    </div>
+    <div class="stat"><span class="lbl">movimento</span><span class="val mv mv-v">vazia</span></div>
+  </div>
+  <a class="card-link" href="beach/natal-ponta-negra.html"><div class="tide"><span class="lbl">maré</span><span>↑ 17:00 <small>+1.2m</small> · ↓ 11:00 <small>-1.1m</small></span></div><div class="card-cta">ver detalhes →</div></a>
+</article>
+
+
+<article class="card" data-state="SC" data-surf="0.377" data-swim="0.446" data-sun="0.081">
+  <a class="card-link" href="beach/floripa-barra-lagoa.html">
+  <header class="card-h">
+    <h2>Florianópolis <span class="posto">Barra da Lagoa</span></h2>
+    <div class="badges"></div>
+  </header>
+  </a>
+  <div class="media"><iframe src="https://www.youtube.com/embed/v9ne2bJD01U?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">onda</span>
+      <span class="val">0.8m</span>
+      <span class="sub">5s período</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">água</span>
+      <span class="val">22°</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">vento</span>
+      <span class="val hi">24<small> km/h</small></span>
+      <span class="sub">↑ 190°</span>
+    </div>
+    <div class="stat"><span class="lbl">movimento</span><span class="val mv mv-v">vazia</span></div>
+  </div>
+  <a class="card-link" href="beach/floripa-barra-lagoa.html"><div class="tide"><span class="lbl">maré</span><span>↑ 02:00 <small>+0.5m</small> · ↓ 09:00 <small>-0.2m</small></span></div><div class="card-cta">ver detalhes →</div></a>
+</article>
+
+
+<article class="card" data-state="SC" data-surf="0.348" data-swim="0.464" data-sun="0.133">
+  <a class="card-link" href="beach/balneario-camboriu.html">
+  <header class="card-h">
+    <h2>Balneário Camboriú <span class="posto">Hotel Marambaia</span></h2>
+    <div class="badges"></div>
+  </header>
+  </a>
+  <div class="media"><iframe src="https://www.youtube.com/embed/j4Wne61IJ3I?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">onda</span>
+      <span class="val">0.8m</span>
+      <span class="sub">4s período</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">água</span>
+      <span class="val">22°</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">vento</span>
+      <span class="val">10<small> km/h</small></span>
+      <span class="sub">↑ 197°</span>
+    </div>
+    <div class="stat"><span class="lbl">movimento</span><span class="val mv mv-v">vazia</span></div>
+  </div>
+  <a class="card-link" href="beach/balneario-camboriu.html"><div class="tide"><span class="lbl">maré</span><span>↑ 15:00 <small>+0.8m</small> · ↓ 07:00 <small>-0.2m</small></span></div><div class="card-cta">ver detalhes →</div></a>
+</article>
+
+
+<article class="card" data-state="BA" data-surf="0.32" data-swim="0.735" data-sun="0.232">
+  <a class="card-link" href="beach/morro-terceira.html">
+  <header class="card-h">
+    <h2>Morro de São Paulo <span class="posto">Terceira Praia</span></h2>
+    <div class="badges"><span class="badge swim">🏊 mais calma</span></div>
+  </header>
+  </a>
+  <div class="media"><iframe src="https://www.youtube.com/embed/f2qPp97kJ_I?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+  <div class="stats">
+    <div class="stat">
+      <span class="lbl">onda</span>
+      <span class="val lo">0.5m</span>
+      <span class="sub">7s período</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">água</span>
+      <span class="val">28°</span>
+    </div>
+    <div class="stat">
+      <span class="lbl">vento</span>
+      <span class="val">4<small> km/h</small></span>
+      <span class="sub">↗ 234°</span>
+    </div>
+    <div class="stat"><span class="lbl">movimento</span><span class="val mv mv-v">vazia</span></div>
+  </div>
+  <a class="card-link" href="beach/morro-terceira.html"><div class="tide"><span class="lbl">maré</span><span>↑ 16:00 <small>+1.2m</small> · ↓ 10:00 <small>-0.9m</small></span></div><div class="card-cta">ver detalhes →</div></a>
+</article>
+
+
+<div class="ad-slot">
+  <iframe data-aa='2438112' src='//acceptable.a-ads.com/2438112/?size=Adaptive'
+    style='border:0;padding:0;width:100%;height:90px;overflow:hidden;display:block;'></iframe>
+</div>
+
+</main>
+<div class="footer">dados Open-Meteo · câmeras YouTube · v0.3</div>
+<script>
+(()=>{
+  const pills = document.querySelectorAll('.pill');
+  pills.forEach(b => b.addEventListener('click', () => {
+    pills.forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    const st = b.dataset.st;
+    document.querySelectorAll('.card').forEach(c => {
+      c.style.display = (st === 'all' || c.dataset.state === st) ? '' : 'none';
+    });
+  }));
+})();
+</script>
+</body>
+</html>

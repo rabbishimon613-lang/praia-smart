@@ -1,6 +1,28 @@
 {
-  "fetched_at": 1779187823,
+  "fetched_at": 1779214772,
   "alerts": [
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54428",
+      "event": "Tempestade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-05-19 00:00:00.0",
+      "end": "2026-05-19 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 19/05/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Central Mineira, Zona da Mata, São José do Rio Preto, Triângulo Mineiro/Alto Paranaíba, Campinas, Oeste de Minas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Sul Espírito-santense, Central Espírito-santense, Campo das Vertentes, Ribeirão Preto, Araçatuba, Macro Metropolitana Paulista, Marília, Metropolitana de Belo Horizonte, Araraquara, Sul Fluminense, Vale do Paraíba Paulista, Noroeste Fluminense, Baixadas, Centro Fluminense, Metropolitana de São Paulo, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Assis, Norte Fluminense, Presidente Prudente"
+    },
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54427",
+      "event": "Tempestade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-05-19 09:35:00.0",
+      "end": "2026-05-21 09:00:00.0",
+      "description": "INMET publica aviso iniciando em: 19/05/2026 09:35. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Triângulo Mineiro/Alto Paranaíba, Central Mineira, Zona da Mata, Sul Goiano, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Central Espírito-santense, Leste de Mato Grosso do Sul, Campinas, Oeste de Minas, Bauru, Piracicaba, Vale do Rio Doce, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Sul Espírito-santense, Campo das Vertentes, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Macro Metropolitana Paulista, Marília, Metropolitana de Belo Horizonte, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Centro Goiano, Pantanais Sul Mato-grossense, Norte Pioneiro Paranaense, Sul Fluminense, Vale do Paraíba Paulista, Noroeste Fluminense, Litoral Norte Espírito-santense, Baixadas, Centro Fluminense, Noroeste Goiano, Metropolitana de São Paulo, Assis, Noroeste Espírito-santense, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Norte Fluminense, Noroeste Paranaense, Noroeste de Minas, Centro Oriental Paranaense"
+    },
     {
       "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
       "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54423",
@@ -11,17 +33,6 @@
       "end": "2026-05-19 23:59:00.0",
       "description": "INMET publica aviso iniciando em: 19/05/2026 12:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
       "area": "Aviso para as Áreas: Zona da Mata, São José do Rio Preto, Triângulo Mineiro/Alto Paranaíba, Campinas, Oeste de Minas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Sul Espírito-santense, Central Espírito-santense, Campo das Vertentes, Ribeirão Preto, Araçatuba, Macro Metropolitana Paulista, Marília, Metropolitana de Belo Horizonte, Araraquara, Sul Fluminense, Vale do Paraíba Paulista, Noroeste Fluminense, Baixadas, Central Mineira, Centro Fluminense, Metropolitana de São Paulo, Metropolitana do Rio de Janeiro, Assis, Litoral Sul Paulista, Norte Fluminense, Presidente Prudente"
-    },
-    {
-      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54422",
-      "event": "Tempestade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-05-19 00:00:00.0",
-      "end": "2026-05-19 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 19/05/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
-      "area": "Aviso para as Áreas: Central Mineira, Zona da Mata, São José do Rio Preto, Triângulo Mineiro/Alto Paranaíba, Campinas, Oeste de Minas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Sul Espírito-santense, Central Espírito-santense, Campo das Vertentes, Ribeirão Preto, Araçatuba, Macro Metropolitana Paulista, Marília, Metropolitana de Belo Horizonte, Araraquara, Sul Fluminense, Vale do Paraíba Paulista, Noroeste Fluminense, Baixadas, Centro Fluminense, Metropolitana de São Paulo, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Assis, Norte Fluminense, Presidente Prudente"
     }
   ]
 }

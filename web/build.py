@@ -657,12 +657,12 @@ a { color: inherit; text-decoration: none; }
 .wordmark { display: inline-flex; align-items: baseline; gap: 6px; letter-spacing: -0.01em; }
 .wordmark .wm-praia {
   font-family: var(--font-serif); font-style: italic; font-weight: 400;
-  font-size: 28px; line-height: 1; color: var(--accent);
+  font-size: 42px; line-height: 1; color: var(--accent);
   margin-right: -1px; letter-spacing: -0.02em;
 }
 .wordmark .wm-smart {
   font-family: var(--font-sans); font-weight: 700;
-  font-size: 18px; letter-spacing: -0.005em; color: var(--ink);
+  font-size: 26px; letter-spacing: -0.005em; color: var(--ink);
 }
 .topbar-sub {
   display: flex; align-items: center; gap: 7px;
@@ -1135,10 +1135,6 @@ def main():
 <header class="topbar">
   <div class="topbar-row1">
     {wordmark}
-  </div>
-  <div class="topbar-sub">
-    <span class="dot dot--live"></span>
-    <span>{region_label} · atualizado {ts} · {aqi_text} · uv {uv_avg} · nuvens {cloud_avg}%</span>
   </div>
   <div class="pills">{state_pills}</div>
 </header>

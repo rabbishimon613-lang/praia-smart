@@ -26,7 +26,7 @@ AD_HTML = """
 <div class="ad-slot">
   <div class="ad-slot-tag">anúncio</div>
   <iframe data-aa='2438146' src='//acceptable.a-ads.com/2438146/?size=Adaptive'
-    style='border:0;padding:0;width:70%;height:auto;overflow:hidden;display:block;margin:auto;background:transparent;'></iframe>
+    style='border:0;padding:0;width:70%;height:90px;overflow:hidden;display:block;margin:auto;background:transparent;'></iframe>
 </div>
 """
 

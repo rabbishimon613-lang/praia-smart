@@ -2,6 +2,10 @@
 
 Mobile-first. Leads with cross-posto winners ("qual praia pra X agora"),
 sorts cards by surf score, badges/highlights notable values.
+
+Visual redesign: light "praia 10am" beach palette, sun-arc score viz,
+24h activity strip, parasol crowd meter, Plus Jakarta Sans + Instrument
+Serif italic wordmark.
 """
 import json
 import math
@@ -16,11 +20,13 @@ AGITO = os.path.join(ROOT, "data", "agito.json")
 OUT = os.path.join(ROOT, "web", "index.html")
 
 BUCKET_CLASS = {"vazia": "v", "moderada": "m", "cheia": "c", "lotada": "l"}
+BUCKET_INDEX = {"vazia": 1, "moderada": 2, "cheia": 3, "lotada": 4}
 
 AD_HTML = """
 <div class="ad-slot">
-  <iframe data-aa='2438112' src='//acceptable.a-ads.com/2438112/?size=Adaptive'
-    style='border:0;padding:0;width:100%;height:90px;overflow:hidden;display:block;'></iframe>
+  <div class="ad-slot-tag">anúncio</div>
+  <iframe data-aa='2438146' src='//acceptable.a-ads.com/2438146/?size=Adaptive'
+    style='border:0;padding:0;width:70%;height:auto;overflow:hidden;display:block;margin:auto;background:transparent;'></iframe>
 </div>
 """
 
@@ -57,17 +63,27 @@ def offshore_component(wind_dir):
     return math.cos(math.radians(wind_dir))
 
 
+def _bell(x, center, width):
+    try:
+        return math.exp(-((x - center) ** 2) / (2 * width ** 2))
+    except Exception:
+        return 0
+
+
+# ─────────────────────────────────────────────────────────────
+# Current-condition scores (used to sort cards + pick hero)
+# ─────────────────────────────────────────────────────────────
+
 def surf_score(p):
     s, w = p["surf"], p["weather"]
     h = s.get("wave_height_m") or 0
     period = s.get("wave_period_s") or 0
     wind = w.get("wind_kmh") or 0
-    # Bell curve around 1.5m, zero outside 0.4-3.0m
     if h < 0.4 or h > 3.0:
         size = 0
     else:
         size = max(0.0, 1 - abs(h - 1.5) / 1.5)
-    period_score = min(period / 14, 1.0)  # 14s = peak
+    period_score = min(period / 14, 1.0)
     offshore = max(0, offshore_component(w.get("wind_dir"))) * min(wind / 15, 1.0)
     return round(size * 0.5 + period_score * 0.3 + offshore * 0.2, 3)
 
@@ -76,8 +92,8 @@ def swim_score(p):
     s, a = p["surf"], p["water"]
     h = s.get("wave_height_m") or 0
     temp = a.get("sea_temp_c") or 0
-    calm = 1 / (1 + h)  # smaller wave = higher
-    warmth = max(0, min((temp - 18) / 12, 1.0))  # 18-30 range
+    calm = 1 / (1 + h)
+    warmth = max(0, min((temp - 18) / 12, 1.0))
     return round(calm * 0.6 + warmth * 0.4, 3)
 
 
@@ -90,6 +106,121 @@ def sun_score(p):
     uv_score = uv / 8 if uv <= 8 else max(0, 1 - (uv - 8) / 4)
     breeze = max(0, 1 - wind / 30)
     return round(clear * 0.5 + uv_score * 0.3 + breeze * 0.2, 3)
+
+
+def shade_score(p):
+    """'Evitar sol' — bright outside but UV mild."""
+    w = p["weather"]
+    uv = w.get("uv") or 0
+    cloud = w.get("cloud_pct") or 0
+    if uv <= 0:
+        return 0
+    mild = max(0, 1 - uv / 6)
+    light = (100 - cloud) / 100
+    return round(mild * 0.6 + light * 0.4, 3)
+
+
+# ─────────────────────────────────────────────────────────────
+# Hourly scoring (per-activity 24-bar strip)
+# ─────────────────────────────────────────────────────────────
+
+def hourly_scores(p):
+    """Return {surfar:[24], nadar:[24], sol:[24], evitar_sol:[24]}.
+
+    Reads hourly arrays from p['hourly'] when present, otherwise falls back
+    to flat arrays scaled by the current condition score.
+    """
+    out = {"surfar": [0.0] * 24, "nadar": [0.0] * 24, "sol": [0.0] * 24, "evitar_sol": [0.0] * 24}
+    hh = p.get("hourly") or {}
+    times = hh.get("time") or []
+    n = min(24, len(times))
+    if n == 0:
+        # fallback to flat current-score bars
+        return {
+            "surfar":     [p["_surf"]] * 24,
+            "nadar":      [p["_swim"]] * 24,
+            "sol":        [p["_sun"]] * 24,
+            "evitar_sol": [shade_score(p)] * 24,
+        }
+
+    sea_t = (p.get("water") or {}).get("sea_temp_c") or 0
+    waves = hh.get("wave_m") or []
+    periods = hh.get("wave_period_s") or []
+    winds = hh.get("wind_kmh") or []
+    wdirs = hh.get("wind_dir") or []
+    uvs = hh.get("uv") or []
+    clouds = hh.get("cloud_pct") or []
+
+    def g(arr, i, default=0):
+        return arr[i] if i < len(arr) and arr[i] is not None else default
+
+    for i in range(n):
+        # parse hour-of-day from ISO time
+        try:
+            hod = int(times[i][11:13])
+        except Exception:
+            hod = i % 24
+        wv = g(waves, i); per = g(periods, i); wd = g(winds, i)
+        wdr = wdirs[i] if i < len(wdirs) else None
+        uv = g(uvs, i); cl = g(clouds, i)
+
+        # surfar
+        size = _bell(wv, 1.5, 0.9) if 0.4 <= wv <= 3.0 else 0
+        per_s = min(per / 14, 1.0)
+        offsh = max(0, offshore_component(wdr)) * min(wd / 12, 1.0)
+        daylight = 1.0 if uv > 0 else 0.2
+        surfar = daylight * (size * 0.5 + per_s * 0.3 + offsh * 0.2)
+
+        # nadar
+        calm = 1 / (1 + wv)
+        warmth = max(0, min((sea_t - 18) / 12, 1.0))
+        # only meaningful in daylight
+        nadar = (calm * 0.6 + warmth * 0.4) * (1.0 if uv > 0 else 0.25)
+
+        # sol (tan-zone)
+        if uv <= 0:
+            sol = 0
+        elif uv < 3:
+            uv_s = uv / 3 * 0.6
+            clear = (100 - cl) / 100
+            breeze = max(0, 1 - wd / 25)
+            sol = uv_s * 0.5 + clear * 0.3 + breeze * 0.2
+        elif uv <= 7:
+            clear = (100 - cl) / 100
+            breeze = max(0, 1 - wd / 25)
+            sol = 1.0 * 0.5 + clear * 0.3 + breeze * 0.2
+        else:
+            uv_s = max(0, 1 - (uv - 7) / 4)
+            clear = (100 - cl) / 100
+            breeze = max(0, 1 - wd / 25)
+            sol = uv_s * 0.5 + clear * 0.3 + breeze * 0.2
+
+        # evitar_sol — bright but mild UV
+        if uv <= 0:
+            evitar = 0
+        else:
+            mild = max(0, 1 - uv / 6)
+            light = (100 - cl) / 100
+            evitar = mild * 0.6 + light * 0.4
+
+        # store by hour-of-day so bars line up to 00–23
+        out["surfar"][hod]     = max(out["surfar"][hod], round(surfar, 3))
+        out["nadar"][hod]      = max(out["nadar"][hod], round(nadar, 3))
+        out["sol"][hod]        = max(out["sol"][hod], round(sol, 3))
+        out["evitar_sol"][hod] = max(out["evitar_sol"][hod], round(evitar, 3))
+
+    return out
+
+
+def best_window(hours, length=3):
+    if not hours or max(hours) <= 0.05:
+        return None
+    best_sum, best_i = -1, 0
+    for i in range(0, max(1, 24 - length + 1)):
+        s = sum(hours[i:i + length])
+        if s > best_sum:
+            best_sum, best_i = s, i
+    return (best_i, best_i + length)
 
 
 def fmt(v, unit="", nd=1):
@@ -118,217 +249,791 @@ def aqi_label(aqi):
     return ("ar ruim", "bad")
 
 
-def render_movimento_stat(p, agito_data):
-    info = (agito_data or {}).get("by_beach", {}).get(p["id"]) if agito_data else None
-    if not info:
-        return ('<div class="stat"><span class="lbl">movimento</span>'
-                '<span class="val muted">—</span></div>')
-    cur = info["current"]
-    cls = BUCKET_CLASS.get(cur["bucket"], "m")
+# ─────────────────────────────────────────────────────────────
+# Visual primitives — return inline HTML/SVG strings
+# ─────────────────────────────────────────────────────────────
+
+ACTIVITY_LABEL = {
+    "surfar": "surfar", "nadar": "nadar", "sol": "sol", "evitar_sol": "evitar sol",
+}
+ACTIVITY_VAR = {
+    "surfar": "var(--surf)", "nadar": "var(--swim)",
+    "sol": "var(--sun)", "evitar_sol": "var(--shade)",
+}
+
+
+def render_activity_glyph(activity, color="currentColor", size=14):
+    s = size
+    if activity == "surfar":
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<path d="M2 15 C 5 11, 8 11, 11 14 S 17 17, 22 13" stroke="{color}" stroke-width="2.2" stroke-linecap="round" fill="none"/>'
+                f'<path d="M2 19 C 5 16, 8 16, 11 18 S 17 20, 22 17" stroke="{color}" stroke-width="2.2" stroke-linecap="round" fill="none" opacity="0.5"/>'
+                f'</svg>')
+    if activity == "nadar":
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<path d="M12 3 C 12 3, 5 11, 5 16 a 7 7 0 0 0 14 0 C 19 11, 12 3, 12 3 Z" stroke="{color}" stroke-width="2" fill="none" stroke-linejoin="round"/>'
+                f'</svg>')
+    if activity == "sol":
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<circle cx="12" cy="12" r="4" stroke="{color}" stroke-width="2" fill="none"/>'
+                f'<g stroke="{color}" stroke-width="2" stroke-linecap="round">'
+                f'<line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>'
+                f'<line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>'
+                f'<line x1="4.9" y1="4.9" x2="6.3" y2="6.3"/><line x1="17.7" y1="17.7" x2="19.1" y2="19.1"/>'
+                f'<line x1="4.9" y1="19.1" x2="6.3" y2="17.7"/><line x1="17.7" y1="6.3" x2="19.1" y2="4.9"/>'
+                f'</g></svg>')
+    if activity == "evitar_sol":
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<path d="M3 11 a 9 6 0 0 1 18 0 Z" stroke="{color}" stroke-width="2" fill="none" stroke-linejoin="round"/>'
+                f'<line x1="12" y1="11" x2="12" y2="21" stroke="{color}" stroke-width="2" stroke-linecap="round"/>'
+                f'<path d="M12 21 q 2 0 2 -2" stroke="{color}" stroke-width="2" fill="none" stroke-linecap="round"/>'
+                f'</svg>')
+    return ""
+
+
+def render_sun_arc(score, activity, color_var, size=80):
+    """Inline SVG semicircle arc, filled proportionally to score [0,1]."""
+    score = max(0.0, min(1.0, score or 0))
+    cx, cy, r = 50, 52, 38
+    PR = math.pi * r
+    filled = max(0.001, score)
+    theta = math.pi * (1 - filled)
+    hx = cx + r * math.cos(theta)
+    hy = cy - r * math.sin(theta)
+    score10 = round(score * 10)
+    h = round(size * 0.78)
+    arc_path = f'M {cx - r} {cy} A {r} {r} 0 0 1 {cx + r} {cy}'
+
+    ticks = []
+    for t in (0.25, 0.5, 0.75):
+        a = math.pi * (1 - t)
+        x1 = cx + (r - 9) * math.cos(a); y1 = cy - (r - 9) * math.sin(a)
+        x2 = cx + (r - 3) * math.cos(a); y2 = cy - (r - 3) * math.sin(a)
+        ticks.append(f'<line x1="{x1:.2f}" y1="{y1:.2f}" x2="{x2:.2f}" y2="{y2:.2f}" stroke="var(--track-tick)" stroke-width="1.3" stroke-linecap="round"/>')
+
+    glyph = render_activity_glyph(activity, color="white", size=12)
+
     return (
-        f'<div class="stat"><span class="lbl">movimento</span>'
-        f'<span class="val mv mv-{cls}">{cur["bucket"]}</span></div>'
+        f'<div class="sa">'
+        f'<svg width="{size}" height="{h}" viewBox="0 0 100 78" style="display:block">'
+        f'<path d="{arc_path}" stroke="var(--track)" stroke-width="7" stroke-linecap="round" fill="none"/>'
+        f'{"".join(ticks)}'
+        f'<path d="{arc_path}" stroke="{color_var}" stroke-width="7" stroke-linecap="round" fill="none"'
+        f' stroke-dasharray="{filled * PR:.2f} {PR:.2f}"/>'
+        f'<circle cx="{hx:.2f}" cy="{hy:.2f}" r="9" fill="{color_var}"/>'
+        f'<g transform="translate({hx - 6:.2f} {hy - 6:.2f})">{glyph}</g>'
+        f'<text x="{cx}" y="{cy + 4}" text-anchor="middle"'
+        f' font-family="\'Plus Jakarta Sans\', sans-serif" font-size="20" fill="var(--ink)"'
+        f' font-weight="700" letter-spacing="-0.02em">{score10}</text>'
+        f'</svg>'
+        f'<div class="sa-label">{ACTIVITY_LABEL[activity]}</div>'
+        f'</div>'
     )
 
 
-def render_card(p, marks, agito_data=None):
-    yt = p.get("youtube_id")
-    if yt:
-        media = (
-            f'<iframe src="https://www.youtube.com/embed/{yt}'
-            f'?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1" '
-            'allow="autoplay; encrypted-media; picture-in-picture" '
-            'allowfullscreen loading="lazy"></iframe>'
-        )
-    else:
-        media = '<div class="no-cam">imagem indisponível</div>'
+def render_score_row(scores):
+    """Sun-arc dial for each of 4 activities."""
+    items = [
+        ("surfar", "var(--surf)"),
+        ("nadar", "var(--swim)"),
+        ("sol", "var(--sun)"),
+        ("evitar_sol", "var(--shade)"),
+    ]
+    cells = "".join(render_sun_arc(scores.get(a, 0), a, c, size=76) for a, c in items)
+    return f'<div class="score-row score-row--arc">{cells}</div>'
 
+
+def render_hourly_row(activity, hours, color_var, now_hour):
+    if not hours:
+        hours = [0] * 24
+    inactive = max(hours) < 0.1
+    bw = best_window(hours, 3) if not inactive else None
+    bars = []
+    for h in range(24):
+        v = hours[h] if h < len(hours) else 0
+        height = max(2, v * 22)
+        cls = "hs-bar"
+        if h == now_hour: cls += " is-now"
+        if bw and bw[0] <= h < bw[1]: cls += " in-win"
+        bars.append(
+            f'<div class="{cls}" style="--h:{height:.1f}px;--c:{color_var}"'
+            f' title="{h:02d}h · {v * 10:.1f}"></div>'
+        )
+    now_line = (f'<div class="hs-now-line" style="left:calc({(now_hour + 0.5) / 24 * 100:.2f}%)"></div>')
+    win_underline = ""
+    if bw:
+        win_underline = (f'<div class="hs-window-underline"'
+                         f' style="left:{bw[0] / 24 * 100:.2f}%;width:{3 / 24 * 100:.2f}%;background:{color_var}"></div>')
+    win_label = (f'{bw[0]:02d}–{bw[1]:02d}h' if bw else '—')
+    glyph = render_activity_glyph(activity, color=color_var, size=12)
+    return (
+        f'<div class="hs-row">'
+        f'<div class="hs-label">{glyph}<span>{ACTIVITY_LABEL[activity]}</span></div>'
+        f'<div class="hs-bars">{"".join(bars)}{now_line}{win_underline}</div>'
+        f'<div class="hs-window-label" style="color:{color_var}">{win_label}</div>'
+        f'</div>'
+    )
+
+
+def render_hourly_strip(hourly, now_hour):
+    rows = [
+        ("surfar", "var(--surf)"),
+        ("nadar", "var(--swim)"),
+        ("sol", "var(--sun)"),
+        ("evitar_sol", "var(--shade)"),
+    ]
+    rows_html = "".join(render_hourly_row(a, hourly.get(a, []), c, now_hour) for a, c in rows)
+    return (
+        f'<div class="hs">'
+        f'<div class="hs-axis"><span>00</span><span>06</span>'
+        f'<span style="color:var(--accent);font-weight:700">agora</span>'
+        f'<span>12</span><span>18</span><span>24</span></div>'
+        f'{rows_html}'
+        f'</div>'
+    )
+
+
+def render_best_window(activity, start_hour, end_hour, headline):
+    if start_hour is None:
+        return ""
+    color_var = ACTIVITY_VAR[activity]
+    return (
+        f'<div class="bw" style="--bw-c:{color_var}">'
+        f'<span class="bw-bar"></span>'
+        f'<div class="bw-text">{headline}</div>'
+        f'<div class="bw-window">{start_hour:02d}–{end_hour:02d}h</div>'
+        f'</div>'
+    )
+
+
+def render_parasol(filled, color):
+    fill = color if filled else "none"
+    return (f'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+            f'<path d="M3 11 a 9 6 0 0 1 18 0 Z" stroke="{color}" stroke-width="1.8" fill="{fill}" stroke-linejoin="round"/>'
+            f'<line x1="12" y1="11" x2="12" y2="21" stroke="{color}" stroke-width="1.8" stroke-linecap="round"/>'
+            f'<path d="M12 21 q 2 0 2 -2" stroke="{color}" stroke-width="1.8" fill="none" stroke-linecap="round"/>'
+            f'</svg>')
+
+
+def render_crowd_meter(bucket, peak=None):
+    if not bucket:
+        return ('<div class="crowd"><div class="crowd-parasols">'
+                + "".join(render_parasol(False, "var(--mute)") for _ in range(4))
+                + '</div><div class="crowd-meta"><span class="crowd-label" style="color:var(--mute)">—</span></div></div>')
+    idx = BUCKET_INDEX.get(bucket, 2)
+    parasols = "".join(
+        render_parasol(i < idx, "var(--accent)" if i < idx else "var(--mute)")
+        for i in range(4)
+    )
+    peak_html = ""
+    if peak:
+        peak_html = f'<span class="crowd-peak">· pico {peak.get("t","")} <em>{peak.get("bucket","")}</em></span>'
+    return (f'<div class="crowd">'
+            f'<div class="crowd-parasols">{parasols}</div>'
+            f'<div class="crowd-meta"><span class="crowd-label">{bucket}</span>{peak_html}</div>'
+            f'</div>')
+
+
+# Tiny inline icons for conditions row
+def _icon(name, size=14):
+    s = size
+    if name == "wave":
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<path d="M2 14 C 5 11, 8 11, 11 13 S 17 16, 22 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>'
+                f'<path d="M2 18 C 5 15, 8 15, 11 17 S 17 20, 22 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.5"/>'
+                f'</svg>')
+    if name == "drop":
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<path d="M12 3 C 12 3, 5 11, 5 16 a 7 7 0 0 0 14 0 C 19 11, 12 3, 12 3 Z" stroke="currentColor" stroke-width="1.8" fill="none"/>'
+                f'</svg>')
+    if name == "wind":
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<path d="M3 9 H 14 a 3 3 0 1 0 -3 -3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>'
+                f'<path d="M3 15 H 18 a 3 3 0 1 1 -3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>'
+                f'</svg>')
+    if name == "uv":
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.8"/>'
+                f'<g stroke="currentColor" stroke-width="1.8" stroke-linecap="round">'
+                f'<line x1="12" y1="3" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21"/>'
+                f'<line x1="3" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21" y2="12"/>'
+                f'</g></svg>')
+    if name == "pin":
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<path d="M12 2 a 7 7 0 0 1 7 7 c 0 5 -7 13 -7 13 S 5 14 5 9 a 7 7 0 0 1 7 -7 Z" stroke="currentColor" stroke-width="1.8"/>'
+                f'<circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.8"/>'
+                f'</svg>')
+    if name == "chev":
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<path d="M9 6 L 15 12 L 9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
+                f'</svg>')
+    return ""
+
+
+def uv_label(uv):
+    if uv is None or uv == 0: return "—"
+    if uv < 3: return "mole"
+    if uv < 6: return "ok"
+    if uv < 8: return "forte"
+    return "extremo"
+
+
+# ─────────────────────────────────────────────────────────────
+# Card render
+# ─────────────────────────────────────────────────────────────
+
+def render_card(p, marks, agito_data=None, now_hour=12):
     w, s, a = p["weather"], p["surf"], p["water"]
 
     badges = []
     if marks.get("surf") == p["id"]:
-        badges.append('<span class="badge surf">🏄 melhor onda</span>')
+        badges.append('<span class="badge badge--surf">melhor onda</span>')
     if marks.get("swim") == p["id"]:
-        badges.append('<span class="badge swim">🏊 mais calma</span>')
+        badges.append('<span class="badge badge--swim">mais calma</span>')
     if marks.get("warmest") == p["id"]:
-        badges.append('<span class="badge warm">🌡 água quente</span>')
+        badges.append('<span class="badge badge--warm">água quente</span>')
     badges_html = "".join(badges)
 
-    def cls(metric, val):
-        if val is None: return ""
-        if marks.get(f"max_{metric}") == p["id"]: return " hi"
-        if marks.get(f"min_{metric}") == p["id"]: return " lo"
-        return ""
+    yt = p.get("youtube_id")
+    if yt:
+        cam = (
+            f'<div class="card-cam" aria-label="câmera ao vivo">'
+            f'<img src="https://i.ytimg.com/vi/{yt}/mqdefault.jpg" alt="" loading="lazy"/>'
+            f'<div class="card-cam-dot"></div>'
+            f'<div class="card-cam-tag">ao vivo</div>'
+            f'</div>'
+        )
+    else:
+        cam = '<div class="card-cam card-cam--off"><div class="card-cam-off-text">sem cam</div></div>'
 
-    nh, nl = a.get("next_high_tide"), a.get("next_low_tide")
-    tide_parts = []
-    if nh: tide_parts.append(f"↑ {time_short(nh['time'])} <small>{nh['height_m']:+.1f}m</small>")
-    if nl: tide_parts.append(f"↓ {time_short(nl['time'])} <small>{nl['height_m']:+.1f}m</small>")
-    tide_row = (
-        f'<div class="tide"><span class="lbl">maré</span><span>{" · ".join(tide_parts)}</span></div>'
-        if tide_parts else ""
-    )
+    scores = {
+        "surfar": p["_surf"], "nadar": p["_swim"],
+        "sol": p["_sun"], "evitar_sol": p["_shade"],
+    }
+    score_row = render_score_row(scores)
+    hourly_html = render_hourly_strip(p["_hourly"], now_hour)
+
+    # Best window from the top-scoring activity
+    top_act = max(scores, key=scores.get)
+    bw = best_window(p["_hourly"].get(top_act, []), 3)
+    headlines = {
+        "surfar": f"mar bom pra surfar · onda {fmt(s.get('wave_height_m'), 'm')}",
+        "nadar":  f"mar manso, água {fmt(a.get('sea_temp_c'), '°', 0)}",
+        "sol":    f"bom pro sol · uv {fmt(w.get('uv'), '', 0)}",
+        "evitar_sol": "sol ameno, dá pra ficar fora",
+    }
+    bw_html = (render_best_window(top_act, bw[0], bw[1], headlines[top_act])
+               if bw else "")
+
+    # Conditions row
+    wd = w.get("wind_dir")
+    cond_html = f"""
+<div class="cond">
+  <div class="cond-i">
+    <span class="cond-ico">{_icon('wave')}</span>
+    <span class="cond-v">{fmt(s.get('wave_height_m'), '', 1)}<small>m</small></span>
+    <span class="cond-l">{fmt(s.get('wave_period_s'), 's', 0)} período</span>
+  </div>
+  <div class="cond-i">
+    <span class="cond-ico">{_icon('drop')}</span>
+    <span class="cond-v">{fmt(a.get('sea_temp_c'), '', 0)}<small>°</small></span>
+    <span class="cond-l">água</span>
+  </div>
+  <div class="cond-i">
+    <span class="cond-ico">{_icon('wind')}</span>
+    <span class="cond-v">{fmt(w.get('wind_kmh'), '', 0)}<small>km/h</small></span>
+    <span class="cond-l">{wind_arrow(wd)} {fmt(wd, '°', 0) if wd is not None else '—'}</span>
+  </div>
+  <div class="cond-i">
+    <span class="cond-ico">{_icon('uv')}</span>
+    <span class="cond-v">{fmt(w.get('uv'), '', 0)}</span>
+    <span class="cond-l">UV {uv_label(w.get('uv'))}</span>
+  </div>
+</div>"""
+
+    # Crowd footer
+    info = (agito_data or {}).get("by_beach", {}).get(p["id"]) if agito_data else None
+    bucket = info["current"]["bucket"] if info and info.get("current") else None
+    peak = None
+    if info:
+        np = info.get("next_peak") or info.get("peak")
+        if np:
+            peak = {"t": time_short(np.get("time")) if np.get("time") else np.get("t", ""),
+                    "bucket": np.get("bucket", "")}
+    crowd_html = render_crowd_meter(bucket, peak)
 
     return f"""
 <article class="card" data-state="{p.get('state','?')}" data-surf="{p['_surf']}" data-swim="{p['_swim']}" data-sun="{p['_sun']}">
-  <a class="card-link" href="beach/{p['id']}.html">
   <header class="card-h">
-    <h2>{p['beach']} <span class="posto">{p['posto']}</span></h2>
-    <div class="badges">{badges_html}</div>
+    <div class="card-h-l">
+      <h3 class="card-name">{p['beach']}</h3>
+      <div class="card-meta">
+        <span class="card-posto">{_icon('pin', 11)} {p['posto']}</span>
+        <span class="card-state">{p.get('state','')}</span>
+        {badges_html}
+      </div>
+    </div>
+    <a href="beach/{p['id']}.html" aria-label="ver câmera">{cam}</a>
   </header>
-  </a>
-  <div class="media">{media}</div>
-  <div class="stats">
-    <div class="stat">
-      <span class="lbl">onda</span>
-      <span class="val{cls('wave', s.get('wave_height_m'))}">{fmt(s.get('wave_height_m'), 'm')}</span>
-      <span class="sub">{fmt(s.get('wave_period_s'), 's', 0)} período</span>
-    </div>
-    <div class="stat">
-      <span class="lbl">água</span>
-      <span class="val{cls('seatemp', a.get('sea_temp_c'))}">{fmt(a.get('sea_temp_c'), '°', 0)}</span>
-    </div>
-    <div class="stat">
-      <span class="lbl">vento</span>
-      <span class="val{cls('wind', w.get('wind_kmh'))}">{fmt(w.get('wind_kmh'), '', 0)}<small> km/h</small></span>
-      <span class="sub">{wind_arrow(w.get('wind_dir'))} {fmt(w.get('wind_dir'), '°', 0)}</span>
-    </div>
-    {render_movimento_stat(p, agito_data)}
-  </div>
-  <a class="card-link" href="beach/{p['id']}.html">{tide_row}<div class="card-cta">ver detalhes →</div></a>
+  {score_row}
+  {hourly_html}
+  {bw_html}
+  {cond_html}
+  <footer class="card-f">
+    {crowd_html}
+    <a class="card-cta" href="beach/{p['id']}.html">ver detalhes {_icon('chev', 12)}</a>
+  </footer>
 </article>
 """
 
 
+# ─────────────────────────────────────────────────────────────
+# Hero strip
+# ─────────────────────────────────────────────────────────────
+
+def render_hero_card(key, title, activity, color_var, beach, why, score):
+    return f"""
+<a class="hero-card hero-card--{key}" style="--c:{color_var}" href="beach/{beach['id']}.html">
+  <div class="hero-card__title">
+    {render_activity_glyph(activity, color=color_var, size=14)}
+    <span>{title}</span>
+    <span class="hero-card__now">agora</span>
+  </div>
+  <div class="hero-card__name">{beach['beach']}</div>
+  <div class="hero-card__reason">{why}</div>
+  <div class="hero-card__arc">{render_sun_arc(score, activity, color_var, size=64)}</div>
+  <div class="hero-card__shimmer" aria-hidden="true"></div>
+</a>"""
+
+
+# ─────────────────────────────────────────────────────────────
+# CSS — light "praia 10am" palette
+# ─────────────────────────────────────────────────────────────
+
 CSS = """
 :root {
-  --bg: #0a1620; --card: #14283a; --line: #1f3a52;
-  --text: #e7eef5; --muted: #7d97b0;
-  --accent: #4fc4ff; --hi: #ffb86b; --lo: #5fe0a0;
-  --surf: #ffb86b; --swim: #5fe0a0; --sun: #ffd966; --warm: #ff9088;
-  --good: #5fe0a0; --ok: #8bd9d3; --warn: #ffc14d; --bad: #ff7a8a;
+  --paper:#F4EFE4; --paper-warm:#F9F4E8; --card:#FFFFFF;
+  --ink:#1F3F4D; --ink-soft:#577485; --mute:#94A8B4;
+  --line:#E6DCC8; --track:#EADFC8; --track-tick:#D2C2A2;
+  --sea:#2D5566;
+  --surf:#E8895E; --swim:#5A9FB5; --sun:#E5B86A; --shade:#7C9183;
+  --accent:#E8895E;
+  --good:#5BB48A; --ok:#5A9FB5; --warn:#E5B86A; --bad:#D44A2A;
+  --font-sans:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --font-serif:"Instrument Serif","Times New Roman",serif;
+  --font-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --pad:16px;
 }
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text);
-  font: 15px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased; }
+html, body {
+  margin: 0; padding: 0;
+  background:
+    radial-gradient(900px 600px at 20% 0%, #f1ecdf 0%, transparent 50%),
+    radial-gradient(800px 700px at 100% 30%, #e5eef2 0%, transparent 55%),
+    linear-gradient(180deg, #efe9da 0%, #e9e4d2 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px; line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
 body { padding-bottom: env(safe-area-inset-bottom); }
+a { color: inherit; text-decoration: none; }
 
-.topbar { position: sticky; top: 0; z-index: 10; background: rgba(10,22,32,0.94);
-  backdrop-filter: blur(12px); padding: 12px 16px 10px;
+/* ── Topbar ───────────────────────────────────────────── */
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  background: linear-gradient(180deg, var(--paper) 70%, rgba(244,239,228,0.85) 100%);
+  backdrop-filter: blur(10px);
+  padding: 12px var(--pad) 10px;
   padding-top: calc(12px + env(safe-area-inset-top));
-  border-bottom: 1px solid var(--line); }
-.topbar h1 { margin: 0; font-size: 18px; font-weight: 700; }
-.topbar h1 .em { color: var(--accent); }
-.topbar .sub { color: var(--muted); font-size: 12px; margin-top: 4px; }
+  border-bottom: 1px solid rgba(230,220,200,0.7);
+}
+.topbar-row1 { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.wordmark { display: inline-flex; align-items: baseline; gap: 6px; letter-spacing: -0.01em; }
+.wordmark .wm-praia {
+  font-family: var(--font-serif); font-style: italic; font-weight: 400;
+  font-size: 28px; line-height: 1; color: var(--accent);
+  margin-right: -1px; letter-spacing: -0.02em;
+}
+.wordmark .wm-smart {
+  font-family: var(--font-sans); font-weight: 700;
+  font-size: 18px; letter-spacing: -0.005em; color: var(--ink);
+}
+.topbar-sub {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 12px; color: var(--ink-soft); margin-top: 8px;
+  font-family: var(--font-mono); letter-spacing: 0.02em;
+}
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--good); display: inline-block; }
+.dot--live { animation: live-pulse 2.4s infinite;
+  box-shadow: 0 0 0 0 rgba(91,180,138,0.5); }
+@keyframes live-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(91,180,138,0.5); }
+  70% { box-shadow: 0 0 0 8px rgba(91,180,138,0); }
+  100% { box-shadow: 0 0 0 0 rgba(91,180,138,0); }
+}
 
-.pills { display: flex; gap: 6px; margin-top: 10px; overflow-x: auto;
-  -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+.pills {
+  display: flex; gap: 6px; margin-top: 10px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  padding-bottom: 2px; scrollbar-width: none;
+}
 .pills::-webkit-scrollbar { display: none; }
-.pill { flex: 0 0 auto; background: transparent; color: var(--muted);
-  border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px;
-  font: inherit; font-size: 12px; font-weight: 600; letter-spacing: 0.3px;
-  cursor: pointer; -webkit-tap-highlight-color: transparent;
-  transition: all 0.15s; }
-.pill:hover { color: var(--text); border-color: var(--muted); }
-.pill.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
-.pill.nav { text-decoration: none; color: var(--text); border-color: transparent;
-  background: rgba(255,255,255,0.04); }
-.pill.nav:hover, .pill.nav:active { background: rgba(79,196,255,0.15); color: var(--accent); }
+.pill {
+  flex: 0 0 auto;
+  display: inline-flex; align-items: center; gap: 5px;
+  background: transparent; color: var(--ink-soft);
+  border: 1px solid rgba(87,116,133,0.25);
+  border-radius: 999px; padding: 5px 12px;
+  font: inherit; font-size: 12px; font-weight: 600;
+  letter-spacing: -0.005em; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.15s ease;
+  font-family: var(--font-mono);
+}
+.pill:hover { color: var(--ink); border-color: var(--ink-soft); }
+.pill.active, .pill.is-active {
+  background: var(--ink); color: var(--paper); border-color: var(--ink);
+}
+.pill.nav, .pill--nav {
+  background: rgba(232,137,94,0.12); color: var(--accent);
+  border-color: transparent; font-family: var(--font-sans);
+}
 .pill.nav-first { margin-left: auto; }
 
-.hero { padding: 14px 12px 4px; }
-.hero-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
-@media (min-width: 600px) { .hero-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; } }
-.hero-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-  padding: 12px 14px; display: flex; flex-direction: column; gap: 2px;
-  border-left: 3px solid var(--accent);
-  text-decoration: none; color: inherit; -webkit-tap-highlight-color: transparent; }
-.hero-card:active { transform: scale(0.98); }
-.hero-card.surf { border-left-color: var(--surf); }
-.hero-card.swim { border-left-color: var(--swim); }
-.hero-card.sun { border-left-color: var(--sun); }
-.hero-card .ico { font-size: 18px; }
-.hero-card .h { font-size: 11px; color: var(--muted); text-transform: uppercase;
-  letter-spacing: 0.5px; font-weight: 600; }
-.hero-card .name { font-size: 17px; font-weight: 700; margin-top: 2px; }
-.hero-card .why { font-size: 12px; color: var(--muted); margin-top: 2px; }
+/* ── Hero strip ────────────────────────────────────────── */
+.hero { padding: 14px var(--pad) 4px; }
+.hero-stack { display: grid; grid-template-columns: 1fr; gap: 10px; }
+@media (min-width: 720px) { .hero-stack { grid-template-columns: repeat(3, 1fr); } }
+.hero-card {
+  position: relative;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 12px;
+  background: var(--card); border-radius: 18px;
+  padding: 14px 16px 14px 18px;
+  box-shadow:
+    0 1px 0 rgba(0,0,0,0.02),
+    0 8px 24px -16px rgba(232,137,94,0.5),
+    inset 0 0 0 1px rgba(232,137,94,0.18);
+  overflow: hidden; isolation: isolate;
+  transition: transform 0.18s ease;
+}
+.hero-card:active { transform: scale(0.992); }
+.hero-card::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(220px 120px at 0% 100%, var(--c, var(--accent)) 0%, transparent 70%);
+  opacity: 0.22; pointer-events: none; z-index: -1;
+}
+.hero-card__title {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--c, var(--accent));
+  grid-column: 1 / -1;
+}
+.hero-card__now {
+  margin-left: auto; font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.06em;
+  color: var(--mute); text-transform: lowercase;
+}
+.hero-card__name {
+  font-weight: 700; font-size: 20px; line-height: 1.1;
+  color: var(--ink); letter-spacing: -0.015em;
+}
+.hero-card__reason {
+  margin-top: 2px; font-size: 12px; color: var(--ink-soft);
+}
+.hero-card__arc { grid-row: 2 / span 2; grid-column: 2;
+  align-self: center; justify-self: end; }
+.hero-card__shimmer {
+  position: absolute; inset: 0;
+  background: linear-gradient(110deg, transparent 30%,
+    rgba(232,137,94,0.14) 50%, transparent 70%);
+  background-size: 250% 100%;
+  pointer-events: none; z-index: -1;
+  animation: shimmer 6s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
 
-main { padding: 12px; display: grid; gap: 14px; grid-template-columns: 1fr; }
-@media (min-width: 720px) { main { grid-template-columns: repeat(2, 1fr); padding: 16px; gap: 16px; } }
-@media (min-width: 1100px) { main { grid-template-columns: repeat(3, 1fr); max-width: 1400px; margin: 0 auto; } }
+/* ── Alert banner ──────────────────────────────────────── */
+.alert-banner {
+  background: rgba(212,74,42,0.10);
+  border-bottom: 1px solid rgba(212,74,42,0.25);
+  padding: 10px var(--pad); font-size: 13px; color: var(--bad);
+  display: flex; gap: 8px; align-items: center;
+}
+.alert-banner .ev { color: var(--ink); font-weight: 700; }
+.alert-banner .area {
+  color: var(--mute); font-size: 10px;
+  font-family: var(--font-mono); letter-spacing: 0.06em;
+}
 
-.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-  overflow: hidden; display: flex; flex-direction: column; }
-.card-h { display: flex; justify-content: space-between; align-items: center;
-  gap: 8px; padding: 12px 14px 8px; }
-.card-h h2 { margin: 0; font-size: 16px; font-weight: 700; }
-.card-h .posto { color: var(--muted); font-weight: 500; margin-left: 4px; font-size: 14px; }
-.badges { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
-.badge { font-size: 10px; padding: 3px 7px; border-radius: 999px; font-weight: 600;
-  white-space: nowrap; }
-.badge.surf { background: rgba(255,184,107,0.18); color: var(--surf); }
-.badge.swim { background: rgba(95,224,160,0.18); color: var(--swim); }
-.badge.warm { background: rgba(255,144,136,0.18); color: var(--warm); }
+/* ── Feed (cards grid) ────────────────────────────────── */
+main.feed {
+  padding: 14px var(--pad);
+  display: grid; gap: 14px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) { main.feed { grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 16px; } }
+@media (min-width: 1100px) { main.feed { grid-template-columns: repeat(3, 1fr); max-width: 1400px; margin: 0 auto; } }
 
-.media { aspect-ratio: 16/9; background: #000; position: relative; }
-.media iframe { width: 100%; height: 100%; border: 0; display: block; }
-.no-cam { position: absolute; inset: 0; display: grid; place-items: center;
-  color: var(--muted); font-size: 13px; background: linear-gradient(135deg, #1a2f44, #0f2030); }
+/* ── Beach card ───────────────────────────────────────── */
+.card {
+  background: var(--card); border-radius: 22px;
+  padding: 16px 16px 14px;
+  display: flex; flex-direction: column; gap: 14px;
+  box-shadow:
+    0 1px 0 rgba(0,0,0,0.02),
+    0 12px 30px -22px rgba(31,63,77,0.35),
+    inset 0 0 0 1px rgba(230,220,200,0.6);
+}
+.card-h {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 14px; align-items: flex-start;
+}
+.card-h-l { min-width: 0; }
+.card-name {
+  font-weight: 700; font-size: 20px; line-height: 1.1;
+  margin: 0; color: var(--ink); letter-spacing: -0.015em;
+}
+.card-meta {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 6px; margin-top: 6px;
+}
+.card-posto {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.02em; color: var(--ink-soft);
+}
+.card-state {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 0.08em;
+  color: var(--ink); background: var(--paper-warm);
+  border: 1px solid var(--line);
+  padding: 2px 6px; border-radius: 4px;
+}
+.badge {
+  font-size: 10px; font-weight: 600; letter-spacing: -0.005em;
+  color: var(--ink-soft);
+  background: rgba(87,116,133,0.10);
+  padding: 3px 8px; border-radius: 999px;
+  white-space: nowrap;
+}
+.badge--surf { color: var(--surf); background: rgba(232,137,94,0.12); }
+.badge--swim { color: var(--swim); background: rgba(90,159,181,0.14); }
+.badge--warm { color: var(--bad);  background: rgba(212,74,42,0.10); }
 
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
-  background: var(--line); border-top: 1px solid var(--line); }
-.stat { background: var(--card); padding: 10px 12px; display: flex; flex-direction: column;
-  align-items: flex-start; gap: 2px; min-height: 70px; }
-.stat .lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-.stat .val { font-size: 20px; font-weight: 700; line-height: 1.1; }
-.stat .val small { font-size: 11px; font-weight: 500; color: var(--muted); }
-.stat .val.hi { color: var(--hi); }
-.stat .val.lo { color: var(--lo); }
-.stat .val.muted { color: var(--muted); font-weight: 500; }
-.stat .val.mv { font-size: 14px; padding: 3px 9px; border-radius: 999px;
-  font-weight: 700; text-transform: lowercase; letter-spacing: 0.2px;
-  display: inline-block; line-height: 1.4; align-self: flex-start; }
-.stat .val.mv-v { background: rgba(95,224,160,0.18); color: var(--good); }
-.stat .val.mv-m { background: rgba(139,217,211,0.18); color: var(--ok); }
-.stat .val.mv-c { background: rgba(255,193,77,0.18); color: var(--warn); }
-.stat .val.mv-l { background: rgba(255,122,138,0.18); color: var(--bad); }
+/* Live cam thumbnail */
+.card-cam {
+  position: relative; width: 78px; height: 78px;
+  border-radius: 14px; overflow: hidden;
+  background: #d8d2c1; flex: 0 0 78px;
+  isolation: isolate;
+}
+.card-cam img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.card-cam-dot {
+  position: absolute; top: 7px; left: 7px;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #ff5b5b;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.6);
+  animation: live-pulse 2s infinite;
+  z-index: 1;
+}
+.card-cam-tag {
+  position: absolute; bottom: 5px; left: 5px;
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: 0.06em;
+  color: white; background: rgba(0,0,0,0.55);
+  padding: 2px 5px; border-radius: 4px;
+  text-transform: uppercase;
+}
+.card-cam--off {
+  background: var(--paper-warm);
+  display: grid; place-items: center;
+}
+.card-cam-off-text {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.06em; color: var(--mute); text-transform: uppercase;
+}
 
-.ad-slot { background: rgba(255,255,255,0.03); border: 1px solid var(--line);
-  border-radius: 12px; padding: 8px; text-align: center;
-  grid-column: 1 / -1; }
-.ad-slot iframe { max-width: 600px; margin: 0 auto; }
-.stat .sub { font-size: 11px; color: var(--muted); }
+/* ── Score row (sun-arc dials) ─────────────────────────── */
+.score-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 4px 0 0; }
+.sa { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.sa-label {
+  font-size: 11px; font-weight: 600;
+  color: var(--ink-soft); letter-spacing: -0.005em;
+  text-align: center;
+}
 
-.card-link { color: inherit; text-decoration: none; display: block;
-  -webkit-tap-highlight-color: transparent; }
-.card-link:active { background: rgba(79,196,255,0.04); }
-.card-cta { padding: 8px 14px 12px; font-size: 11px; color: var(--accent);
-  font-weight: 600; letter-spacing: 0.3px; }
+/* ── Hourly strip ──────────────────────────────────────── */
+.hs {
+  display: flex; flex-direction: column; gap: 6px;
+  padding: 10px 0;
+  border-top: 1px dashed rgba(230,220,200,0.9);
+  border-bottom: 1px dashed rgba(230,220,200,0.9);
+}
+.hs-axis {
+  display: flex; justify-content: space-between;
+  padding: 0 60px 4px 80px;
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: 0.06em;
+  color: var(--mute); text-transform: uppercase;
+}
+.hs-row {
+  display: grid; grid-template-columns: 76px 1fr 50px;
+  align-items: center; gap: 6px;
+}
+.hs-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600; color: var(--ink-soft);
+}
+.hs-bars {
+  position: relative;
+  display: grid; grid-template-columns: repeat(24, 1fr);
+  align-items: flex-end; gap: 1px;
+  height: 26px; padding-bottom: 2px;
+}
+.hs-bar {
+  height: var(--h, 2px);
+  background: color-mix(in oklab, var(--c, var(--ink-soft)) 35%, transparent);
+  border-radius: 1.5px; align-self: end;
+}
+.hs-bar.in-win { background: var(--c, var(--ink-soft)); }
+.hs-bar.is-now {
+  background: var(--c, var(--ink-soft));
+  box-shadow: 0 0 0 1.5px rgba(31,63,77,0.18);
+  position: relative; z-index: 1;
+}
+.hs-now-line {
+  position: absolute; top: -2px; bottom: 0;
+  width: 1.5px; background: var(--ink);
+  transform: translateX(-50%); opacity: 0.5;
+  pointer-events: none;
+}
+.hs-window-underline {
+  position: absolute; bottom: -3px;
+  height: 2px; border-radius: 1px; opacity: 0.7;
+}
+.hs-window-label {
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.02em; text-align: right;
+  font-variant-numeric: tabular-nums;
+}
 
-.tide { padding: 9px 14px; font-size: 12px; color: var(--text);
-  display: flex; gap: 10px; align-items: center; border-top: 1px solid var(--line); }
-.tide .lbl { font-size: 10px; color: var(--muted); text-transform: uppercase;
-  letter-spacing: 0.5px; font-weight: 600; }
-.tide small { color: var(--muted); margin-left: 2px; }
+/* ── Best window pill ──────────────────────────────────── */
+.bw {
+  position: relative;
+  display: grid; grid-template-columns: auto 1fr auto;
+  gap: 10px; align-items: center;
+  padding: 10px 12px;
+  background: color-mix(in oklab, var(--bw-c, var(--accent)) 8%, var(--paper-warm));
+  border-radius: 12px;
+}
+.bw-bar {
+  width: 3px; min-height: 22px;
+  background: var(--bw-c, var(--accent));
+  border-radius: 2px; align-self: stretch;
+}
+.bw-text { font-size: 13px; color: var(--ink); font-weight: 500; }
+.bw-window {
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.04em; color: var(--bw-c, var(--accent));
+  background: var(--card); padding: 4px 8px;
+  border-radius: 999px; font-weight: 600; white-space: nowrap;
+}
 
-.alert-banner { background: rgba(255,122,138,0.12);
-  border-bottom: 1px solid rgba(255,122,138,0.3);
-  padding: 10px 16px; font-size: 13px; color: var(--bad);
-  display: flex; gap: 8px; align-items: center; }
-.alert-banner .ev { color: var(--text); font-weight: 600; }
-.alert-banner .area { color: var(--muted); font-size: 11px; }
+/* ── Conditions row ────────────────────────────────────── */
+.cond {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px dashed rgba(230,220,200,0.85);
+  padding-top: 12px;
+}
+.cond-i {
+  display: flex; flex-direction: column; gap: 2px;
+  padding: 0 4px;
+  border-right: 1px dashed rgba(230,220,200,0.7);
+}
+.cond-i:last-child { border-right: none; }
+.cond-i:first-child { padding-left: 0; }
+.cond-ico { color: var(--ink-soft); margin-bottom: 2px; }
+.cond-v {
+  font-weight: 700; font-size: 17px;
+  color: var(--ink); line-height: 1.05;
+  letter-spacing: -0.015em;
+  font-variant-numeric: tabular-nums;
+}
+.cond-v small {
+  font-weight: 500; font-size: 10px;
+  color: var(--ink-soft); margin-left: 1px;
+}
+.cond-l {
+  font-size: 10px; font-weight: 500;
+  color: var(--ink-soft); letter-spacing: 0.02em;
+}
 
-.footer { text-align: center; padding: 24px 16px; color: var(--muted); font-size: 11px; }
+/* ── Card footer ───────────────────────────────────────── */
+.card-f {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; padding-top: 10px;
+  border-top: 1px solid rgba(230,220,200,0.6);
+}
+.crowd { display: flex; align-items: center; gap: 10px; }
+.crowd-parasols { display: inline-flex; gap: 2px; }
+.crowd-meta { display: flex; align-items: baseline; gap: 0; font-size: 12px; }
+.crowd-label { font-weight: 700; color: var(--ink); text-transform: lowercase; }
+.crowd-peak { color: var(--mute); font-size: 11px; margin-left: 4px; }
+.crowd-peak em { font-style: normal; color: var(--ink-soft); font-weight: 600; }
+.card-cta {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 12px; font-weight: 700; letter-spacing: -0.005em;
+  color: var(--accent); padding: 4px 6px;
+  border-radius: 8px; transition: background 0.15s;
+}
+.card-cta:hover { background: rgba(232,137,94,0.10); }
+
+/* ── Ad slot ───────────────────────────────────────────── */
+.ad-slot {
+  grid-column: 1 / -1;
+  display: flex; flex-direction: column; gap: 4px;
+  border: 1px dashed rgba(148,168,180,0.5);
+  border-radius: 14px; padding: 8px 12px;
+  background: var(--paper-warm);
+  text-align: center;
+}
+.ad-slot-tag {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: 0.08em;
+  color: var(--mute); text-transform: uppercase;
+  text-align: left;
+}
+.ad-slot iframe { max-width: 600px; margin: 0 auto; background: transparent; }
+
+/* ── Footer ────────────────────────────────────────────── */
+.footer {
+  text-align: center; padding: 24px var(--pad) 28px;
+  color: var(--mute); font-size: 11px;
+  font-family: var(--font-mono); letter-spacing: 0.02em;
+}
 """
 
+
+# ─────────────────────────────────────────────────────────────
+# Main
+# ─────────────────────────────────────────────────────────────
 
 def main():
     postos = json.load(open(DATA))
     for p in postos:
-        p["_surf"] = surf_score(p)
-        p["_swim"] = swim_score(p)
-        p["_sun"] = sun_score(p)
+        p["_surf"]  = surf_score(p)
+        p["_swim"]  = swim_score(p)
+        p["_sun"]   = sun_score(p)
+        p["_shade"] = shade_score(p)
+        p["_hourly"] = hourly_scores(p)
 
     def top(key):
         return max(postos, key=lambda p: p[key])
@@ -345,9 +1050,7 @@ def main():
         return min(valid, key=lambda p: _get(p, metric_path))["id"] if valid else None
 
     marks = {
-        "surf": surf_w["id"],
-        "swim": swim_w["id"],
-        "sun": sun_w["id"],
+        "surf": surf_w["id"], "swim": swim_w["id"], "sun": sun_w["id"],
         "warmest": warmest["id"],
         "max_wave": argmax("surf.wave_height_m"),
         "min_wave": argmin("surf.wave_height_m"),
@@ -356,21 +1059,21 @@ def main():
         "min_wind": argmin("weather.wind_kmh"),
     }
 
-    # Sort by surf score (default mode)
     postos_sorted = sorted(postos, key=lambda p: -p["_surf"])
     agito_data = load_optional(AGITO)
-    card_list = [render_card(p, marks, agito_data) for p in postos_sorted]
+    now_hour = datetime.now().hour
+    card_list = [render_card(p, marks, agito_data, now_hour) for p in postos_sorted]
     cards = insert_ads(card_list)
 
     ts = datetime.fromtimestamp(postos[0]["fetched_at"]).strftime("%H:%M")
     sample = postos[0]
-    aqi_text, aqi_class = aqi_label(sample["air"]["aqi"])
+    aqi_text, _ = aqi_label(sample["air"]["aqi"])
     uv_avg = round(sum(p["weather"]["uv"] or 0 for p in postos) / len(postos), 1)
     cloud_avg = round(sum(p["weather"]["cloud_pct"] or 0 for p in postos) / len(postos))
     region_count = len({p["beach"] for p in postos})
     region_label = "Brasil" if region_count > 1 else postos[0]["beach"].split()[0]
 
-    # Alerts banner
+    # Alerts
     alerts_data = load_optional(ALERTS) or {}
     active_alerts = alerts_data.get("alerts", [])
     alert_banner = ""
@@ -383,14 +1086,22 @@ def main():
             f'<span class="area">{a.get("severity","").upper()}{more}</span></div>'
         )
 
+    # Hero
     def why_surf(p):
         return f"onda {fmt(p['surf']['wave_height_m'], 'm')} · {fmt(p['surf']['wave_period_s'], 's', 0)} período"
-
     def why_swim(p):
         return f"onda {fmt(p['surf']['wave_height_m'], 'm')} · água {fmt(p['water']['sea_temp_c'], '°', 0)}"
-
     def why_sun(p):
         return f"nuvens {fmt(p['weather']['cloud_pct'], '%', 0)} · uv {fmt(p['weather']['uv'], '', 0)}"
+
+    hero_html = (
+        render_hero_card("surf", "bom pra surfar", "surfar", "var(--surf)",
+                         surf_w, why_surf(surf_w), surf_w["_surf"])
+        + render_hero_card("swim", "bom pra nadar", "nadar", "var(--swim)",
+                           swim_w, why_swim(swim_w), swim_w["_swim"])
+        + render_hero_card("sun", "bom pro sol", "sol", "var(--sun)",
+                           sun_w, why_sun(sun_w), sun_w["_sun"])
+    )
 
     states = sorted({p["state"] for p in postos if p.get("state")})
     state_pills = (
@@ -400,29 +1111,43 @@ def main():
         + '<a class="pill nav" href="sobre.html">sobre</a>'
     )
 
+    wordmark = ('<div class="wordmark">'
+                '<span class="wm-praia">praia</span>'
+                '<span class="wm-smart">smart</span>'
+                '</div>')
+
     html = f"""<!doctype html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0a1620">
+<meta name="theme-color" content="#F4EFE4">
 <title>praia smart — {region_label} agora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>{CSS}</style>
 </head>
 <body>
 <header class="topbar">
-  <h1>praia <span class="em">smart</span></h1>
-  <div class="sub">{region_label} · atualizado {ts} · {aqi_text} · uv {uv_avg} · nuvens {cloud_avg}%</div>
+  <div class="topbar-row1">
+    {wordmark}
+  </div>
+  <div class="topbar-sub">
+    <span class="dot dot--live"></span>
+    <span>{region_label} · atualizado {ts} · {aqi_text} · uv {uv_avg} · nuvens {cloud_avg}%</span>
+  </div>
   <div class="pills">{state_pills}</div>
 </header>
 {alert_banner}
-<main id="grid">
+<section class="hero"><div class="hero-stack">{hero_html}</div></section>
+<main class="feed" id="grid">
 {cards}
 </main>
-<div class="footer">dados Open-Meteo · câmeras YouTube · v0.3</div>
+<div class="footer">dados Open-Meteo · câmeras YouTube · v0.4</div>
 <script>
 (()=>{{
-  const pills = document.querySelectorAll('.pill');
+  const pills = document.querySelectorAll('.pill[data-st]');
   pills.forEach(b => b.addEventListener('click', () => {{
     pills.forEach(x => x.classList.remove('active'));
     b.classList.add('active');

@@ -362,7 +362,226 @@ section {
 .aqi-cell .v { font-size: 18px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
 
 .footer { text-align: center; padding: 22px var(--pad) 28px; color: var(--mute); font-size: 11px; font-family: var(--font-mono); letter-spacing: 0.02em; }
+
+/* Ships */
+.ships-summary {
+  font-size: 12px; color: var(--ink-soft);
+  margin-bottom: 10px; font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+.ships-summary small { color: var(--mute); }
+.ships-empty {
+  color: var(--mute); font-style: italic;
+  padding: 10px 0; font-size: 13px;
+}
+.ships-list { display: flex; flex-direction: column; gap: 8px; }
+.ship {
+  display: flex; gap: 12px; padding: 10px 12px;
+  background: var(--paper-warm);
+  border: 1px solid var(--line); border-radius: 12px;
+}
+.ship-ico { font-size: 22px; line-height: 1; padding-top: 2px; }
+.ship-body { flex: 1; min-width: 0; }
+.ship-h { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.ship-name {
+  font-size: 13px; font-weight: 700; color: var(--ink);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  letter-spacing: -0.005em;
+}
+.ship-flag { font-size: 14px; flex-shrink: 0; }
+.ship-meta {
+  font-size: 11px; color: var(--accent); margin-top: 3px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+  font-family: var(--font-mono); font-weight: 600;
+}
+.ship-meta span:nth-child(even) { color: var(--mute); font-weight: 500; }
+.ship-status {
+  font-size: 11px; color: var(--ink-soft); margin-top: 2px;
+  text-transform: lowercase;
+}
+.ship-dest { font-size: 11px; color: var(--swim); margin-top: 2px; font-weight: 600; }
+
+/* Satellite */
+.sat-pills {
+  display: flex; gap: 6px; margin-bottom: 10px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.sat-pills::-webkit-scrollbar { display: none; }
+.sat-pill {
+  background: var(--paper-warm); color: var(--ink-soft);
+  border: 1px solid var(--line); border-radius: 999px;
+  padding: 5px 12px; font: inherit; font-size: 11px;
+  font-family: var(--font-mono); font-weight: 600;
+  letter-spacing: 0.04em; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+.sat-pill.active {
+  background: var(--accent); color: var(--card);
+  border-color: var(--accent);
+}
+.sat-image {
+  background: var(--paper-warm); border-radius: 12px;
+  overflow: hidden; aspect-ratio: 1/1;
+  border: 1px solid var(--line);
+}
+.sat-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sat-cap {
+  font-size: 11px; color: var(--ink-soft);
+  margin-top: 8px; text-align: center;
+  font-family: var(--font-mono); letter-spacing: 0.02em;
+}
+.sat-empty {
+  text-align: center; padding: 28px 14px; color: var(--mute);
+  background: var(--paper-warm); border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.sat-empty-ico { font-size: 36px; margin-bottom: 8px; opacity: 0.7; }
+.sat-empty-sub {
+  font-size: 11px; margin-top: 4px; opacity: 0.85;
+  font-family: var(--font-mono); letter-spacing: 0.04em;
+}
 """
+
+SHIP_ICONS = {
+    "cargueiro": "🚢", "petroleiro": "⛽", "cruzeiro": "🛳",
+    "passageiros": "⛴", "pesqueiro": "🎣", "rebocador": "🚤",
+    "iate": "⛵", "militar": "⚓", "rápido": "💨",
+    "draga": "🏗", "outro": "🛥", "—": "🛥",
+}
+
+
+def country_from_mmsi(mmsi):
+    if mmsi is None: return ""
+    s = str(mmsi)[:3]
+    flags = {
+        "710": "🇧🇷", "725": "🇨🇱", "750": "🇪🇨", "775": "🇻🇪", "701": "🇦🇷",
+        "303": "🇺🇸", "366": "🇺🇸", "367": "🇺🇸", "338": "🇺🇸",
+        "311": "🇧🇸", "319": "🇰🇾", "215": "🇲🇹", "247": "🇮🇹",
+        "227": "🇫🇷", "228": "🇫🇷", "211": "🇩🇪", "218": "🇩🇪",
+        "636": "🇱🇷", "538": "🇲🇭", "352": "🇵🇦", "355": "🇵🇦",
+        "374": "🇵🇦", "477": "🇭🇰", "236": "🇬🇮", "316": "🇨🇦",
+        "248": "🇲🇹", "563": "🇸🇬", "564": "🇸🇬",
+    }
+    return flags.get(s, "")
+
+
+def render_ships(p, ships_data):
+    if not ships_data:
+        return ""
+    bid = p["id"]
+    ships = ships_data.get("by_beach", {}).get(bid, [])
+    age_min = (datetime.now().timestamp() - ships_data.get("fetched_at", 0)) / 60
+
+    if not ships:
+        return (
+            '<section>'
+            '<div class="section-tag">navios na costa <span class="sub">50 km</span></div>'
+            '<div class="ships-empty">horizonte tranquilo · nenhum navio detectado</div>'
+            '</section>'
+        )
+
+    type_count = {}
+    for s in ships:
+        t = s.get("type") or "—"
+        type_count[t] = type_count.get(t, 0) + 1
+    summary_parts = [f"{n} {t}" for t, n in sorted(type_count.items(), key=lambda x: -x[1]) if t != "—"]
+    summary = " · ".join(summary_parts) if summary_parts else "tipos desconhecidos"
+
+    items = []
+    for s in ships[:12]:
+        ico = SHIP_ICONS.get(s.get("type") or "—", "🛥")
+        flag = country_from_mmsi(s.get("mmsi"))
+        name = s.get("name") or f"MMSI {s.get('mmsi')}"
+        ship_type = s.get("type") or "navio"
+        dist = s.get("dist_km")
+        compass = s.get("compass") or ""
+        status = s.get("status") or ""
+        speed = s.get("speed_kn")
+        speed_txt = f"{speed} nós" if speed and speed > 0.3 else "parado"
+        dest = s.get("dest")
+        dest_line = f'<div class="ship-dest">→ {dest}</div>' if dest else ""
+
+        items.append(
+            f'<div class="ship">'
+            f'  <div class="ship-ico">{ico}</div>'
+            f'  <div class="ship-body">'
+            f'    <div class="ship-h">'
+            f'      <span class="ship-name">{name}</span>'
+            f'      <span class="ship-flag">{flag}</span>'
+            f'    </div>'
+            f'    <div class="ship-meta">'
+            f'      <span>{ship_type}</span>'
+            f'      <span>·</span>'
+            f'      <span>{dist} km {compass}</span>'
+            f'      <span>·</span>'
+            f'      <span>{speed_txt}</span>'
+            f'    </div>'
+            f'    <div class="ship-status">{status}</div>'
+            f'    {dest_line}'
+            f'  </div>'
+            f'</div>'
+        )
+
+    return (
+        f'<section>'
+        f'<div class="section-tag">navios na costa <span class="sub">50 km · há {age_min:.0f} min</span></div>'
+        f'<div class="ships-summary">{len(ships)} navios · {summary}</div>'
+        f'<div class="ships-list">{"".join(items)}</div>'
+        f'</section>'
+    )
+
+
+def render_satellite(p, sat_data):
+    if not sat_data:
+        return ""
+    records = sat_data.get("by_beach", {}).get(p["id"], [])
+    valid = [r for r in records if r.get("status") == "ok"]
+    if not valid:
+        return '''
+  <section>
+    <div class="section-tag">satélite <span class="sub">sentinel-2</span></div>
+    <div class="sat-empty">
+      <div class="sat-empty-ico">☁</div>
+      <div>ainda nublado · volte amanhã</div>
+      <div class="sat-empty-sub">passa do satélite a cada 5 dias</div>
+    </div>
+  </section>'''
+
+    label_map = {"hoje": "hoje", "3d": "−3d", "7d": "−7d", "14d": "−14d", "30d": "−30d"}
+
+    pills = "".join(
+        f'<button class="sat-pill" data-img="../{r["image"]}" '
+        f'data-date="{r["date"]}" data-cloud="{r["cloud"]}">'
+        f'{label_map.get(r["label"], r["label"])}</button>'
+        for r in valid
+    )
+    first = valid[0]
+    return f'''
+  <section>
+    <div class="section-tag">satélite <span class="sub">sentinel-2</span></div>
+    <div class="sat-pills">{pills}</div>
+    <div class="sat-image">
+      <img id="sat-img" src="../{first["image"]}" alt="satélite">
+    </div>
+    <div class="sat-cap" id="sat-cap">
+      captura {first["date"]} · {first["cloud"]}% nuvens
+    </div>
+    <script>
+    (()=>{{
+      const pills = document.querySelectorAll('.sat-pill');
+      const img = document.getElementById('sat-img');
+      const cap = document.getElementById('sat-cap');
+      pills[0].classList.add('active');
+      pills.forEach(b => b.addEventListener('click', () => {{
+        pills.forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        img.src = b.dataset.img;
+        cap.textContent = `captura ${{b.dataset.date}} · ${{b.dataset.cloud}}% nuvens`;
+      }}));
+    }})();
+    </script>
+  </section>'''
 
 
 def render_score_row_arc(scores):
@@ -410,7 +629,7 @@ def hourly_cells(hourly, now_hour, max_h=12):
     return '<div class="hourly">' + "".join(out) + "</div>"
 
 
-def render(p, agito_data=None, now_hour=12):
+def render(p, agito_data=None, now_hour=12, ships_data=None, sat_data=None):
     # Compute scores
     p["_surf"] = surf_score(p)
     p["_swim"] = swim_score(p)
@@ -588,6 +807,10 @@ def render(p, agito_data=None, now_hour=12):
     {crowd_html}
   </section>
 
+  {render_ships(p, ships_data)}
+
+  {render_satellite(p, sat_data)}
+
 </main>
 <div class="footer">dados Open-Meteo · cam YouTube</div>
 </body>
@@ -598,10 +821,12 @@ def main():
     os.makedirs(OUTDIR, exist_ok=True)
     postos = json.load(open(DATA))
     agito_data = load_optional(AGITO)
+    ships_data = load_optional(SHIPS)
+    sat_data = load_optional(SATELLITE)
     now_hour = datetime.now().hour
     for p in postos:
         path = os.path.join(OUTDIR, f"{p['id']}.html")
-        open(path, "w").write(render(p, agito_data, now_hour))
+        open(path, "w").write(render(p, agito_data, now_hour, ships_data, sat_data))
     print(f"Wrote {len(postos)} detail pages to {OUTDIR}")
 
 

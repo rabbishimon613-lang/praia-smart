@@ -48,6 +48,16 @@ jobs:
         run: python workers/ships.py --once
         continue-on-error: true
 
+      - name: balneabilidade (only every ~12h, state agencies update weekly)
+        run: |
+          if [ ! -f data/balneabilidade.json ] || \
+             [ $(( $(date +%s) - $(stat -c %Y data/balneabilidade.json 2>/dev/null || echo 0) )) -gt 43200 ]; then
+            python workers/balneabilidade.py
+          else
+            echo "balneabilidade still fresh, skipping"
+          fi
+        continue-on-error: true
+
       - name: satellite (only every ~6h, Sentinel passes every 5 days)
         run: |
           if [ ! -f data/satellite.json ] || \

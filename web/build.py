@@ -436,6 +436,10 @@ def score_uv(posto):
     uv = (posto.get("weather") or {}).get("uv")
     if uv is None:
         return (None, None)
+    # Sun's down — UV is meaningless. Drop the dial entirely.
+    sun = posto.get("sun") or {}
+    if uv <= 0 and (sun.get("sunset") or sun.get("sunrise")):
+        return (None, None)
     if uv <= 2: v = 10
     elif uv <= 5: v = 8
     elif uv <= 7: v = 5

@@ -16,6 +16,7 @@ from build import (
     wind_arrow, fmt, time_short, uv_label, _icon, aqi_label,
     ACTIVITY_LABEL, ACTIVITY_VAR, BUCKET_INDEX,
     CATEGORIES, pick_top_dials, render_category_glyph,
+    render_agua_box, _BALNE_BY_BEACH,
 )
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -231,6 +232,50 @@ section {
   margin-bottom: 10px;
 }
 .section-tag .sub { color: var(--mute); margin-left: 6px; font-weight: 500; }
+
+/* Água box */
+.agua-box {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 14px 14px 18px;
+  margin-bottom: 14px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.agua-box::before {
+  content: ""; position: absolute;
+  left: 0; top: 10px; bottom: 10px; width: 4px;
+  background: var(--agua-c, var(--mute));
+  border-radius: 4px;
+}
+.agua-status {
+  font-weight: 800; font-size: 26px; line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+.agua-meta {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--ink-soft); letter-spacing: 0.02em;
+}
+.agua-rain {
+  margin-top: 6px;
+  font-size: 12px; color: var(--bad); font-weight: 600;
+  display: flex; gap: 6px; align-items: center;
+}
+.agua-rain-icon { font-size: 14px; }
+.agua-ecoli {
+  font-family: var(--font-mono); font-size: 13px;
+  color: var(--ink); margin-top: 6px;
+}
+.agua-link {
+  font-size: 13px; color: var(--accent); font-weight: 600;
+  text-decoration: none; margin-top: 6px; display: inline-block;
+}
+.agua-link:hover { text-decoration: underline; }
+.agua-explainer {
+  font-size: 11px; color: var(--mute); margin-top: 8px;
+  font-style: italic; line-height: 1.4;
+}
 
 /* Score row (sun-arc) — copied from build.py */
 .score-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 4px 0 0; }
@@ -659,6 +704,7 @@ def render(p, agito_data=None, now_hour=12, ships_data=None, sat_data=None):
     }
     agito_b = (agito_data or {}).get("by_beach", {}).get(p["id"]) if agito_data else None
     score_html = render_score_row_arc(p, agito_b)
+    agua_html = render_agua_box(p, _BALNE_BY_BEACH.get(p["id"]), is_detail=True)
     hourly_html = render_hourly_strip(p["_hourly"], now_hour)
 
     # Best window from top score
@@ -773,6 +819,8 @@ def render(p, agito_data=None, now_hour=12, ships_data=None, sat_data=None):
     {score_html}
     {bw_html}
   </section>
+
+  {agua_html}
 
   <section>
     <div class="section-tag">quando ir <span class="sub">próximas 24h</span></div>

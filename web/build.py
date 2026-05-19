@@ -392,11 +392,6 @@ def render_category_glyph(cat_id, color="currentColor", size=12):
                 f'<path d="M2 16 C 6 12, 10 12, 12 14 S 18 18, 22 14" stroke="{color}" stroke-width="2" stroke-linecap="round" fill="none"/>'
                 f'<path d="M17 8 L 20 5 L 23 8 M 20 5 V 12" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
                 f'</svg>')
-    if cat_id == "agua_limpa":
-        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
-                f'<path d="M12 3 C 12 3, 5 11, 5 16 a 7 7 0 0 0 14 0 C 19 11, 12 3, 12 3 Z" stroke="{color}" stroke-width="2" fill="none"/>'
-                f'<path d="M9 15 L 11 17 L 15 13" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
-                f'</svg>')
     return ""
 
 
@@ -566,18 +561,82 @@ def _balne_sublabel(entry):
         return f"{src} · {rd}"
 
 
-def score_agua_limpa(posto):
-    entry = _BALNE_BY_BEACH.get(posto.get("id"))
-    if not entry:
-        return (None, None)
-    status = entry.get("status")
-    if status == "propria":
-        return (10, f"própria — {_balne_sublabel(entry)}")
-    if status == "alerta":
-        return (5, f"alerta — {_balne_sublabel(entry)}")
-    if status == "impropria":
-        return (1, f"imprópria — {_balne_sublabel(entry)}")
-    return (None, None)
+_STATUS_META = {
+    "propria":   ("própria",   "var(--swim)"),
+    "alerta":    ("alerta",    "var(--sun)"),
+    "impropria": ("imprópria", "var(--bad)"),
+    "sem_dados": ("sem dados", "var(--mute)"),
+}
+
+
+def _rain_overlay(posto):
+    """Return (html, fired_bool). Warning if recent precip>10mm OR next 6h>5mm."""
+    w = posto.get("weather") or {}
+    hourly = posto.get("hourly") or {}
+    precip_arr = hourly.get("precip_mm") or []
+    recent = w.get("precip_mm") or 0
+    next6 = sum(v for v in precip_arr[:6] if v is not None)
+    if recent > 10 or next6 > 5:
+        return (
+            '<div class="agua-rain">'
+            '<span class="agua-rain-icon">⚠</span>'
+            '<span>chuva forte recente — água pode estar pior</span>'
+            '</div>'
+        ), True
+    return "", False
+
+
+def render_agua_box(posto, balne_entry, is_detail=False):
+    """Standalone água section: status badge + source/age + rain overlay."""
+    entry = balne_entry or {}
+    status = entry.get("status") or "sem_dados"
+    label, color_var = _STATUS_META.get(status, _STATUS_META["sem_dados"])
+
+    src = entry.get("source") or "INEA"
+    rd = entry.get("report_date")
+    if status == "sem_dados" or not rd:
+        meta_line = f"fonte: {src or 'INEA'} · em breve"
+    else:
+        try:
+            d = datetime.strptime(rd, "%Y-%m-%d").date()
+            days = (date.today() - d).days
+            if days <= 0:    when = "hoje"
+            elif days == 1:  when = "ontem"
+            else:            when = f"{days} dias atrás"
+            meta_line = f"{src} · {when}"
+        except Exception:
+            meta_line = f"{src} · {rd}"
+
+    rain_html, _fired = _rain_overlay(posto)
+
+    extras = ""
+    if is_detail:
+        ecoli = entry.get("ecoli")
+        ecoli_html = (
+            f'<div class="agua-ecoli">e.coli: {ecoli} NMP/100mL</div>'
+            if ecoli is not None else ""
+        )
+        url = entry.get("url")
+        link_html = (
+            f'<a class="agua-link" href="{url}" target="_blank" rel="noopener">ver boletim →</a>'
+            if url else ""
+        )
+        explainer = (
+            '<div class="agua-explainer">'
+            'dados oficiais são semanais — análise de bactérias leva 24h em laboratório.'
+            '</div>'
+        )
+        extras = f'{ecoli_html}{link_html}{explainer}'
+
+    return (
+        f'<section class="agua-box" style="--agua-c:{color_var}">'
+        f'<div class="section-tag">água</div>'
+        f'<div class="agua-status" style="color:{color_var}">{label}</div>'
+        f'<div class="agua-meta">{meta_line}</div>'
+        f'{rain_html}'
+        f'{extras}'
+        f'</section>'
+    )
 
 
 CATEGORIES = {
@@ -590,7 +649,6 @@ CATEGORIES = {
     "mar_quente": {"label": "mar quente", "color_var": "var(--swim)",   "scorer": score_mar_quente, "needs_agito": False},
     "ceu":        {"label": "céu",        "color_var": "var(--sun)",    "scorer": score_ceu,        "needs_agito": False},
     "mare":       {"label": "maré",       "color_var": "var(--swim)",   "scorer": score_mare,       "needs_agito": False},
-    "agua_limpa": {"label": "água limpa", "color_var": "var(--shade)",  "scorer": score_agua_limpa, "needs_agito": False},
 }
 
 
@@ -627,18 +685,6 @@ def _notability(cat_id, posto):
         return min(1.0, abs(aqi - 25) / 50)
     if cat_id == "mare":
         return 0.4
-    if cat_id == "agua_limpa":
-        entry = _BALNE_BY_BEACH.get(posto.get("id"))
-        if not entry:
-            return 0
-        st = entry.get("status")
-        if st == "impropria":
-            return 0.9
-        if st == "alerta":
-            return 0.7
-        if st == "propria":
-            return 0.5
-        return 0
     return 0
 
 
@@ -862,6 +908,7 @@ def render_card(p, marks, agito_data=None, now_hour=12):
     }
     agito_b = (agito_data or {}).get("by_beach", {}).get(p["id"]) if agito_data else None
     score_row = render_dynamic_score_row(p, agito_b)
+    agua_html = render_agua_box(p, _BALNE_BY_BEACH.get(p["id"]), is_detail=False)
     hourly_html = render_hourly_strip(p["_hourly"], now_hour)
 
     # Best window from the top-scoring activity
@@ -927,6 +974,7 @@ def render_card(p, marks, agito_data=None, now_hour=12):
     <a href="beach/{p['id']}.html" aria-label="ver câmera">{cam}</a>
   </header>
   {score_row}
+  {agua_html}
   {hourly_html}
   {bw_html}
   {cond_html}
@@ -1218,6 +1266,56 @@ main.feed {
   font-size: 11px; font-weight: 600;
   color: var(--ink-soft); letter-spacing: -0.005em;
   text-align: center;
+}
+
+/* ── Água box ──────────────────────────────────────────── */
+.agua-box {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px 12px 16px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.agua-box::before {
+  content: ""; position: absolute;
+  left: 0; top: 8px; bottom: 8px; width: 4px;
+  background: var(--agua-c, var(--mute));
+  border-radius: 4px;
+}
+.section-tag {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.08em; color: var(--accent);
+  text-transform: uppercase; font-weight: 700;
+  margin-bottom: 4px;
+}
+.section-tag .sub { color: var(--mute); margin-left: 6px; font-weight: 500; }
+.agua-status {
+  font-weight: 800; font-size: 22px; line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+.agua-meta {
+  font-family: var(--font-mono); font-size: 11px;
+  color: var(--ink-soft); letter-spacing: 0.02em;
+}
+.agua-rain {
+  margin-top: 6px;
+  font-size: 12px; color: var(--bad); font-weight: 600;
+  display: flex; gap: 6px; align-items: center;
+}
+.agua-rain-icon { font-size: 14px; }
+.agua-ecoli {
+  font-family: var(--font-mono); font-size: 12px;
+  color: var(--ink); margin-top: 4px;
+}
+.agua-link {
+  font-size: 12px; color: var(--accent); font-weight: 600;
+  text-decoration: none; margin-top: 4px; display: inline-block;
+}
+.agua-link:hover { text-decoration: underline; }
+.agua-explainer {
+  font-size: 11px; color: var(--mute); margin-top: 6px;
+  font-style: italic; line-height: 1.4;
 }
 
 /* ── Hourly strip ──────────────────────────────────────── */

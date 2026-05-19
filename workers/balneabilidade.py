@@ -40,10 +40,15 @@ TIMEOUT = 30
 # gets a sem_dados stub at the end of build().
 ALL_BEACH_IDS = [
     "copa-p5", "leblon-mirante", "sao-conrado", "cabo-frio-forte",
+    "ipanema-posto-9", "barra-tijuca-posto-3", "buzios-geriba",
     "balneario-camboriu", "balneario-rincao", "floripa-barra-lagoa",
+    "jurere-internacional",
     "morro-terceira", "santos-gonzaga", "guaruja-enseada",
     "praia-grande-boqueirao", "natal-ponta-negra",
     "salvador-itapua", "salvador-stella-maris", "porto-seguro-taperapua",
+    "recife-boa-viagem", "ipojuca-porto-galinhas",
+    "fortaleza-iracema-meireles",
+    "maceio-pajucara",
 ]
 
 # Tier-2 sources we don't scrape yet: still report which agency would own them.
@@ -53,6 +58,14 @@ DEFAULT_SOURCE = {
     "salvador-stella-maris": "INEMA",
     "porto-seguro-taperapua": "INEMA",
     "natal-ponta-negra": "IDEMA",
+    "ipanema-posto-9": "INEA",
+    "barra-tijuca-posto-3": "INEA",
+    "buzios-geriba": "INEA",
+    "jurere-internacional": "IMA-SC",
+    "recife-boa-viagem": "CPRH",
+    "ipojuca-porto-galinhas": "CPRH",
+    "fortaleza-iracema-meireles": "SEMACE",
+    "maceio-pajucara": "IMA-AL",
 }
 
 
@@ -113,12 +126,15 @@ IMA_NAME_MAP = {
     "balneario camboriu": "balneario-camboriu",
     "rincão": "balneario-rincao",
     "rincao": "balneario-rincao",
+    "jurerê": "jurere-internacional",
+    "jurere": "jurere-internacional",
 }
 IMA_PREFERRED_POINT = {
     # If multiple sample points hit, prefer one matching this hint
     "balneario-camboriu": "marambaia",  # matches Hotel Marambaia in postos.csv
     "floripa-barra-lagoa": None,
     "balneario-rincao": None,
+    "jurere-internacional": "internacional",
 }
 
 
@@ -292,6 +308,13 @@ INEA_NAME_MAP = {
     ("pepino", ""): "sao-conrado",
     ("forte", "cabo frio"): "cabo-frio-forte",
     ("cabo frio", "forte"): "cabo-frio-forte",
+    ("ipanema", "posto 9"): "ipanema-posto-9",
+    ("ipanema", "p9"): "ipanema-posto-9",
+    ("ipanema", ""): "ipanema-posto-9",
+    ("barra da tijuca", "posto 3"): "barra-tijuca-posto-3",
+    ("barra da tijuca", ""): "barra-tijuca-posto-3",
+    ("geribá", ""): "buzios-geriba",
+    ("geriba", ""): "buzios-geriba",
 }
 
 
@@ -619,6 +642,335 @@ def fetch_inema():
 
 
 # -----------------------------------------------------------------------------
+# CPRH (Pernambuco)
+# -----------------------------------------------------------------------------
+# Weekly PDFs listed at /informativos-semanais-YYYY/. We hit the parent index
+# page (which links to the current-year page), then grab the newest PDF and
+# substring-match beach names against the table rows.
+
+CPRH_INDEX = ("https://www2.cprh.pe.gov.br/monitoramento-ambiental/"
+              "balneabilidade/")
+
+# beach_id → list of substrings that uniquely identify the beach row.
+CPRH_POINTS = {
+    "recife-boa-viagem": ["boa viagem"],
+    "ipojuca-porto-galinhas": ["porto de galinhas"],
+}
+
+
+def _cprh_latest_pdf_url():
+    # First try the year-specific index pages linked from the parent.
+    try:
+        landing = curl(CPRH_INDEX)
+    except subprocess.CalledProcessError as e:
+        print(f"  CPRH: landing err {e}", file=sys.stderr)
+        return None
+    year_pages = re.findall(
+        r'href="(https?://[^"]*informativos?-semanais?-\d{4}/?)"',
+        landing, re.I)
+    pdfs = []
+    pages_to_scan = list(dict.fromkeys(year_pages)) or [CPRH_INDEX]
+    for page in pages_to_scan[:3]:
+        try:
+            html = curl(page)
+        except subprocess.CalledProcessError:
+            continue
+        found = re.findall(
+            r'href="(https?://[^"]*informativo-balneabilidade-\d+_\d{4}[^"]*\.pdf)"',
+            html, re.I)
+        pdfs.extend(found)
+        if pdfs:
+            break
+    if not pdfs:
+        # Fallback: any PDF on landing.
+        pdfs = re.findall(r'href="([^"]+\.pdf)"', landing, re.I)
+    if not pdfs:
+        return None
+
+    def week_num(u):
+        m = re.search(r"informativo-balneabilidade-(\d+)_(\d{4})", u, re.I)
+        if not m:
+            return (0, 0)
+        return (int(m.group(2)), int(m.group(1)))
+
+    pdfs.sort(key=week_num, reverse=True)
+    return pdfs[0]
+
+
+def fetch_cprh():
+    url = _cprh_latest_pdf_url()
+    if not url:
+        print("  CPRH: no PDF found", file=sys.stderr)
+        return {}
+    try:
+        pdf = curl(url, binary=True)
+    except subprocess.CalledProcessError as e:
+        print(f"  CPRH: download err {e}", file=sys.stderr)
+        return {}
+    if not pdf.startswith(b"%PDF"):
+        return {}
+    try:
+        text = pdf_to_text(pdf)
+    except Exception as e:
+        print(f"  CPRH: pdftotext failed: {e}", file=sys.stderr)
+        return {}
+
+    # Date: look for a "DATA DA COLETA: dd/mm/yyyy" or any dd/mm/yyyy.
+    report_date = None
+    m = re.search(r"COLETA[^0-9]*(\d{2}/\d{2}/\d{4})", text, re.I)
+    if not m:
+        m = re.search(r"(\d{2}/\d{2}/\d{4})", text)
+    if m:
+        try:
+            report_date = datetime.strptime(
+                m.group(1), "%d/%m/%Y").date().isoformat()
+        except ValueError:
+            pass
+
+    print(f"  CPRH: parsing {url}", file=sys.stderr)
+    out = {}
+    for line in text.splitlines():
+        low = line.lower()
+        status = None
+        if "impróp" in low or "improp" in low:
+            status = "impropria"
+        elif "própr" in low or "propr" in low:
+            status = "propria"
+        if not status:
+            continue
+        for bid, needles in CPRH_POINTS.items():
+            for needle in needles:
+                if needle in low:
+                    # Prefer keeping the first hit per beach (matches the
+                    # primary sample point listed).
+                    if bid not in out:
+                        out[bid] = {
+                            "status": status,
+                            "source": "CPRH",
+                            "report_date": report_date,
+                            "ecoli": None,
+                            "url": url,
+                            "confidence": "oficial",
+                        }
+                    break
+    return out
+
+
+# -----------------------------------------------------------------------------
+# SEMACE (Ceará)
+# -----------------------------------------------------------------------------
+# No JSON API was found on the boletim page — only a list of weekly PDF links
+# under wp-content/uploads/.../Boletim-*.pdf. The wp-json endpoint exists but
+# only returns the page wrapper, not bulletin data. So we parse the PDF.
+
+SEMACE_LANDING = "https://www.semace.ce.gov.br/boletim-de-balneabilidade/"
+
+SEMACE_POINTS = {
+    "fortaleza-iracema-meireles": ["iracema", "meireles"],
+}
+
+_STATUS_PRIORITY = {"impropria": 2, "alerta": 1, "propria": 0}
+
+
+def fetch_semace():
+    try:
+        html = curl(SEMACE_LANDING)
+    except subprocess.CalledProcessError as e:
+        print(f"  SEMACE: landing err {e}", file=sys.stderr)
+        return {}
+    pdfs = re.findall(
+        r'href="(https?://[^"]*?Boletim-\d+[^"]*\.pdf)"', html, re.I)
+    if not pdfs:
+        pdfs = re.findall(r'href="([^"]+\.pdf)"', html, re.I)
+    if not pdfs:
+        print("  SEMACE: no PDF links", file=sys.stderr)
+        return {}
+
+    def boletim_date(u):
+        m = re.search(r"Boletim-(\d{8})", u)
+        return m.group(1) if m else ""
+
+    pdfs.sort(key=boletim_date, reverse=True)
+    for url in pdfs[:4]:
+        try:
+            pdf = curl(url, binary=True)
+        except subprocess.CalledProcessError:
+            continue
+        if not pdf.startswith(b"%PDF"):
+            continue
+        try:
+            text = pdf_to_text(pdf)
+        except Exception as e:
+            print(f"  SEMACE: pdftotext err {e}", file=sys.stderr)
+            continue
+        print(f"  SEMACE: parsing {url}", file=sys.stderr)
+
+        report_date = None
+        m = re.search(r"Boletim-(\d{4})(\d{2})(\d{2})", url)
+        if m:
+            report_date = f"{m.group(1)}-{m.group(2)}-{m.group(3)}"
+        else:
+            m2 = re.search(r"(\d{2}/\d{2}/\d{4})", text)
+            if m2:
+                try:
+                    report_date = datetime.strptime(
+                        m2.group(1), "%d/%m/%Y").date().isoformat()
+                except ValueError:
+                    pass
+
+        out = {}
+        # SEMACE format: each line ends with a trailing " P" or " I"
+        # (própria / imprópria) as classification token.
+        for line in text.splitlines():
+            low = line.lower()
+            hit_bid = None
+            for bid, needles in SEMACE_POINTS.items():
+                for needle in needles:
+                    if needle in low:
+                        hit_bid = bid
+                        break
+                if hit_bid:
+                    break
+            if not hit_bid:
+                continue
+            status = None
+            stripped = line.rstrip()
+            # Last single-letter token after whitespace.
+            mt = re.search(r"\s([PIp i])\s*$", stripped)
+            if mt:
+                tok = mt.group(1).upper()
+                if tok == "P":
+                    status = "propria"
+                elif tok == "I":
+                    status = "impropria"
+            if not status:
+                # Fallback: look for the words in the line.
+                if "impróp" in low or "improp" in low:
+                    status = "impropria"
+                elif "própr" in low or "propr" in low:
+                    status = "propria"
+            if not status:
+                continue
+            prev = out.get(hit_bid)
+            if (prev is None or
+                    _STATUS_PRIORITY[status] > _STATUS_PRIORITY[prev["status"]]):
+                out[hit_bid] = {
+                    "status": status,
+                    "source": "SEMACE",
+                    "report_date": report_date,
+                    "ecoli": None,
+                    "url": url,
+                    "confidence": "oficial",
+                }
+        if out:
+            return out
+    return {}
+
+
+# -----------------------------------------------------------------------------
+# IMA-AL (Alagoas)
+# -----------------------------------------------------------------------------
+# The relatórios page loads documents asynchronously via wp-admin/admin-ajax.php
+# with category 'balneabilidade-das-praias'. We fetch the AJAX response,
+# extract the newest PDF link, and parse it.
+
+IMA_AL_LANDING = ("https://www2.ima.al.gov.br/laboratorio/"
+                  "relatorios-de-balneabilidade/balneabilidade-de-praias/")
+IMA_AL_AJAX = "https://www2.ima.al.gov.br/wp-admin/admin-ajax.php"
+
+IMA_AL_POINTS = {
+    "maceio-pajucara": ["pajuçara", "pajucara", "ponta verde"],
+}
+
+
+def _ima_al_latest_pdf():
+    # We need a fresh nonce: grab from the landing page.
+    try:
+        page = curl(IMA_AL_LANDING)
+    except subprocess.CalledProcessError as e:
+        print(f"  IMA-AL: landing err {e}", file=sys.stderr)
+        return None
+    m = re.search(r'documentos_vars\s*=\s*\{[^}]*"nonce"\s*:\s*"([a-f0-9]+)"',
+                  page)
+    nonce = m.group(1) if m else ""
+    # POST to admin-ajax
+    data = (f"action=carregar_documentos&nonce={nonce}"
+            f"&categoria=balneabilidade-das-praias&per_page=5"
+            f"&orderby=date&page=1")
+    try:
+        out = subprocess.run(
+            ["curl", "-sSfL", "-A", UA, "-m", str(TIMEOUT),
+             "-X", "POST", "--data", data, IMA_AL_AJAX],
+            capture_output=True, check=True, timeout=TIMEOUT + 5,
+        ).stdout.decode("utf-8", errors="replace")
+    except subprocess.CalledProcessError as e:
+        print(f"  IMA-AL: ajax err {e}", file=sys.stderr)
+        return None
+    pdfs = re.findall(r'href="(https?://[^"]+\.pdf)"', out, re.I)
+    if not pdfs:
+        return None
+    return pdfs[0]
+
+
+def fetch_ima_al():
+    url = _ima_al_latest_pdf()
+    if not url:
+        print("  IMA-AL: no PDF found", file=sys.stderr)
+        return {}
+    try:
+        pdf = curl(url, binary=True)
+    except subprocess.CalledProcessError as e:
+        print(f"  IMA-AL: download err {e}", file=sys.stderr)
+        return {}
+    if not pdf.startswith(b"%PDF"):
+        return {}
+    try:
+        text = pdf_to_text(pdf)
+    except Exception as e:
+        print(f"  IMA-AL: pdftotext err {e}", file=sys.stderr)
+        return {}
+
+    print(f"  IMA-AL: parsing {url}", file=sys.stderr)
+    report_date = None
+    m = re.search(r"REAB-(\d+)-(\d{4})", url)
+    # Prefer date in body if present.
+    md = re.search(r"(\d{2}/\d{2}/\d{4})", text)
+    if md:
+        try:
+            report_date = datetime.strptime(
+                md.group(1), "%d/%m/%Y").date().isoformat()
+        except ValueError:
+            pass
+
+    out = {}
+    for line in text.splitlines():
+        low = line.lower()
+        status = None
+        if "impróp" in low or "improp" in low:
+            status = "impropria"
+        elif "própr" in low or "propr" in low:
+            status = "propria"
+        if not status:
+            continue
+        for bid, needles in IMA_AL_POINTS.items():
+            if any(n in low for n in needles):
+                prev = out.get(bid)
+                if (prev is None or
+                        _STATUS_PRIORITY[status] >
+                        _STATUS_PRIORITY[prev["status"]]):
+                    out[bid] = {
+                        "status": status,
+                        "source": "IMA-AL",
+                        "report_date": report_date,
+                        "ecoli": None,
+                        "url": url,
+                        "confidence": "oficial",
+                    }
+                break
+    return out
+
+
+# -----------------------------------------------------------------------------
 # Build
 # -----------------------------------------------------------------------------
 
@@ -628,7 +980,10 @@ def build():
     for name, fn in [("IMA-SC", fetch_ima_sc),
                      ("CETESB", fetch_cetesb),
                      ("INEA",   fetch_inea),
-                     ("INEMA",  fetch_inema)]:
+                     ("INEMA",  fetch_inema),
+                     ("CPRH",   fetch_cprh),
+                     ("SEMACE", fetch_semace),
+                     ("IMA-AL", fetch_ima_al)]:
         try:
             res = fn() or {}
             print(f"  {name}: {len(res)} beaches resolved", file=sys.stderr)

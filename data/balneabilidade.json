@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1779228709,
+  "fetched_at": 1779230237,
   "by_beach": {
     "santos-gonzaga": {
       "status": "impropria",
@@ -57,6 +57,38 @@
       "url": "http://www.ba.gov.br/inema/noticias/2026-05/93349/balneabilidade-inema-divulga-situacao-das-praias-da-bahia-neste-final-de",
       "confidence": "oficial"
     },
+    "recife-boa-viagem": {
+      "status": "impropria",
+      "source": "CPRH",
+      "report_date": "2026-05-04",
+      "ecoli": null,
+      "url": "https://www2.cprh.pe.gov.br/wp-content/uploads/2026/05/informativo-balneabilidade-19_2026-enterolert.pdf",
+      "confidence": "oficial"
+    },
+    "ipojuca-porto-galinhas": {
+      "status": "propria",
+      "source": "CPRH",
+      "report_date": "2026-05-04",
+      "ecoli": null,
+      "url": "https://www2.cprh.pe.gov.br/wp-content/uploads/2026/05/informativo-balneabilidade-19_2026-enterolert.pdf",
+      "confidence": "oficial"
+    },
+    "fortaleza-iracema-meireles": {
+      "status": "impropria",
+      "source": "SEMACE",
+      "report_date": "2026-05-13",
+      "ecoli": null,
+      "url": "https://www.semace.ce.gov.br/wp-content/uploads/sites/46/2026/05/Boletim-202605131-BOL1919836791438711543.pdf",
+      "confidence": "oficial"
+    },
+    "maceio-pajucara": {
+      "status": "impropria",
+      "source": "IMA-AL",
+      "report_date": "2026-05-04",
+      "ecoli": null,
+      "url": "https://www2.ima.al.gov.br/wp-content/uploads/2026/05/REAB-18-2026.pdf",
+      "confidence": "oficial"
+    },
     "copa-p5": {
       "status": "sem_dados",
       "source": "—",
@@ -89,6 +121,30 @@
       "url": null,
       "confidence": "estimativa"
     },
+    "ipanema-posto-9": {
+      "status": "sem_dados",
+      "source": "INEA",
+      "report_date": null,
+      "ecoli": null,
+      "url": null,
+      "confidence": "estimativa"
+    },
+    "barra-tijuca-posto-3": {
+      "status": "sem_dados",
+      "source": "INEA",
+      "report_date": null,
+      "ecoli": null,
+      "url": null,
+      "confidence": "estimativa"
+    },
+    "buzios-geriba": {
+      "status": "sem_dados",
+      "source": "INEA",
+      "report_date": null,
+      "ecoli": null,
+      "url": null,
+      "confidence": "estimativa"
+    },
     "balneario-camboriu": {
       "status": "sem_dados",
       "source": "—",
@@ -108,6 +164,14 @@
     "floripa-barra-lagoa": {
       "status": "sem_dados",
       "source": "—",
+      "report_date": null,
+      "ecoli": null,
+      "url": null,
+      "confidence": "estimativa"
+    },
+    "jurere-internacional": {
+      "status": "sem_dados",
+      "source": "IMA-SC",
       "report_date": null,
       "ecoli": null,
       "url": null,

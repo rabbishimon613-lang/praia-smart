@@ -7,9 +7,14 @@ Sources wired:
             praia-grande-boqueirao. Weekly HTML map page.
   - INEA    (Rio de Janeiro) → copa-p5, leblon-mirante, sao-conrado,
             cabo-frio-forte. Weekly PDF linked from landing page.
+  - INEMA   (Bahia)          → morro-terceira, salvador-itapua,
+            salvador-stella-maris, porto-seguro-taperapua. INEMA's PDF
+            URLs aren't reliably discoverable, but the agency publishes
+            a weekly *news article* on www.ba.gov.br/inema with the
+            full bulletin in prose form — we parse that.
 
-morro-terceira (INEMA-BA) and natal-ponta-negra (IDEMA-RN) get sem_dados
-placeholders for now — no clean URL pattern.
+natal-ponta-negra (IDEMA-RN) gets a sem_dados placeholder for now —
+no clean URL pattern.
 
 Stdlib + curl + pdftotext (poppler) only, to match other workers/ scripts.
 
@@ -38,11 +43,15 @@ ALL_BEACH_IDS = [
     "balneario-camboriu", "balneario-rincao", "floripa-barra-lagoa",
     "morro-terceira", "santos-gonzaga", "guaruja-enseada",
     "praia-grande-boqueirao", "natal-ponta-negra",
+    "salvador-itapua", "salvador-stella-maris", "porto-seguro-taperapua",
 ]
 
 # Tier-2 sources we don't scrape yet: still report which agency would own them.
 DEFAULT_SOURCE = {
     "morro-terceira": "INEMA",
+    "salvador-itapua": "INEMA",
+    "salvador-stella-maris": "INEMA",
+    "porto-seguro-taperapua": "INEMA",
     "natal-ponta-negra": "IDEMA",
 }
 
@@ -365,6 +374,251 @@ def _parse_inea_text(text, url):
 
 
 # -----------------------------------------------------------------------------
+# INEMA (Bahia)
+# -----------------------------------------------------------------------------
+# INEMA's PDFs are at unpredictable filenames on homologa.ba.gov.br
+# (which is also often unreachable from outside BA). However, every Friday
+# INEMA publishes a *news article* with the full bulletin in prose form,
+# listing all sample points by status. We discover the latest such article
+# via the on-site search and parse the body text.
+
+INEMA_SEARCH = "https://www.ba.gov.br/inema/busca-solr-multisite?keys=balneabilidade"
+INEMA_BASE = "https://www.ba.gov.br"
+
+# beach_id → list of (substring, optional context hint) — substring must hit
+# one of the próprios / impróprios lists in the article.
+INEMA_POINTS = {
+    "morro-terceira": ["terceira praia", "3ª praia", "3a praia"],
+    "salvador-itapua": ["itapuã", "itapua"],
+    "salvador-stella-maris": ["stella maris"],
+    "porto-seguro-taperapua": ["taperapuã", "taperapua"],
+}
+
+# Try direct PDF URL patterns as a secondary strategy (in case INEMA
+# ever links them from a future news article). Strategy:
+#   1) discover candidate PDF urls from any recent news article body
+#   2) fall back to guessing the most recent Fridays of current/last month
+INEMA_PDF_MUNI = {
+    "morro-terceira": "Cairu",
+    "salvador-itapua": "Salvador",
+    "salvador-stella-maris": "Salvador",
+    "porto-seguro-taperapua": "Porto Seguro",
+}
+
+
+def _inema_find_latest_news():
+    """Return list of (url, slug-date-hint) for the most recent
+    balneabilidade news articles, newest first."""
+    try:
+        html_text = curl(INEMA_SEARCH)
+    except subprocess.CalledProcessError as e:
+        print(f"  INEMA: search err {e}", file=sys.stderr)
+        return []
+    links = re.findall(
+        r'href="(https?://[^"]*inema/noticias/[^"]*balneabilidade[^"]*)"',
+        html_text, re.I,
+    )
+    # Dedup, keep order, prefer ones whose slug describes a "divulga situação"
+    # / "praias" listing (vs. methodology explainers).
+    seen = set()
+    ordered = []
+    for u in links:
+        u = u.replace("&amp;", "&")
+        if u in seen:
+            continue
+        seen.add(u)
+        ordered.append(u)
+    # Prefer divulga/situacao slugs first; then anything with a YYYY-MM path.
+    def score(u):
+        s = 0
+        if "divulga" in u or "situacao" in u or "praias" in u:
+            s += 10
+        # newer YYYY-MM path scores higher (lexicographic on the matched slice)
+        m = re.search(r"/(\d{4}-\d{2})/", u)
+        if m:
+            s += 1
+        return (s, u)
+    ordered.sort(key=score, reverse=True)
+    return ordered
+
+
+def _inema_strip(html_text):
+    """Reduce news HTML to a single whitespace-collapsed plain-text blob."""
+    h = re.sub(r"<(script|style)[^>]*>.*?</\1>", "", html_text,
+               flags=re.S | re.I)
+    h = re.sub(r"<[^>]+>", " ", h)
+    # Decode HTML entities the cheap way.
+    from html import unescape
+    h = unescape(h)
+    h = re.sub(r"\s+", " ", h).strip()
+    return h
+
+
+def _inema_parse_date(text):
+    m = re.search(r"(\d{2}/\d{2}/\d{4})", text)
+    if not m:
+        return None
+    try:
+        return datetime.strptime(m.group(1), "%d/%m/%Y").date().isoformat()
+    except ValueError:
+        return None
+
+
+def _inema_classify_point(text_low, needles):
+    """Look for any needle in text_low and decide própria/imprópria based on
+    which list segment it falls in. INEMA articles always interleave
+    'próprio(s/as)' and 'impróprio(s/as)' paragraph markers — we find the
+    nearest preceding marker before the needle hit.
+
+    For the Morro de São Paulo complex, the article uses a summary clause
+    instead of enumerating each praia ("complexo de Morro de São Paulo
+    apresentou condição própria — à exceção da 1ª praia"). We special-case
+    Terceira Praia below.
+    """
+    for needle in needles:
+        idx = text_low.find(needle)
+        if idx < 0:
+            continue
+        window = text_low[:idx]
+        last_propr = max(window.rfind("próprio"), window.rfind("proprio"),
+                         window.rfind("próprios"), window.rfind("próprias"),
+                         window.rfind("condição própria"),
+                         window.rfind("condicao propria"))
+        last_impr = max(window.rfind("impróprio"), window.rfind("improprio"),
+                        window.rfind("impróprios"), window.rfind("impróprias"),
+                        window.rfind("condição imprópria"))
+        if last_propr < 0 and last_impr < 0:
+            return None
+        return "propria" if last_propr > last_impr else "impropria"
+    return None
+
+
+def _inema_parse_news(text, url):
+    """Return {beach_id: entry} parsed from a balneabilidade news article."""
+    report_date = _inema_parse_date(text)
+    low = text.lower()
+    out = {}
+
+    for bid, needles in INEMA_POINTS.items():
+        if bid == "morro-terceira":
+            # Special case: the article describes the Morro de São Paulo
+            # complex as a whole. Terceira Praia is própria unless the
+            # article explicitly excludes "3ª praia" / "terceira".
+            if "morro de são paulo" not in low and "morro de sao paulo" not in low:
+                continue
+            # Default to própria; flip if Terceira is mentioned as exception.
+            status = "propria"
+            # Look for explicit exceptions naming Terceira / 3ª.
+            for kw in ("terceira praia", "3ª praia", "3a praia"):
+                k = low.find(kw)
+                if k < 0:
+                    continue
+                # Check the nearest preceding "exceção" or "imprópria" within
+                # ~120 chars.
+                ctx = low[max(0, k - 200):k + 60]
+                if ("exceção" in ctx or "excecao" in ctx
+                        or "imprópri" in ctx or "improp" in ctx):
+                    status = "impropria"
+                    break
+            out[bid] = {
+                "status": status,
+                "source": "INEMA",
+                "report_date": report_date,
+                "ecoli": None,
+                "url": url,
+                "confidence": "oficial",
+            }
+            continue
+
+        status = _inema_classify_point(low, needles)
+        if not status:
+            continue
+        out[bid] = {
+            "status": status,
+            "source": "INEMA",
+            "report_date": report_date,
+            "ecoli": None,
+            "url": url,
+            "confidence": "oficial",
+        }
+
+    return out
+
+
+def _inema_try_pdfs(news_text):
+    """If the news article happens to link any boletim PDFs, try to parse
+    those for E. coli numbers. Best-effort: returns {beach_id: ecoli_int}."""
+    pdf_urls = re.findall(
+        r'(https?://[^\s"<>]+Boletim[^\s"<>]*\.pdf)', news_text, re.I)
+    ecoli = {}
+    for url in pdf_urls[:6]:
+        try:
+            pdf = curl(url, binary=True)
+        except subprocess.CalledProcessError:
+            continue
+        if not pdf.startswith(b"%PDF"):
+            continue
+        try:
+            text = pdf_to_text(pdf)
+        except Exception:
+            continue
+        low = text.lower()
+        for bid, needles in INEMA_POINTS.items():
+            if bid in ecoli:
+                continue
+            for needle in needles:
+                idx = low.find(needle)
+                if idx < 0:
+                    continue
+                # Grab line containing the needle.
+                line_start = low.rfind("\n", 0, idx) + 1
+                line_end = low.find("\n", idx)
+                if line_end < 0:
+                    line_end = len(low)
+                line = text[line_start:line_end]
+                m = re.search(r"\b(\d{1,7})\b\s*(?:nmp|/100|colônias|colonias)?",
+                              line, re.I)
+                if m:
+                    try:
+                        ecoli[bid] = int(m.group(1))
+                    except ValueError:
+                        pass
+                break
+    return ecoli
+
+
+def fetch_inema():
+    news_urls = _inema_find_latest_news()
+    if not news_urls:
+        print("  INEMA: no news articles found", file=sys.stderr)
+        return {}
+    last_err = None
+    for nu in news_urls[:4]:
+        try:
+            raw = curl(nu)
+        except subprocess.CalledProcessError as e:
+            last_err = e
+            continue
+        text = _inema_strip(raw)
+        out = _inema_parse_news(text, nu)
+        if not out:
+            continue
+        print(f"  INEMA: parsing {nu}", file=sys.stderr)
+        # Best-effort: enrich with E. coli numbers from any linked PDFs.
+        try:
+            ecoli = _inema_try_pdfs(raw)
+            for bid, val in ecoli.items():
+                if bid in out:
+                    out[bid]["ecoli"] = val
+        except Exception as e:
+            print(f"  INEMA: PDF enrich skipped: {e}", file=sys.stderr)
+        return out
+    if last_err:
+        print(f"  INEMA: last error {last_err}", file=sys.stderr)
+    return {}
+
+
+# -----------------------------------------------------------------------------
 # Build
 # -----------------------------------------------------------------------------
 
@@ -373,7 +627,8 @@ def build():
 
     for name, fn in [("IMA-SC", fetch_ima_sc),
                      ("CETESB", fetch_cetesb),
-                     ("INEA",   fetch_inea)]:
+                     ("INEA",   fetch_inea),
+                     ("INEMA",  fetch_inema)]:
         try:
             res = fn() or {}
             print(f"  {name}: {len(res)} beaches resolved", file=sys.stderr)

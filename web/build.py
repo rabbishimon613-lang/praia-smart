@@ -1708,6 +1708,12 @@ def main():
     lastmod = datetime.now().strftime("%Y-%m-%d")
     urls = [f"{SITE_URL}/", f"{SITE_URL}/melhores.html", f"{SITE_URL}/sobre.html"]
     urls += [f"{SITE_URL}/beach/{p['id']}.html" for p in postos]
+    # Weekly auto-generated city "fim de semana" pages (see web/cities.py).
+    _city_slugs = [
+        "rio", "cabo-frio", "morro-de-sao-paulo", "santos", "guaruja",
+        "praia-grande", "balneario-camboriu", "floripa", "balneario-rincao", "natal",
+    ]
+    urls += [f"{SITE_URL}/{s}/fim-de-semana.html" for s in _city_slugs]
     sm_entries = "\n".join(
         f"  <url><loc>{u}</loc><lastmod>{lastmod}</lastmod></url>" for u in urls
     )

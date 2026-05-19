@@ -284,10 +284,13 @@ def render_activity_glyph(activity, color="currentColor", size=14):
                 f'</g></svg>')
     if activity == "evitar_sol":
         return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
-                f'<path d="M3 11 a 9 6 0 0 1 18 0 Z" stroke="{color}" stroke-width="2" fill="none" stroke-linejoin="round"/>'
-                f'<line x1="12" y1="11" x2="12" y2="21" stroke="{color}" stroke-width="2" stroke-linecap="round"/>'
-                f'<path d="M12 21 q 2 0 2 -2" stroke="{color}" stroke-width="2" fill="none" stroke-linecap="round"/>'
-                f'</svg>')
+                f'<path d="M5 16 a 7 7 0 0 1 14 0" stroke="{color}" stroke-width="2" fill="none" stroke-linecap="round"/>'
+                f'<line x1="3" y1="20" x2="21" y2="20" stroke="{color}" stroke-width="2" stroke-linecap="round"/>'
+                f'<g stroke="{color}" stroke-width="2" stroke-linecap="round">'
+                f'<line x1="12" y1="3" x2="12" y2="5"/>'
+                f'<line x1="4.5" y1="9" x2="5.9" y2="10.4"/>'
+                f'<line x1="19.5" y1="9" x2="18.1" y2="10.4"/>'
+                f'</g></svg>')
     return ""
 
 

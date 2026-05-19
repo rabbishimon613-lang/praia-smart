@@ -3,27 +3,158 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0a1620">
+<meta name="theme-color" content="#F4EFE4">
 <title>sobre — praia smart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+:root {
+  --paper:#F4EFE4; --paper-warm:#F9F4E8; --card:#FFFFFF;
+  --ink:#1F3F4D; --ink-soft:#577485; --mute:#94A8B4;
+  --line:#E6DCC8; --accent:#E8895E;
+  --font-sans:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --font-serif:"Instrument Serif","Times New Roman",serif;
+  --font-mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --pad:16px;
+}
 * { box-sizing: border-box; }
-html, body { margin:0; padding:0; background: #0a1620; color: #e7eef5;
-  font: 15px/1.5 -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }
-.nav { position: sticky; top:0; background: rgba(10,22,32,0.94); backdrop-filter: blur(12px);
-  padding: 12px 14px; padding-top: calc(12px + env(safe-area-inset-top));
-  border-bottom: 1px solid #1f3a52; display:flex; gap:12px; align-items:center; }
-.nav a { color: #4fc4ff; text-decoration:none; font-size:18px; padding:4px 8px; }
-.nav h1 { margin:0; font-size:16px; font-weight:700; }
-main { padding: 24px 16px; max-width: 720px; margin: 0 auto; }
-h2 { font-size: 16px; margin: 24px 0 8px; color: #4fc4ff; }
-p { color: #c7d4e3; }
-.placeholder { color: #7d97b0; font-style: italic; }
+html, body {
+  margin:0; padding:0;
+  background:
+    radial-gradient(900px 600px at 20% 0%, #f1ecdf 0%, transparent 50%),
+    radial-gradient(800px 700px at 100% 30%, #e5eef2 0%, transparent 55%),
+    linear-gradient(180deg, #efe9da 0%, #e9e4d2 100%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 15px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+body { padding-bottom: env(safe-area-inset-bottom); }
+a { color: inherit; text-decoration: none; }
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  background: linear-gradient(180deg, var(--paper) 70%, rgba(244,239,228,0.85) 100%);
+  backdrop-filter: blur(10px);
+  padding: 12px var(--pad) 10px;
+  padding-top: calc(12px + env(safe-area-inset-top));
+  border-bottom: 1px solid rgba(230,220,200,0.7);
+  display: flex; align-items: center; gap: 10px;
+}
+.back-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 999px;
+  background: var(--card); border: 1px solid var(--line);
+  color: var(--accent); cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.wordmark { display: inline-flex; align-items: baseline; gap: 6px; letter-spacing: -0.01em; }
+.wordmark .wm-praia {
+  font-family: var(--font-serif); font-style: italic; font-weight: 400;
+  font-size: 26px; line-height: 1; color: var(--accent);
+  letter-spacing: -0.02em;
+}
+.wordmark .wm-smart {
+  font-family: var(--font-sans); font-weight: 700;
+  font-size: 17px; color: var(--ink);
+}
+.subhdr-eyebrow {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.08em; color: var(--mute); text-transform: uppercase;
+}
+main { padding: 24px var(--pad) 8px; max-width: 720px; margin: 0 auto; }
+.sobre-hero { text-align: center; padding: 12px 0 18px; }
+.sobre-hero .wordmark .wm-praia { font-size: 44px; }
+.sobre-hero .wordmark .wm-smart { font-size: 26px; }
+.sobre-tag {
+  margin: 10px 0 0; color: var(--ink-soft);
+  font-family: var(--font-serif); font-style: italic; font-size: 18px;
+}
+.sobre-block {
+  background: var(--card); border-radius: 18px;
+  padding: 16px 18px; margin-top: 14px;
+  box-shadow:
+    0 1px 0 rgba(0,0,0,0.02),
+    0 12px 30px -22px rgba(31,63,77,0.35),
+    inset 0 0 0 1px rgba(230,220,200,0.6);
+}
+.sobre-block-t {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.08em; color: var(--accent);
+  text-transform: uppercase; font-weight: 700;
+  margin-bottom: 8px;
+}
+.sobre-block-b { color: var(--ink); font-size: 14px; line-height: 1.55; }
+.sobre-block-b em { color: var(--accent); font-style: normal; font-weight: 600; }
+.sobre-list { margin: 4px 0 0; padding-left: 18px; color: var(--ink-soft); }
+.sobre-list li { margin: 4px 0; }
+.sobre-footer {
+  text-align: center; padding: 24px var(--pad);
+  color: var(--mute); font-size: 12px;
+  font-family: var(--font-mono); letter-spacing: 0.02em;
+}
+.placeholder {
+  color: var(--mute); font-style: italic;
+  font-family: var(--font-serif); font-size: 16px;
+}
 </style>
 </head>
 <body>
-<nav class="nav"><a href="index.html">←</a><h1>sobre</h1></nav>
+<header class="topbar">
+  <a class="back-btn" href="index.html" aria-label="voltar">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M15 6 L 9 12 L 15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+  <div class="wordmark"><span class="wm-praia">praia</span><span class="wm-smart">smart</span></div>
+  <div style="flex:1"></div>
+  <div class="subhdr-eyebrow">sobre</div>
+</header>
 <main>
-  <p class="placeholder">conteúdo em construção — vamos definir o que vai aqui.</p>
+  <div class="sobre-hero">
+    <div class="wordmark"><span class="wm-praia">praia</span><span class="wm-smart">smart</span></div>
+    <p class="sobre-tag">tempo de praia, sem complicar.</p>
+  </div>
+
+  <div class="sobre-block">
+    <div class="sobre-block-t">o que é</div>
+    <div class="sobre-block-b">
+      praia smart te diz, em tempo real, <em>se vale ir pra praia agora</em> — e qual praia,
+      e em qual hora do dia. Câmera ao vivo, mar, sol e vento, com quatro scores por praia:
+      surfar, nadar, pegar sol, evitar sol.
+    </div>
+  </div>
+
+  <div class="sobre-block">
+    <div class="sobre-block-t">como a gente sabe</div>
+    <div class="sobre-block-b">
+      A gente combina dados públicos do Open-Meteo (onda, vento, UV, maré) com a câmera
+      ao vivo da praia (YouTube). Um modelinho simples calcula o score por hora pras
+      próximas 24h e escolhe a melhor janela de 3 horas pra cada atividade.
+    </div>
+  </div>
+
+  <div class="sobre-block">
+    <div class="sobre-block-t">fontes</div>
+    <div class="sobre-block-b">
+      <ul class="sobre-list">
+        <li>Open-Meteo — clima, onda, maré, UV</li>
+        <li>YouTube Live — câmeras ao vivo das praias</li>
+        <li>Sentinel-2 — satélite a cada 5 dias</li>
+        <li>AIS — navios na costa em tempo real</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sobre-block">
+    <div class="sobre-block-t">próximos</div>
+    <div class="sobre-block-b">
+      <p class="placeholder">conteúdo em construção — em breve mais detalhes.</p>
+    </div>
+  </div>
+
+  <div class="sobre-footer">
+    <span style="color:var(--accent)">♥</span> feito pra praia, no Rio.
+  </div>
 </main>
 </body>
 </html>

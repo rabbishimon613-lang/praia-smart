@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1779230237,
+  "fetched_at": 1779230737,
   "by_beach": {
     "santos-gonzaga": {
       "status": "impropria",
@@ -88,6 +88,28 @@
       "ecoli": null,
       "url": "https://www2.ima.al.gov.br/wp-content/uploads/2026/05/REAB-18-2026.pdf",
       "confidence": "oficial"
+    },
+    "tramandai": {
+      "status": "sem_dados",
+      "source": "FEPAM",
+      "report_date": null,
+      "ecoli": null,
+      "url": "https://www.fepam.rs.gov.br/?s=balneabilidade",
+      "confidence": "estimativa",
+      "off_season": true,
+      "note": "FEPAM publica boletins apenas durante a Operação Verão Total (dez–fev).",
+      "checked_at": "2026-05-19"
+    },
+    "capao-da-canoa": {
+      "status": "sem_dados",
+      "source": "FEPAM",
+      "report_date": null,
+      "ecoli": null,
+      "url": "https://www.fepam.rs.gov.br/?s=balneabilidade",
+      "confidence": "estimativa",
+      "off_season": true,
+      "note": "FEPAM publica boletins apenas durante a Operação Verão Total (dez–fev).",
+      "checked_at": "2026-05-19"
     },
     "copa-p5": {
       "status": "sem_dados",

@@ -13,8 +13,23 @@ Sources wired:
             a weekly *news article* on www.ba.gov.br/inema with the
             full bulletin in prose form — we parse that.
 
+  - FEPAM   (Rio Grande do Sul) → tramandai, capao-da-canoa. Seasonal:
+            weekly Friday bulletin only during Operação Verão Total
+            (Dec–Feb). Off-season we return sem_dados stubs with
+            off_season=True.
+
 natal-ponta-negra (IDEMA-RN) gets a sem_dados placeholder for now —
 no clean URL pattern.
+
+INEMA "Vai dar Praia" app: probed api.inema.ba.gov.br (NXDOMAIN),
+servicos.inema.ba.gov.br (timeout), vaidarpraia.inema.ba.gov.br
+(NXDOMAIN), and the Brasil.IO balneabilidade-bahia dataset (auth-only).
+No public JSON backend found in May 2026 — sticking with the news-article
+scraper.
+
+SEMACE Digital app: probed api.semace.ce.gov.br (timeout),
+mobile.semace.ce.gov.br (503), servicos.semace.ce.gov.br (timeout).
+No public JSON backend found — sticking with the PDF scraper.
 
 Stdlib + curl + pdftotext (poppler) only, to match other workers/ scripts.
 
@@ -49,6 +64,7 @@ ALL_BEACH_IDS = [
     "recife-boa-viagem", "ipojuca-porto-galinhas",
     "fortaleza-iracema-meireles",
     "maceio-pajucara",
+    "tramandai", "capao-da-canoa",
 ]
 
 # Tier-2 sources we don't scrape yet: still report which agency would own them.
@@ -66,6 +82,8 @@ DEFAULT_SOURCE = {
     "ipojuca-porto-galinhas": "CPRH",
     "fortaleza-iracema-meireles": "SEMACE",
     "maceio-pajucara": "IMA-AL",
+    "tramandai": "FEPAM",
+    "capao-da-canoa": "FEPAM",
 }
 
 
@@ -971,6 +989,148 @@ def fetch_ima_al():
 
 
 # -----------------------------------------------------------------------------
+# FEPAM (Rio Grande do Sul)
+# -----------------------------------------------------------------------------
+# FEPAM's Projeto Balneabilidade is *seasonal* — weekly Friday bulletins are
+# only published during "Operação Verão Total" (roughly Dec → late Feb).
+# Outside that window the dedicated app host (balneabilidade.rs.gov.br) is
+# empty and no boletim is produced, so we short-circuit with an off_season
+# stub instead of pointlessly hammering the site.
+
+FEPAM_SEARCH = "https://www.fepam.rs.gov.br/?s=balneabilidade"
+FEPAM_HOST = "https://www.fepam.rs.gov.br"
+
+FEPAM_POINTS = {
+    "tramandai": ["tramandaí", "tramandai"],
+    "capao-da-canoa": ["capão da canoa", "capao da canoa"],
+}
+
+
+def _fepam_in_season(today=None):
+    today = today or date.today()
+    # Dec, Jan, Feb only. Mar–Nov is off-season.
+    return today.month in (12, 1, 2)
+
+
+def _fepam_off_season_stub():
+    out = {}
+    today = date.today().isoformat()
+    for bid in FEPAM_POINTS:
+        out[bid] = {
+            "status": "sem_dados",
+            "source": "FEPAM",
+            "report_date": None,
+            "ecoli": None,
+            "url": FEPAM_SEARCH,
+            "confidence": "estimativa",
+            "off_season": True,
+            "note": "FEPAM publica boletins apenas durante a Operação Verão Total (dez–fev).",
+            "checked_at": today,
+        }
+    return out
+
+
+def _fepam_classify_window(text_low, idx):
+    """Find the nearest preceding propria/impropria marker before idx."""
+    window = text_low[:idx]
+    last_p = max(window.rfind("própri"), window.rfind("propri"))
+    last_i = max(window.rfind("impróp"), window.rfind("improp"))
+    if last_p < 0 and last_i < 0:
+        return None
+    return "impropria" if last_i > last_p else "propria"
+
+
+def fetch_fepam():
+    if not _fepam_in_season():
+        print("  FEPAM: off-season (May 19) → sem_dados stubs", file=sys.stderr)
+        return _fepam_off_season_stub()
+
+    # In-season: try to discover the most-recent boletim news article via the
+    # WP search page and parse the prose listing of próprios/impróprios pts.
+    try:
+        html_text = curl(FEPAM_SEARCH)
+    except subprocess.CalledProcessError as e:
+        print(f"  FEPAM: search err {e}", file=sys.stderr)
+        return _fepam_off_season_stub()
+
+    links = re.findall(
+        r'href="(https?://[^"]*fepam\.rs\.gov\.br/[^"]*balneabilidade[^"]*)"',
+        html_text, re.I)
+    rel = re.findall(r'href="(/[^"]*balneabilidade[^"]*)"', html_text, re.I)
+    links += [FEPAM_HOST + r for r in rel]
+    # Dedupe, prefer slugs that look like boletim/projeto/litoral.
+    seen, ordered = set(), []
+    for u in links:
+        u = u.replace("&amp;", "&")
+        if u in seen or u.endswith(".css") or u.endswith(".js"):
+            continue
+        seen.add(u)
+        ordered.append(u)
+    ordered.sort(
+        key=lambda u: ("boletim" in u or "projeto" in u or "litoral" in u),
+        reverse=True,
+    )
+
+    for nu in ordered[:5]:
+        try:
+            raw = curl(nu)
+        except subprocess.CalledProcessError:
+            continue
+        # Strip HTML cheaply.
+        h = re.sub(r"<(script|style)[^>]*>.*?</\1>", "", raw,
+                   flags=re.S | re.I)
+        h = re.sub(r"<[^>]+>", " ", h)
+        from html import unescape
+        text = unescape(re.sub(r"\s+", " ", h)).strip()
+        low = text.lower()
+        if "balneabilidade" not in low:
+            continue
+        report_date = None
+        m = re.search(r"(\d{2}/\d{2}/\d{4})", text)
+        if m:
+            try:
+                report_date = datetime.strptime(
+                    m.group(1), "%d/%m/%Y").date().isoformat()
+            except ValueError:
+                pass
+
+        out = {}
+        for bid, needles in FEPAM_POINTS.items():
+            for n in needles:
+                idx = low.find(n)
+                if idx < 0:
+                    continue
+                status = _fepam_classify_window(low, idx)
+                if not status:
+                    continue
+                out[bid] = {
+                    "status": status,
+                    "source": "FEPAM",
+                    "report_date": report_date,
+                    "ecoli": None,
+                    "url": nu,
+                    "confidence": "oficial",
+                }
+                break
+        if out:
+            print(f"  FEPAM: parsing {nu}", file=sys.stderr)
+            # Fill in misses with off-season-style stubs but keep season flag off.
+            for bid in FEPAM_POINTS:
+                out.setdefault(bid, {
+                    "status": "sem_dados",
+                    "source": "FEPAM",
+                    "report_date": report_date,
+                    "ecoli": None,
+                    "url": nu,
+                    "confidence": "estimativa",
+                })
+            return out
+
+    print("  FEPAM: in-season but no boletim parsed", file=sys.stderr)
+    return _fepam_off_season_stub()
+
+
+# -----------------------------------------------------------------------------
 # Build
 # -----------------------------------------------------------------------------
 
@@ -983,7 +1143,8 @@ def build():
                      ("INEMA",  fetch_inema),
                      ("CPRH",   fetch_cprh),
                      ("SEMACE", fetch_semace),
-                     ("IMA-AL", fetch_ima_al)]:
+                     ("IMA-AL", fetch_ima_al),
+                     ("FEPAM",  fetch_fepam)]:
         try:
             res = fn() or {}
             print(f"  {name}: {len(res)} beaches resolved", file=sys.stderr)

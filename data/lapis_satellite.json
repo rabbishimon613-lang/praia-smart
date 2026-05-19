@@ -1,0 +1,78 @@
+{
+  "fetched_at": 1779230630,
+  "by_beach": {
+    "recife-boa-viagem": {
+      "image_url": null,
+      "turbidity_proxy": null,
+      "source": "lapis_eumetsat",
+      "fetched_at": 1779230630,
+      "status": "sem_dados"
+    },
+    "ipojuca-porto-galinhas": {
+      "image_url": null,
+      "turbidity_proxy": null,
+      "source": "lapis_eumetsat",
+      "fetched_at": 1779230630,
+      "status": "sem_dados"
+    },
+    "fortaleza-iracema-meireles": {
+      "image_url": null,
+      "turbidity_proxy": null,
+      "source": "lapis_eumetsat",
+      "fetched_at": 1779230630,
+      "status": "sem_dados"
+    },
+    "maceio-pajucara": {
+      "image_url": null,
+      "turbidity_proxy": null,
+      "source": "lapis_eumetsat",
+      "fetched_at": 1779230630,
+      "status": "sem_dados"
+    },
+    "salvador-itapua": {
+      "image_url": null,
+      "turbidity_proxy": null,
+      "source": "lapis_eumetsat",
+      "fetched_at": 1779230630,
+      "status": "sem_dados"
+    },
+    "salvador-stella-maris": {
+      "image_url": null,
+      "turbidity_proxy": null,
+      "source": "lapis_eumetsat",
+      "fetched_at": 1779230630,
+      "status": "sem_dados"
+    },
+    "morro-terceira": {
+      "image_url": null,
+      "turbidity_proxy": null,
+      "source": "lapis_eumetsat",
+      "fetched_at": 1779230630,
+      "status": "sem_dados"
+    },
+    "natal-ponta-negra": {
+      "image_url": null,
+      "turbidity_proxy": null,
+      "source": "lapis_eumetsat",
+      "fetched_at": 1779230630,
+      "status": "sem_dados"
+    }
+  },
+  "probed_sources": [
+    {
+      "name": "lapismet",
+      "url": "https://lapismet.com/",
+      "note": "DNS NXDOMAIN at probe time"
+    },
+    {
+      "name": "lapis_ufal",
+      "url": "https://www.lapis.ufal.br/",
+      "note": "DNS NXDOMAIN at probe time"
+    },
+    {
+      "name": "eumetsat_view",
+      "url": "https://view.eumetsat.int/",
+      "note": "JS-rendered viewer; WMS GetMap viable with layer ids"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "fetched_at": 1779230630,
+  "by_city": {
+    "salvador": {
+      "monthly_visitors": null,
+      "month": null,
+      "trend_yoy_pct": null,
+      "source": "https://www.observatorio.turismo.ba.gov.br/",
+      "state": "BA",
+      "status": "sem_dados"
+    },
+    "fortaleza": {
+      "monthly_visitors": null,
+      "month": null,
+      "trend_yoy_pct": null,
+      "source": "https://www.setur.ce.gov.br/observatorio/",
+      "state": "CE",
+      "status": "sem_dados"
+    },
+    "sao-paulo": {
+      "monthly_visitors": null,
+      "month": null,
+      "trend_yoy_pct": null,
+      "source": "https://www.observatoriodoturismo.sp.gov.br/",
+      "state": "SP",
+      "status": "sem_dados"
+    },
+    "rio-de-janeiro": {
+      "monthly_visitors": null,
+      "month": null,
+      "trend_yoy_pct": null,
+      "source": "https://setur.rj.gov.br/",
+      "state": "RJ",
+      "status": "sem_dados"
+    },
+    "recife": {
+      "monthly_visitors": null,
+      "month": null,
+      "trend_yoy_pct": null,
+      "source": "https://www.observatorio.tur.pe.gov.br/",
+      "state": "PE",
+      "status": "sem_dados"
+    },
+    "maceio": {
+      "monthly_visitors": null,
+      "month": null,
+      "trend_yoy_pct": null,
+      "source": "https://www.cultura.al.gov.br/turismo/",
+      "state": "AL",
+      "status": "sem_dados"
+    }
+  }
+}

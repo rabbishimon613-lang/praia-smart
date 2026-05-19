@@ -1,0 +1,52 @@
+{
+  "fetched_at": 1779230630,
+  "by_beach": {
+    "copa-p5": {
+      "bandeira": "sem_dados",
+      "source": "none",
+      "fetched_at": 1779230630,
+      "url": null
+    },
+    "leblon-mirante": {
+      "bandeira": "sem_dados",
+      "source": "none",
+      "fetched_at": 1779230630,
+      "url": null
+    },
+    "sao-conrado": {
+      "bandeira": "sem_dados",
+      "source": "none",
+      "fetched_at": 1779230630,
+      "url": null
+    },
+    "ipanema-posto-9": {
+      "bandeira": "sem_dados",
+      "source": "none",
+      "fetched_at": 1779230630,
+      "url": null
+    },
+    "barra-tijuca-posto-3": {
+      "bandeira": "sem_dados",
+      "source": "none",
+      "fetched_at": 1779230630,
+      "url": null
+    }
+  },
+  "probed_sources": [
+    {
+      "agency": "orla_rio",
+      "url": "https://www.orlario.com.br/",
+      "note": "surfview camera iframes, no structured flag data"
+    },
+    {
+      "agency": "cor_rio",
+      "url": "https://cor.rio/",
+      "note": "WordPress news; no posto-level feed"
+    },
+    {
+      "agency": "cbmerj",
+      "url": "https://www.cbmerj.rj.gov.br/",
+      "note": "no bandeira API; status only on-site/radio"
+    }
+  ]
+}

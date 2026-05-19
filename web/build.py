@@ -10,13 +10,14 @@ Serif italic wordmark.
 import json
 import math
 import os
-from datetime import datetime
+from datetime import date, datetime
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data", "conditions.json")
 ALERTS = os.path.join(ROOT, "data", "alerts.json")
 NEWS = os.path.join(ROOT, "data", "news.json")
 AGITO = os.path.join(ROOT, "data", "agito.json")
+BALNEABILIDADE = os.path.join(ROOT, "data", "balneabilidade.json")
 OUT = os.path.join(ROOT, "web", "index.html")
 
 BUCKET_CLASS = {"vazia": "v", "moderada": "m", "cheia": "c", "lotada": "l"}
@@ -538,8 +539,40 @@ def score_mare(posto):
     return (_clamp10(v), status)
 
 
+_BALNE = load_optional(BALNEABILIDADE) or {}
+_BALNE_BY_BEACH = _BALNE.get("by_beach", {}) if isinstance(_BALNE, dict) else {}
+
+
+def _balne_sublabel(entry):
+    src = entry.get("source") or "—"
+    rd = entry.get("report_date")
+    if not rd:
+        return src
+    try:
+        d = datetime.strptime(rd, "%Y-%m-%d").date()
+        days = (date.today() - d).days
+        if days <= 0:
+            when = "hoje"
+        elif days == 1:
+            when = "ontem"
+        else:
+            when = f"{days} dias atrás"
+        return f"{src} · {when}"
+    except Exception:
+        return f"{src} · {rd}"
+
+
 def score_agua_limpa(posto):
-    # Not wired yet
+    entry = _BALNE_BY_BEACH.get(posto.get("id"))
+    if not entry:
+        return (None, None)
+    status = entry.get("status")
+    if status == "propria":
+        return (10, f"própria — {_balne_sublabel(entry)}")
+    if status == "alerta":
+        return (5, f"alerta — {_balne_sublabel(entry)}")
+    if status == "impropria":
+        return (1, f"imprópria — {_balne_sublabel(entry)}")
     return (None, None)
 
 
@@ -590,6 +623,18 @@ def _notability(cat_id, posto):
         return min(1.0, abs(aqi - 25) / 50)
     if cat_id == "mare":
         return 0.4
+    if cat_id == "agua_limpa":
+        entry = _BALNE_BY_BEACH.get(posto.get("id"))
+        if not entry:
+            return 0
+        st = entry.get("status")
+        if st == "impropria":
+            return 0.9
+        if st == "alerta":
+            return 0.7
+        if st == "propria":
+            return 0.5
+        return 0
     return 0
 
 

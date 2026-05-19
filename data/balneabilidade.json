@@ -1,0 +1,101 @@
+{
+  "fetched_at": 1779159585,
+  "by_beach": {
+    "santos-gonzaga": {
+      "status": "impropria",
+      "source": "CETESB",
+      "report_date": "2026-05-18",
+      "ecoli": null,
+      "url": "https://sistemasinter.cetesb.sp.gov.br/praias/mapa_praias/respraia1.asp?praia=ST",
+      "confidence": "oficial"
+    },
+    "guaruja-enseada": {
+      "status": "propria",
+      "source": "CETESB",
+      "report_date": "2026-05-18",
+      "ecoli": null,
+      "url": "https://sistemasinter.cetesb.sp.gov.br/praias/mapa_praias/respraia1.asp?praia=GJ",
+      "confidence": "oficial"
+    },
+    "praia-grande-boqueirao": {
+      "status": "propria",
+      "source": "CETESB",
+      "report_date": "2026-05-18",
+      "ecoli": null,
+      "url": "https://sistemasinter.cetesb.sp.gov.br/praias/mapa_praias/respraia1.asp?praia=PG",
+      "confidence": "oficial"
+    },
+    "copa-p5": {
+      "status": "sem_dados",
+      "source": "—",
+      "report_date": null,
+      "ecoli": null,
+      "url": null,
+      "confidence": "estimativa"
+    },
+    "leblon-mirante": {
+      "status": "sem_dados",
+      "source": "—",
+      "report_date": null,
+      "ecoli": null,
+      "url": null,
+      "confidence": "estimativa"
+    },
+    "sao-conrado": {
+      "status": "sem_dados",
+      "source": "—",
+      "report_date": null,
+      "ecoli": null,
+      "url": null,
+      "confidence": "estimativa"
+    },
+    "cabo-frio-forte": {
+      "status": "sem_dados",
+      "source": "—",
+      "report_date": null,
+      "ecoli": null,
+      "url": null,
+      "confidence": "estimativa"
+    },
+    "balneario-camboriu": {
+      "status": "sem_dados",
+      "source": "—",
+      "report_date": null,
+      "ecoli": null,
+      "url": null,
+      "confidence": "estimativa"
+    },
+    "balneario-rincao": {
+      "status": "sem_dados",
+      "source": "—",
+      "report_date": null,
+      "ecoli": null,
+      "url": null,
+      "confidence": "estimativa"
+    },
+    "floripa-barra-lagoa": {
+      "status": "sem_dados",
+      "source": "—",
+      "report_date": null,
+      "ecoli": null,
+      "url": null,
+      "confidence": "estimativa"
+    },
+    "morro-terceira": {
+      "status": "sem_dados",
+      "source": "INEMA",
+      "report_date": null,
+      "ecoli": null,
+      "url": null,
+      "confidence": "estimativa"
+    },
+    "natal-ponta-negra": {
+      "status": "sem_dados",
+      "source": "IDEMA",
+      "report_date": null,
+      "ecoli": null,
+      "url": null,
+      "confidence": "estimativa"
+    }
+  }
+}

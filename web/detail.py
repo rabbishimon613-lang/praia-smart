@@ -15,6 +15,7 @@ from build import (
     render_best_window, render_activity_glyph, best_window,
     wind_arrow, fmt, time_short, uv_label, _icon, aqi_label,
     ACTIVITY_LABEL, ACTIVITY_VAR, BUCKET_INDEX,
+    CATEGORIES, pick_top_dials, render_category_glyph,
 )
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -584,15 +585,13 @@ def render_satellite(p, sat_data):
   </section>'''
 
 
-def render_score_row_arc(scores):
-    items = [
-        ("surfar", "var(--surf)"),
-        ("nadar", "var(--swim)"),
-        ("sol", "var(--sun)"),
-        ("evitar_sol", "var(--shade)"),
-    ]
-    cells = "".join(render_sun_arc(scores.get(a, 0), a, c, size=76) for a, c in items)
-    return f'<div class="score-row">{cells}</div>'
+def render_score_row_arc(posto, agito_b):
+    dials = pick_top_dials(posto, agito_b, n=4)
+    cells = []
+    for cid, s10, color, label, _sub in dials:
+        glyph = render_category_glyph(cid, color="white", size=12)
+        cells.append(render_sun_arc(s10 / 10.0, cid, color, size=76, label=label, glyph_html=glyph))
+    return f'<div class="score-row">{"".join(cells)}</div>'
 
 
 def cloud_icon(pct, uv):
@@ -658,7 +657,8 @@ def render(p, agito_data=None, now_hour=12, ships_data=None, sat_data=None):
         "surfar": p["_surf"], "nadar": p["_swim"],
         "sol": p["_sun"], "evitar_sol": p["_shade"],
     }
-    score_html = render_score_row_arc(scores)
+    agito_b = (agito_data or {}).get("by_beach", {}).get(p["id"]) if agito_data else None
+    score_html = render_score_row_arc(p, agito_b)
     hourly_html = render_hourly_strip(p["_hourly"], now_hour)
 
     # Best window from top score

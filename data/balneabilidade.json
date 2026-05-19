@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1779230737,
+  "fetched_at": 1779231166,
   "by_beach": {
     "santos-gonzaga": {
       "status": "impropria",
@@ -23,6 +23,62 @@
       "report_date": "2026-05-19",
       "ecoli": null,
       "url": "https://sistemasinter.cetesb.sp.gov.br/praias/mapa_praias/respraia1.asp?praia=PG",
+      "confidence": "oficial"
+    },
+    "copa-p5": {
+      "status": "propria",
+      "source": "INEA",
+      "report_date": "2026-03-18",
+      "ecoli": 10,
+      "url": "https://www.inea.rj.gov.br/wp-content/uploads/2026/03/Praias-Monitoradas-pelo-INEA-desde-2005_2026-4.xlsx_mar_2026.xlsx",
+      "confidence": "oficial"
+    },
+    "leblon-mirante": {
+      "status": "propria",
+      "source": "INEA",
+      "report_date": "2026-03-18",
+      "ecoli": 10,
+      "url": "https://www.inea.rj.gov.br/wp-content/uploads/2026/03/Praias-Monitoradas-pelo-INEA-desde-2005_2026-4.xlsx_mar_2026.xlsx",
+      "confidence": "oficial"
+    },
+    "sao-conrado": {
+      "status": "propria",
+      "source": "INEA",
+      "report_date": "2026-03-18",
+      "ecoli": 10,
+      "url": "https://www.inea.rj.gov.br/wp-content/uploads/2026/03/Praias-Monitoradas-pelo-INEA-desde-2005_2026-4.xlsx_mar_2026.xlsx",
+      "confidence": "oficial"
+    },
+    "ipanema-posto-9": {
+      "status": "propria",
+      "source": "INEA",
+      "report_date": "2026-03-18",
+      "ecoli": 86,
+      "url": "https://www.inea.rj.gov.br/wp-content/uploads/2026/03/Praias-Monitoradas-pelo-INEA-desde-2005_2026-4.xlsx_mar_2026.xlsx",
+      "confidence": "oficial"
+    },
+    "barra-tijuca-posto-3": {
+      "status": "propria",
+      "source": "INEA",
+      "report_date": "2026-03-18",
+      "ecoli": 62,
+      "url": "https://www.inea.rj.gov.br/wp-content/uploads/2026/03/Praias-Monitoradas-pelo-INEA-desde-2005_2026-4.xlsx_mar_2026.xlsx",
+      "confidence": "oficial"
+    },
+    "cabo-frio-forte": {
+      "status": "propria",
+      "source": "INEA",
+      "report_date": "2026-03-04",
+      "ecoli": 10,
+      "url": "https://www.inea.rj.gov.br/wp-content/uploads/2026/03/Praias-Monitoradas-pelo-INEA-desde-2005_2026-4.xlsx_mar_2026.xlsx",
+      "confidence": "oficial"
+    },
+    "buzios-geriba": {
+      "status": "propria",
+      "source": "INEA",
+      "report_date": "2026-03-18",
+      "ecoli": 10,
+      "url": "https://www.inea.rj.gov.br/wp-content/uploads/2026/03/Praias-Monitoradas-pelo-INEA-desde-2005_2026-4.xlsx_mar_2026.xlsx",
       "confidence": "oficial"
     },
     "morro-terceira": {
@@ -110,62 +166,6 @@
       "off_season": true,
       "note": "FEPAM publica boletins apenas durante a Operação Verão Total (dez–fev).",
       "checked_at": "2026-05-19"
-    },
-    "copa-p5": {
-      "status": "sem_dados",
-      "source": "—",
-      "report_date": null,
-      "ecoli": null,
-      "url": null,
-      "confidence": "estimativa"
-    },
-    "leblon-mirante": {
-      "status": "sem_dados",
-      "source": "—",
-      "report_date": null,
-      "ecoli": null,
-      "url": null,
-      "confidence": "estimativa"
-    },
-    "sao-conrado": {
-      "status": "sem_dados",
-      "source": "—",
-      "report_date": null,
-      "ecoli": null,
-      "url": null,
-      "confidence": "estimativa"
-    },
-    "cabo-frio-forte": {
-      "status": "sem_dados",
-      "source": "—",
-      "report_date": null,
-      "ecoli": null,
-      "url": null,
-      "confidence": "estimativa"
-    },
-    "ipanema-posto-9": {
-      "status": "sem_dados",
-      "source": "INEA",
-      "report_date": null,
-      "ecoli": null,
-      "url": null,
-      "confidence": "estimativa"
-    },
-    "barra-tijuca-posto-3": {
-      "status": "sem_dados",
-      "source": "INEA",
-      "report_date": null,
-      "ecoli": null,
-      "url": null,
-      "confidence": "estimativa"
-    },
-    "buzios-geriba": {
-      "status": "sem_dados",
-      "source": "INEA",
-      "report_date": null,
-      "ecoli": null,
-      "url": null,
-      "confidence": "estimativa"
     },
     "balneario-camboriu": {
       "status": "sem_dados",

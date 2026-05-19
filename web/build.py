@@ -1543,14 +1543,59 @@ def main():
     def why_sun(p):
         return f"nuvens {fmt(p['weather']['cloud_pct'], '%', 0)} · uv {fmt(p['weather']['uv'], '', 0)}"
 
-    hero_html = (
-        render_hero_card("surf", "bom pra surfar", "surfar", "var(--surf)",
-                         surf_w, why_surf(surf_w), surf_w["_surf"])
-        + render_hero_card("swim", "bom pra nadar", "nadar", "var(--swim)",
-                           swim_w, why_swim(swim_w), swim_w["_swim"])
-        + render_hero_card("sun", "bom pro sol", "sol", "var(--sun)",
-                           sun_w, why_sun(sun_w), sun_w["_sun"])
-    )
+    # Sunset / night detection: UV=0 everywhere AND past sunset on primary beach
+    all_uv_zero = all((p["weather"].get("uv") or 0) <= 0 for p in postos)
+    primary = surf_w
+    sunset_hh = None
+    try:
+        ss = (primary.get("sun") or {}).get("sunset") or ""
+        if ss and len(ss) >= 13:
+            sunset_hh = int(ss[11:13])
+    except Exception:
+        sunset_hh = None
+    is_night = all_uv_zero and (sunset_hh is None or now_hour >= sunset_hh or now_hour < 5)
+
+    if is_night:
+        # Pick tomorrow's best sol window from any posto's hourly sol scores.
+        # Approximation: hourly_scores arrays are indexed 0..23 over the next 24h
+        # from "now"; treat indices >= (24 - now_hour) as "tomorrow" early hours.
+        best_beach = sun_w
+        best_score = -1
+        best_hour = None
+        for p in postos:
+            sol_arr = (p.get("_hourly") or {}).get("sol") or []
+            # Look at remaining hours of today + tomorrow up to ~14h
+            for i, v in enumerate(sol_arr):
+                hod = (now_hour + i) % 24
+                # tomorrow morning window 7..15h
+                if i >= (24 - now_hour) and 7 <= hod <= 15 and v > best_score:
+                    best_score = v
+                    best_beach = p
+                    best_hour = hod
+        if best_hour is not None:
+            sunset_why = f"melhor amanhã ~{best_hour:02d}h · uv prev. {best_score*10:.0f}"
+        else:
+            sunset_why = "melhor amanhã cedo"
+        sunset_card = render_hero_card(
+            "sunset", "pôr do sol", "sol", "var(--warm, #E5896A)",
+            best_beach, sunset_why, max(0.0, best_score if best_score > 0 else 0.0),
+        )
+        hero_html = (
+            render_hero_card("surf", "bom pra surfar", "surfar", "var(--surf)",
+                             surf_w, why_surf(surf_w), surf_w["_surf"])
+            + render_hero_card("swim", "bom pra nadar", "nadar", "var(--swim)",
+                               swim_w, why_swim(swim_w), swim_w["_swim"])
+            + sunset_card
+        )
+    else:
+        hero_html = (
+            render_hero_card("surf", "bom pra surfar", "surfar", "var(--surf)",
+                             surf_w, why_surf(surf_w), surf_w["_surf"])
+            + render_hero_card("swim", "bom pra nadar", "nadar", "var(--swim)",
+                               swim_w, why_swim(swim_w), swim_w["_swim"])
+            + render_hero_card("sun", "bom pro sol", "sol", "var(--sun)",
+                               sun_w, why_sun(sun_w), sun_w["_sun"])
+        )
 
     states = sorted({p["state"] for p in postos if p.get("state")})
     state_pills = (
@@ -1565,13 +1610,64 @@ def main():
                 '<span class="wm-smart">smart</span>'
                 '</div>')
 
+    # ── SEO / OG / analytics ─────────────────────────────────
+    SITE_URL = "https://praiasmart.com.br"
+    page_title = f"praia smart — {region_label} agora"
+    page_desc = ("Condições em tempo real das praias do Brasil — ondas, vento, "
+                 "água, UV, agito. Câmeras ao vivo.")
+    # Use surf-winner's cam as the hero OG image
+    og_yt = surf_w.get("youtube_id") or sun_w.get("youtube_id")
+    og_image = (f"https://i.ytimg.com/vi/{og_yt}/maxresdefault.jpg"
+                if og_yt else f"{SITE_URL}/og-default.jpg")
+    canonical = f"{SITE_URL}/"
+    seo_html = f"""<meta name="description" content="{page_desc}">
+<link rel="canonical" href="{canonical}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{page_title}">
+<meta property="og:description" content="{page_desc}">
+<meta property="og:image" content="{og_image}">
+<meta property="og:url" content="{canonical}">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{page_title}">
+<meta name="twitter:description" content="{page_desc}">
+<meta name="twitter:image" content="{og_image}">"""
+
+    # schema.org WebSite + SearchAction
+    site_ld = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "praia smart",
+        "url": SITE_URL,
+        "description": page_desc,
+        "inLanguage": "pt-BR",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": f"{SITE_URL}/?q={{search_term_string}}",
+            "query-input": "required name=search_term_string",
+        },
+    }
+    ld_html = (
+        '<script type="application/ld+json">'
+        + json.dumps(site_ld, ensure_ascii=False)
+        + '</script>'
+    )
+
+    # Analytics — Plausible. To swap providers (GA, Umami, Fathom),
+    # replace the script tag below with the equivalent snippet.
+    analytics_html = ('<script defer data-domain="praiasmart.com.br" '
+                      'src="https://plausible.io/js/script.js"></script>')
+
     html = f"""<!doctype html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F4EFE4">
-<title>praia smart — {region_label} agora</title>
+<title>{page_title}</title>
+{seo_html}
+{ld_html}
+{analytics_html}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -1607,6 +1703,33 @@ def main():
 </html>"""
     open(OUT, "w").write(html)
     print(f"Wrote {OUT}")
+
+    # ── sitemap.xml + robots.txt ─────────────────────────────
+    lastmod = datetime.now().strftime("%Y-%m-%d")
+    urls = [f"{SITE_URL}/", f"{SITE_URL}/melhores.html", f"{SITE_URL}/sobre.html"]
+    urls += [f"{SITE_URL}/beach/{p['id']}.html" for p in postos]
+    sm_entries = "\n".join(
+        f"  <url><loc>{u}</loc><lastmod>{lastmod}</lastmod></url>" for u in urls
+    )
+    sitemap = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + sm_entries + "\n</urlset>\n"
+    )
+    sm_path = os.path.join(ROOT, "web", "sitemap.xml")
+    open(sm_path, "w").write(sitemap)
+    print(f"Wrote {sm_path}")
+
+    robots = (
+        "User-agent: *\n"
+        "Allow: /\n"
+        f"Sitemap: {SITE_URL}/sitemap.xml\n"
+    )
+    rb_path = os.path.join(ROOT, "web", "robots.txt")
+    open(rb_path, "w").write(robots)
+    print(f"Wrote {rb_path}")
+    if is_night:
+        print(f"Sunset mode: replacing 'sol' hero (best tomorrow: {best_beach['beach']})")
     print(f"Surf: {surf_w['beach']} {surf_w['posto']} ({surf_w['_surf']})")
     print(f"Swim: {swim_w['beach']} {swim_w['posto']} ({swim_w['_swim']})")
     print(f"Sun:  {sun_w['beach']} {sun_w['posto']} ({sun_w['_sun']})")

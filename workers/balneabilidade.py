@@ -315,102 +315,236 @@ def fetch_cetesb():
 
 INEA_LANDING = "https://www.inea.rj.gov.br/ar-agua-e-solo/balneabilidade-das-praias/"
 
-INEA_NAME_MAP = {
-    # match (beach_substring, point_substring) → beach_id
-    ("copacabana", "p5"): "copa-p5",
-    ("copacabana", "posto 5"): "copa-p5",
-    ("leblon", "mirante"): "leblon-mirante",
-    ("leblon", "leblon"): "leblon-mirante",     # fallback if only one Leblon point
-    ("são conrado", ""): "sao-conrado",
-    ("sao conrado", ""): "sao-conrado",
-    ("pepino", ""): "sao-conrado",
-    ("forte", "cabo frio"): "cabo-frio-forte",
-    ("cabo frio", "forte"): "cabo-frio-forte",
-    ("ipanema", "posto 9"): "ipanema-posto-9",
-    ("ipanema", "p9"): "ipanema-posto-9",
-    ("ipanema", ""): "ipanema-posto-9",
-    ("barra da tijuca", "posto 3"): "barra-tijuca-posto-3",
-    ("barra da tijuca", ""): "barra-tijuca-posto-3",
-    ("geribá", ""): "buzios-geriba",
-    ("geriba", ""): "buzios-geriba",
+# CONAMA 274/2000 single-sample limit for Enterococos in saltwater:
+# ≤100 NMP/100mL → própria; >100 → imprópria.
+INEA_ENT_LIMIT = 100
+
+# Station codes (Barra/Zona Sul "long" sheet) per target beach. We pick the
+# WORST (highest enterococos) reading across the listed codes for the latest
+# sampling date.
+INEA_ZS_STATIONS = {
+    "copa-p5": ["CP05"],
+    "leblon-mirante": ["LM02"],
+    "sao-conrado": ["PP10"],            # Pepino = São Conrado
+    "ipanema-posto-9": ["IP03", "IP06", "IP10"],
+    "barra-tijuca-posto-3": ["BT00", "BT01"],
 }
 
+# "Wide" sheets (col A = praia, col B = localização, col C = código, cols D… = dates).
+# beach_id → (sheet_name, list of station_code prefixes to consider, worst-of)
+INEA_WIDE = {
+    "cabo-frio-forte": ("C.Frio (Enter.) desde 2011",
+                        ["CF-02", "CF-03", "CF-04"]),  # Forte (3 pontos)
+    "buzios-geriba":   ("Búzios (Enter.) desde 2011",
+                        ["BZ-04"]),                    # Geribá
+}
 
-def fetch_inea():
-    html = curl(INEA_LANDING)
-    # Find candidate PDF links — prefer ones containing "boletim" or "semanal".
-    links = re.findall(r'href="([^"]+\.pdf[^"]*)"', html, re.I)
+INEA_ZS_SHEET = "Barra e Z.Sul (Enterococos) "
+
+
+def _ent_status(value):
+    """Map Enterococos NMP/100mL → status using CONAMA 274/2000."""
+    if value is None:
+        return None
+    try:
+        n = int(value)
+    except (TypeError, ValueError):
+        # "NR" (não realizado) and other strings → no data
+        return None
+    return "propria" if n <= INEA_ENT_LIMIT else "impropria"
+
+
+def _inea_find_xlsx_url(html):
+    links = re.findall(r'href="([^"]+\.xlsx?[^"]*)"', html, re.I)
     if not links:
-        print("  INEA: no PDF links on landing page", file=sys.stderr)
+        return None
+    # Prefer links mentioning "praias" / "monitoradas" / a recent year.
+    def score(u):
+        low = u.lower()
+        s = 0
+        if "praias" in low or "monitoradas" in low:
+            s += 10
+        if "2026" in low:
+            s += 3
+        elif "2025" in low:
+            s += 2
+        if low.endswith(".xlsx") or ".xlsx" in low:
+            s += 1
+        return s
+    return sorted(set(links), key=score, reverse=True)[0]
+
+
+def _inea_parse_zsul(wb, url):
+    """Parse the long-format 'Barra e Z.Sul' sheet: dates in col A, station
+    codes in row 2, values per cell."""
+    if INEA_ZS_SHEET not in wb.sheetnames:
         return {}
-    ranked = sorted(
-        set(links),
-        key=lambda u: (
-            ("boletim" in u.lower() or "semanal" in u.lower()),
-            "2026" in u,
-            "2025" in u,
-        ),
-        reverse=True,
-    )
-    last_err = None
-    for u in ranked[:5]:
-        if u.startswith("/"):
-            u = "https://www.inea.rj.gov.br" + u
-        try:
-            pdf = curl(u, binary=True)
-        except subprocess.CalledProcessError as e:
-            last_err = e
-            continue
-        if not pdf.startswith(b"%PDF"):
-            continue
-        try:
-            text = pdf_to_text(pdf)
-        except Exception as e:
-            last_err = e
-            continue
-        print(f"  INEA: parsing {u}", file=sys.stderr)
-        out = _parse_inea_text(text, u)
-        if out:
-            return out
-    if last_err:
-        print(f"  INEA: last error {last_err}", file=sys.stderr)
-    return {}
-
-
-def _parse_inea_text(text, url):
-    # Pull a date if present (DD/MM/YYYY).
-    m = re.search(r"(\d{2}/\d{2}/\d{4})", text)
-    report_date = None
-    if m:
-        try:
-            report_date = datetime.strptime(m.group(1), "%d/%m/%Y").date().isoformat()
-        except ValueError:
-            pass
+    ws = wb[INEA_ZS_SHEET]
+    rows = list(ws.iter_rows(values_only=True))
+    if len(rows) < 3:
+        return {}
+    header = rows[1]  # row index 1 = station codes
+    code_to_col = {}
+    for i, v in enumerate(header):
+        if isinstance(v, str) and v.strip():
+            code_to_col[v.strip()] = i
 
     out = {}
-    for line in text.splitlines():
-        low = line.lower()
-        status = classify(low)
-        if not status:
+    for bid, codes in INEA_ZS_STATIONS.items():
+        cols = [code_to_col[c] for c in codes if c in code_to_col]
+        if not cols:
             continue
-        for (beach_kw, point_kw), bid in INEA_NAME_MAP.items():
-            if beach_kw not in low:
+        # Walk rows bottom-up, pick the most recent date where ≥1 code has a numeric value.
+        for r in reversed(rows):
+            if not hasattr(r[0], "year"):
                 continue
-            if point_kw and point_kw not in low:
-                continue
-            if bid in out:
-                # Prefer rows with the more-specific point keyword
-                if not point_kw:
+            vals = []
+            for c in cols:
+                if c >= len(r):
                     continue
+                v = r[c]
+                if isinstance(v, (int, float)):
+                    vals.append(int(v))
+            if not vals:
+                continue
+            worst = max(vals)
+            status = _ent_status(worst)
+            if not status:
+                continue
             out[bid] = {
                 "status": status,
                 "source": "INEA",
-                "report_date": report_date,
-                "ecoli": None,
+                "report_date": r[0].date().isoformat(),
+                "ecoli": worst,  # actually enterococos NMP/100mL
                 "url": url,
                 "confidence": "oficial",
             }
             break
+    return out
+
+
+def _inea_parse_wide(wb, url):
+    """Parse 'wide' sheets where dates are columns and rows are stations."""
+    out = {}
+    for bid, (sheet, code_prefixes) in INEA_WIDE.items():
+        if sheet not in wb.sheetnames:
+            continue
+        ws = wb[sheet]
+        rows = list(ws.iter_rows(values_only=True))
+        # Find header row: row whose col D... contains datetimes and col C
+        # would equal "Estações" / blank. Use the row that has the most datetimes.
+        header_row_idx = None
+        best_count = 0
+        for i, r in enumerate(rows[:10]):
+            n = sum(1 for v in r if hasattr(v, "year"))
+            if n > best_count:
+                best_count = n
+                header_row_idx = i
+        if header_row_idx is None or best_count == 0:
+            continue
+        header = rows[header_row_idx]
+        # Find data rows: must have a station code in col C matching a prefix.
+        candidate_rows = []
+        for r in rows[header_row_idx + 1:]:
+            code = r[2]
+            if not isinstance(code, str):
+                continue
+            code_s = code.strip()
+            if any(code_s == p or code_s.startswith(p) for p in code_prefixes):
+                candidate_rows.append(r)
+        if not candidate_rows:
+            continue
+        # Find latest date column with a numeric value in any candidate row.
+        n_cols = max(len(header), max(len(r) for r in candidate_rows))
+        latest_idx = None
+        latest_date = None
+        latest_worst = None
+        for ci in range(n_cols - 1, 2, -1):
+            d = header[ci] if ci < len(header) else None
+            if not hasattr(d, "year"):
+                continue
+            vals = []
+            for r in candidate_rows:
+                if ci >= len(r):
+                    continue
+                v = r[ci]
+                if isinstance(v, (int, float)):
+                    vals.append(int(v))
+            if not vals:
+                continue
+            latest_idx = ci
+            latest_date = d
+            latest_worst = max(vals)
+            break
+        if latest_idx is None:
+            continue
+        status = _ent_status(latest_worst)
+        if not status:
+            continue
+        out[bid] = {
+            "status": status,
+            "source": "INEA",
+            "report_date": latest_date.date().isoformat(),
+            "ecoli": latest_worst,
+            "url": url,
+            "confidence": "oficial",
+        }
+    return out
+
+
+def fetch_inea():
+    """Parse INEA's historical XLSX (Praias Monitoradas pelo INEA desde 2005)
+    instead of the weekly image-only PDF. The XLSX is linked from the
+    balneabilidade landing page and updated monthly with the latest sampling
+    rounds. We pick the most recent date with a numeric reading per beach
+    and classify using CONAMA 274/2000 (Enterococos ≤100 NMP/100mL = própria).
+    """
+    try:
+        import openpyxl  # noqa: F401
+    except ImportError:
+        print("  INEA: openpyxl not installed — skipping", file=sys.stderr)
+        return {}
+
+    try:
+        html = curl(INEA_LANDING)
+    except subprocess.CalledProcessError as e:
+        print(f"  INEA: landing err {e}", file=sys.stderr)
+        return {}
+    xlsx_url = _inea_find_xlsx_url(html)
+    if not xlsx_url:
+        print("  INEA: no XLSX link on landing page", file=sys.stderr)
+        return {}
+    if xlsx_url.startswith("/"):
+        xlsx_url = "https://www.inea.rj.gov.br" + xlsx_url
+
+    try:
+        blob = curl(xlsx_url, binary=True)
+    except subprocess.CalledProcessError as e:
+        print(f"  INEA: download err {e}", file=sys.stderr)
+        return {}
+    if not blob[:2] == b"PK":  # xlsx = zip
+        print("  INEA: not a zip/xlsx", file=sys.stderr)
+        return {}
+
+    import io
+    import openpyxl
+    try:
+        wb = openpyxl.load_workbook(io.BytesIO(blob), read_only=True,
+                                    data_only=True)
+    except Exception as e:
+        print(f"  INEA: openpyxl err {e}", file=sys.stderr)
+        return {}
+
+    print(f"  INEA: parsing {xlsx_url}", file=sys.stderr)
+    out = {}
+    try:
+        out.update(_inea_parse_zsul(wb, xlsx_url))
+    except Exception as e:
+        print(f"  INEA: zsul parse err {e}", file=sys.stderr)
+    try:
+        out.update(_inea_parse_wide(wb, xlsx_url))
+    except Exception as e:
+        print(f"  INEA: wide parse err {e}", file=sys.stderr)
     return out
 
 

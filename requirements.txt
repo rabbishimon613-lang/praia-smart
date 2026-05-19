@@ -4,5 +4,8 @@
 #   - curl                  (HTTP)
 #   - pdftotext (poppler)   (used by workers/balneabilidade.py)
 #
-# No Python packages required yet. If a future scraper needs pdfplumber /
-# requests / beautifulsoup4, add them here.
+# Python packages:
+openpyxl>=3.1   # workers/balneabilidade.py — INEA historical XLSX parser
+#
+# If a future scraper needs pdfplumber / requests / beautifulsoup4, add them
+# here.

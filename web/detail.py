@@ -793,13 +793,72 @@ def render(p, agito_data=None, now_hour=12, ships_data=None, sat_data=None):
 
     aqi_text, _ = aqi_label(ai.get("aqi"))
 
+    # ── SEO / OG / JSON-LD / analytics ───────────────────────
+    SITE_URL = "https://praiasmart.com.br"
+    page_title = f"{p['beach']} {p['posto']} — praia smart"
+    page_desc = (f"Condições agora em {p['beach']}, {state or 'Brasil'}. "
+                 "Câmera ao vivo, qualidade da água, melhor horário pra ir.")
+    og_image = (f"https://i.ytimg.com/vi/{yt}/maxresdefault.jpg"
+                if yt else f"{SITE_URL}/og-default.jpg")
+    canonical = f"{SITE_URL}/beach/{p['id']}.html"
+    seo_html = f"""<meta name="description" content="{page_desc}">
+<link rel="canonical" href="{canonical}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="{page_title}">
+<meta property="og:description" content="{page_desc}">
+<meta property="og:image" content="{og_image}">
+<meta property="og:url" content="{canonical}">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{page_title}">
+<meta name="twitter:description" content="{page_desc}">
+<meta name="twitter:image" content="{og_image}">"""
+
+    beach_ld = {
+        "@context": "https://schema.org",
+        "@type": "BeachWeather",
+        "name": f"{p['beach']} {p['posto']}",
+        "description": page_desc,
+        "url": canonical,
+        "image": og_image,
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": p.get("lat"),
+            "longitude": p.get("lng"),
+        },
+        "containedInPlace": {
+            "@type": "Place",
+            "name": f"{p['beach']}{', ' + state if state else ''}",
+        },
+        "additionalProperty": [
+            {"@type": "PropertyValue", "name": "wave_height_m",
+             "value": s.get("wave_height_m")},
+            {"@type": "PropertyValue", "name": "sea_temp_c",
+             "value": a.get("sea_temp_c")},
+            {"@type": "PropertyValue", "name": "uv", "value": w.get("uv")},
+            {"@type": "PropertyValue", "name": "wind_kmh",
+             "value": w.get("wind_kmh")},
+            {"@type": "PropertyValue", "name": "air_temp_c",
+             "value": w.get("air_temp_c")},
+        ],
+    }
+    ld_html = ('<script type="application/ld+json">'
+               + json.dumps(beach_ld, ensure_ascii=False) + '</script>')
+
+    # Analytics — Plausible. Swap script tag to change providers.
+    analytics_html = ('<script defer data-domain="praiasmart.com.br" '
+                      'src="https://plausible.io/js/script.js"></script>')
+
     return f"""<!doctype html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F4EFE4">
-<title>{p['beach']} {p['posto']} — praia smart</title>
+<title>{page_title}</title>
+{seo_html}
+{ld_html}
+{analytics_html}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">

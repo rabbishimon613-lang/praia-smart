@@ -17,6 +17,7 @@ from build import (
     ACTIVITY_LABEL, ACTIVITY_VAR, BUCKET_INDEX,
     CATEGORIES, pick_top_dials, render_category_glyph,
     render_agua_box, _BALNE_BY_BEACH,
+    AD_HTML,
 )
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -406,6 +407,14 @@ section {
 }
 .aqi-cell .l { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.06em; color: var(--mute); text-transform: uppercase; }
 .aqi-cell .v { font-size: 18px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+.ad-slot { display: flex; flex-direction: column; gap: 4px;
+  border: 1px dashed rgba(148,168,180,0.5); border-radius: 14px;
+  padding: 8px 12px; background: var(--paper-warm); text-align: center;
+  margin: 0 var(--pad) 14px; }
+.ad-slot-tag { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.08em;
+  color: var(--mute); text-transform: uppercase; text-align: left; }
+.ad-slot iframe { max-width: 600px; margin: 0 auto; background: transparent; }
 
 .footer { text-align: center; padding: 22px var(--pad) 28px; color: var(--mute); font-size: 11px; font-family: var(--font-mono); letter-spacing: 0.02em; }
 
@@ -827,6 +836,8 @@ def render(p, agito_data=None, now_hour=12, ships_data=None, sat_data=None):
     {hourly_html}
   </section>
 
+  {AD_HTML}
+
   <section>
     <div class="section-tag">condições <span class="sub">agora · {aqi_text}</span></div>
     {cond_html}
@@ -854,6 +865,8 @@ def render(p, agito_data=None, now_hour=12, ships_data=None, sat_data=None):
     <div class="section-tag">agito <span class="sub">estimativa</span></div>
     {crowd_html}
   </section>
+
+  {AD_HTML}
 
   {render_ships(p, ships_data)}
 

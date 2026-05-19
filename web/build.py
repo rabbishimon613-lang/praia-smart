@@ -254,7 +254,7 @@ def aqi_label(aqi):
 # ─────────────────────────────────────────────────────────────
 
 ACTIVITY_LABEL = {
-    "surfar": "surfar", "nadar": "nadar", "sol": "sol", "evitar_sol": "evitar sol",
+    "surfar": "surfar", "nadar": "nadar", "sol": "sol forte", "evitar_sol": "sol tranquilo",
 }
 ACTIVITY_VAR = {
     "surfar": "var(--surf)", "nadar": "var(--swim)",

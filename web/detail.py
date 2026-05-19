@@ -812,7 +812,7 @@ def render(p, agito_data=None, now_hour=12, ships_data=None, sat_data=None):
     ) if _desc else ""
 
     # ── SEO / OG / JSON-LD / analytics ───────────────────────
-    SITE_URL = "https://praiasmart.com.br"
+    SITE_URL = "https://praiasmart.com"
     page_title = f"{p['beach']} hoje — mar, vento, água, câmera ao vivo | praia smart"
     page_desc = (f"Como tá o mar em {p['beach']} agora · {state or 'Brasil'}. "
                  "Câmera ao vivo, ondas, vento, balneabilidade e melhor horário pra ir.")
@@ -864,7 +864,7 @@ def render(p, agito_data=None, now_hour=12, ships_data=None, sat_data=None):
                + json.dumps(beach_ld, ensure_ascii=False) + '</script>')
 
     # Analytics — Plausible. Swap script tag to change providers.
-    analytics_html = ('<script defer data-domain="praiasmart.com.br" '
+    analytics_html = ('<script defer data-domain="praiasmart.com" '
                       'src="https://plausible.io/js/script.js"></script>')
 
     return f"""<!doctype html>

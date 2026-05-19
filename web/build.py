@@ -1611,7 +1611,7 @@ def main():
                 '</div>')
 
     # ── SEO / OG / analytics ─────────────────────────────────
-    SITE_URL = "https://praiasmart.com.br"
+    SITE_URL = "https://praiasmart.com"
     page_title = "Praias do Brasil hoje — câmeras ao vivo, mar, vento, água | praia smart"
     page_desc = ("Condições em tempo real das praias do Brasil — ondas, vento, "
                  "água, UV, agito. Câmeras ao vivo.")
@@ -1655,7 +1655,7 @@ def main():
 
     # Analytics — Plausible. To swap providers (GA, Umami, Fathom),
     # replace the script tag below with the equivalent snippet.
-    analytics_html = ('<script defer data-domain="praiasmart.com.br" '
+    analytics_html = ('<script defer data-domain="praiasmart.com" '
                       'src="https://plausible.io/js/script.js"></script>')
 
     html = f"""<!doctype html>

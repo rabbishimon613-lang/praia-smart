@@ -2,6 +2,17 @@
 
 Living doc for decisions, ideas parked for later, and gotchas. Not user docs.
 
+## Deploy / infrastructure (current as of 2026-05-19)
+
+- **Domain:** `praiasmart.com` (NOT .com.br — gets the bug-prone .com.br wrong; canonical, og:url, sitemap, Plausible all must use bare `.com`)
+- **DNS / CDN:** Cloudflare
+- **Origin:** GitHub repo `rabbishimon613-lang/praia-smart`, branch `main` — site is served from the latest committed `web/*` files
+- **Refresh cadence:** every 15 min via `.github/workflows/refresh.yml` (cron). Workers fetch → `build.py` → `detail.py` → `cities.py` → commit + push
+- **SSL:** Cloudflare-managed (auto)
+- **Workers/scrapers:** run inside the same GitHub Actions job — no separate VPS yet
+- **Analytics:** Plausible script in `<head>`, domain `praiasmart.com` (need to actually sign up at plausible.io to receive data)
+- **Search Console:** not yet verified — pending the user pasting the verification meta tag in chat
+
 ## Social media push layer (queued for v1.5)
 
 Live social feed integrated into each card + city-wide feed tab.

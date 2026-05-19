@@ -24,7 +24,7 @@ from build import (
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data", "conditions.json")
 OUT_ROOT = os.path.join(ROOT, "web")
-SITE_URL = "https://praiasmart.com.br"
+SITE_URL = "https://praiasmart.com"
 
 # ─────────────────────────────────────────────────────────────
 # City registry — slug → (display name, state, beach ids, blurb)

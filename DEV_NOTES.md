@@ -137,6 +137,99 @@ TTS candidates to evaluate later: Coqui (open, free), Eleven Labs (paid, best qu
 - For one-off video metadata: `https://www.youtube.com/oembed?url=...&format=json` works keyless, returns title + author. Use this to identify any URL the user drops.
 - Channels to enumerate when YouTube API is wired: @LiveRioBR, @maaxcamaovivo, @Vejaomar, @Surfistafotografo, @PointdoForte, @BNU.tv, @Olhar013, @BarradaLagoaOnline, @LiveCamNatal, @MarceloPraiaGrande, EarthCam.
 
+## Shelved — pre-launch checklist (winter 2026, resume before Dec busy season)
+
+Status snapshot as of 2026-05-19. App is live at praiasmart.com via Cloudflare,
+served from rabbishimon613-lang/praia-smart GH repo, refreshing every 15 min.
+
+### User-action items (waiting on Pedro, not Claude)
+
+- **Google Search Console verification** — go to search.google.com/search-console,
+  add property `https://praiasmart.com` (URL prefix, not Domain), pick HTML tag
+  verification, paste the `<meta name="google-site-verification" content="...">`
+  string to Claude. Claude will inject it in `build.py` <head>, push, wait one
+  15-min cron tick, then click "Verify". After verify → submit sitemap at
+  `https://praiasmart.com/sitemap.xml`. Same drill for Bing Webmaster Tools
+  (gives Yahoo + DuckDuckGo for free).
+- **Plausible account** — script is live in <head> with `data-domain="praiasmart.com"`
+  but no account exists yet at plausible.io. Sign up (~$9/mo) OR swap script to
+  Umami self-host / GoatCounter free / etc. Until signed up, no data is collected.
+- **First backlink push** — draft post ready (r/rio recommended). Copy-pasteable
+  draft was in the chat on 2026-05-19. Find it via:
+  `git log --all --oneline | grep -i seo` then look in conversation history.
+  Key points: title "Fiz um site que mostra condições das praias do Rio em
+  tempo real — câmera ao vivo + balneabilidade do INEA". Post as personal
+  weekend-project, not corporate. Don't go to r/brasil first.
+- **Domain fact-checks for beach descriptions** — agent flagged these to verify
+  in `web/beach_descriptions.py`:
+  - Balneário Rincão emancipation year (2013)
+  - Santos Gonzaga Guinness "longest beachfront garden" claim
+  - Praia Grande "Eye" Ferris wheel still operating
+  - Copa Posto 5 phrasing — does it read right to a carioca?
+
+### Open eng work (when we resume)
+
+- **News filter cleanup** — substring matching "barra" hits unrelated stories.
+  Real fix: small LLM classifier (per existing DEV_NOTES item). Looks
+  unprofessional on launch; do before any marketing push.
+- **Lighthouse / perf audit** — never run. Catch render-blocking, image
+  sizing, CLS issues before summer traffic. Mobile-first.
+- **Phone QA pass** — open homepage + 12 detail pages + 10 city pages on a
+  real iPhone + a real cheap Android. Look for broken layouts, slow loads,
+  weird empty states.
+- **Cameras for 11 new top-20 beaches** — water data is wired for Ipanema,
+  Barra, Boa Viagem, Pajuçara, Iracema, Jurerê, Porto de Galinhas, Itapuã,
+  Geribá, Tramandaí, Porto Seguro (and sits unused in balneabilidade.json
+  for several). To surface them, need YouTube cam IDs + postos.csv rows.
+  Cam-first rule means they won't render without cams.
+- **INEMA bahia worker quirk** — scrapes the news article (not PDF) because
+  `homologa.ba.gov.br` is geo-blocked outside Bahia. Works but fragile. No
+  E.coli numbers since article is prose. Consider VPS-in-BA fix later.
+- **IMA-SC date routing** — currently misses the off-season monthly bulletin.
+  In-season (Oct-Mar) it should work. Floripa/Camboriú/Rincão + Jurerê
+  Internacional all show sem_dados during winter. Verify when October hits.
+- **FEPAM seasonal** — Tramandaí/Capão da Canoa only get data Dec-Feb
+  ("Operação Verão Total"). Worker correctly stubs sem_dados off-season.
+  No fix needed; just be aware of the user-facing "fora de temporada" message.
+- **API sniffs that failed** — Vai dar Praia (BA INEMA app) and Semace Digital
+  (CE) both probed; no public JSON endpoints found. If those apps ever
+  publish API docs or someone reverse-engineers them, refactor the workers
+  to use JSON instead of HTML/PDF scraping.
+
+### Bonus integrations parked (P3.3, P3.4, P3.5 stubs exist)
+
+- **Orla Rio bandeiras** — `workers/orla_rio.py` is a stub. Real path to
+  unlock this: CV (YOLOv8 + color sampling) on Orla Rio live cam frames
+  (Surfview iframes embed lifeguard posts). Same pipeline as the planned
+  crowd-counting CV. Build them together — same architecture.
+- **Observatório do Turismo calibration** — `workers/turismo_calibration.py`
+  is a stub. Real path: add a PDF/XLSX parser per state observatório
+  (BA, CE, SP, RJ, PE, AL all identified). Multiply agito.py base-rates by
+  `monthly_visitors / baseline`. Doesn't unlock beaches, makes existing
+  crowd predictions calibrated to real foot-traffic.
+- **LAPIS/UFAL satellite supplement (NE coast)** — `workers/lapis_satellite.py`
+  is a stub. LAPIS hosts unresolvable at last check; EUMETSAT View has the
+  data but is JS-only. Real path: pick a free EUMETSAT WMS layer ID
+  (`msg_iodc_natural` is a candidate), mirror it via `satellite.py`'s
+  `fetch_crop()` pattern, surface as cloud-fallback panel for NE beaches
+  (Boa Viagem, Pajuçara, Porto de Galinhas, Salvador).
+
+### What's already shipped this winter sprint (don't re-do)
+
+- INEA XLSX parser (was image-PDF, now openpyxl-based — 7 Rio beaches live)
+- CETESB SP, INEMA BA, CPRH PE, SEMACE CE, IMA-AL workers — all live
+- Dynamic top-4-of-10 dial system (publico/ar/uv/ondas/vento/calor/mar_quente/ceu/mare)
+- Dedicated água box (status + age + rain overlay)
+- Light "praia 10am" UI redesign across homepage + detail + sub-pages
+- Sun arc score viz, hourly strips, crowd meter parasols, sunset hero
+- SEO: per-page titles with "hoje" keyword, meta description, OG, Twitter
+  card, canonical, sitemap.xml, robots.txt
+- schema.org JSON-LD (BeachWeather per detail, WebSite + SearchAction home)
+- Plausible analytics script (waiting on account signup)
+- 12 hand-written ~150-word PT-BR beach descriptions
+- 10 auto-generated city "fim de semana" pages with cross-linking
+- Ads via A-Ads unit 2438146 (homepage card injection + 2 per detail page)
+
 ## Other parked items
 
 - **INEA balneabilidade** — original URL 404s, they reorganized portal. Needs URL hunting.

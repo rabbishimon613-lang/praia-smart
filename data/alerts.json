@@ -1,4 +1,27 @@
 {
-  "fetched_at": 1779078195,
-  "alerts": []
+  "fetched_at": 1779187823,
+  "alerts": [
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54423",
+      "event": "Tempestade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-05-19 12:00:00.0",
+      "end": "2026-05-19 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 19/05/2026 12:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Zona da Mata, São José do Rio Preto, Triângulo Mineiro/Alto Paranaíba, Campinas, Oeste de Minas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Sul Espírito-santense, Central Espírito-santense, Campo das Vertentes, Ribeirão Preto, Araçatuba, Macro Metropolitana Paulista, Marília, Metropolitana de Belo Horizonte, Araraquara, Sul Fluminense, Vale do Paraíba Paulista, Noroeste Fluminense, Baixadas, Central Mineira, Centro Fluminense, Metropolitana de São Paulo, Metropolitana do Rio de Janeiro, Assis, Litoral Sul Paulista, Norte Fluminense, Presidente Prudente"
+    },
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54422",
+      "event": "Tempestade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-05-19 00:00:00.0",
+      "end": "2026-05-19 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 19/05/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Central Mineira, Zona da Mata, São José do Rio Preto, Triângulo Mineiro/Alto Paranaíba, Campinas, Oeste de Minas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Sul Espírito-santense, Central Espírito-santense, Campo das Vertentes, Ribeirão Preto, Araçatuba, Macro Metropolitana Paulista, Marília, Metropolitana de Belo Horizonte, Araraquara, Sul Fluminense, Vale do Paraíba Paulista, Noroeste Fluminense, Baixadas, Centro Fluminense, Metropolitana de São Paulo, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Assis, Norte Fluminense, Presidente Prudente"
+    }
+  ]
 }

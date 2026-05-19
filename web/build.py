@@ -1612,7 +1612,7 @@ def main():
 
     # ── SEO / OG / analytics ─────────────────────────────────
     SITE_URL = "https://praiasmart.com.br"
-    page_title = f"praia smart — {region_label} agora"
+    page_title = "Praias do Brasil hoje — câmeras ao vivo, mar, vento, água | praia smart"
     page_desc = ("Condições em tempo real das praias do Brasil — ondas, vento, "
                  "água, UV, agito. Câmeras ao vivo.")
     # Use surf-winner's cam as the hero OG image

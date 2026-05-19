@@ -9,6 +9,7 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from predictors import predict
+from beach_descriptions import BEACH_DESCRIPTIONS
 from build import (
     surf_score, swim_score, sun_score, shade_score, hourly_scores,
     render_sun_arc, render_hourly_strip, render_crowd_meter,
@@ -496,6 +497,16 @@ section {
   font-size: 11px; margin-top: 4px; opacity: 0.85;
   font-family: var(--font-mono); letter-spacing: 0.04em;
 }
+
+/* Beach description prose */
+.beach-desc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 62ch;
+  font-weight: 400;
+}
 """
 
 SHIP_ICONS = {
@@ -793,11 +804,18 @@ def render(p, agito_data=None, now_hour=12, ships_data=None, sat_data=None):
 
     aqi_text, _ = aqi_label(ai.get("aqi"))
 
+    # Per-beach descriptive prose (SEO)
+    _desc = BEACH_DESCRIPTIONS.get(p["id"], "")
+    desc_section = (
+        f'<section><div class="section-tag">sobre esta praia</div>'
+        f'<p class="beach-desc">{_desc}</p></section>'
+    ) if _desc else ""
+
     # ── SEO / OG / JSON-LD / analytics ───────────────────────
     SITE_URL = "https://praiasmart.com.br"
-    page_title = f"{p['beach']} {p['posto']} — praia smart"
-    page_desc = (f"Condições agora em {p['beach']}, {state or 'Brasil'}. "
-                 "Câmera ao vivo, qualidade da água, melhor horário pra ir.")
+    page_title = f"{p['beach']} hoje — mar, vento, água, câmera ao vivo | praia smart"
+    page_desc = (f"Como tá o mar em {p['beach']} agora · {state or 'Brasil'}. "
+                 "Câmera ao vivo, ondas, vento, balneabilidade e melhor horário pra ir.")
     og_image = (f"https://i.ytimg.com/vi/{yt}/maxresdefault.jpg"
                 if yt else f"{SITE_URL}/og-default.jpg")
     canonical = f"{SITE_URL}/beach/{p['id']}.html"
@@ -926,6 +944,8 @@ def render(p, agito_data=None, now_hour=12, ships_data=None, sat_data=None):
   </section>
 
   {AD_HTML}
+
+  {desc_section}
 
   {render_ships(p, ships_data)}
 

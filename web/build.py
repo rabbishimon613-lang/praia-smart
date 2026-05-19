@@ -294,8 +294,12 @@ def render_activity_glyph(activity, color="currentColor", size=14):
     return ""
 
 
-def render_sun_arc(score, activity, color_var, size=80):
-    """Inline SVG semicircle arc, filled proportionally to score [0,1]."""
+def render_sun_arc(score, activity, color_var, size=80, label=None, glyph_html=None):
+    """Inline SVG semicircle arc, filled proportionally to score [0,1].
+
+    `activity` is used to look up the default glyph + label when no override
+    is passed. Pass `label` and/or `glyph_html` to use a custom category.
+    """
     score = max(0.0, min(1.0, score or 0))
     cx, cy, r = 50, 52, 38
     PR = math.pi * r
@@ -314,7 +318,10 @@ def render_sun_arc(score, activity, color_var, size=80):
         x2 = cx + (r - 3) * math.cos(a); y2 = cy - (r - 3) * math.sin(a)
         ticks.append(f'<line x1="{x1:.2f}" y1="{y1:.2f}" x2="{x2:.2f}" y2="{y2:.2f}" stroke="var(--track-tick)" stroke-width="1.3" stroke-linecap="round"/>')
 
-    glyph = render_activity_glyph(activity, color="white", size=12)
+    if glyph_html is None:
+        glyph_html = render_activity_glyph(activity, color="white", size=12)
+    if label is None:
+        label = ACTIVITY_LABEL.get(activity, activity)
 
     return (
         f'<div class="sa">'
@@ -324,14 +331,305 @@ def render_sun_arc(score, activity, color_var, size=80):
         f'<path d="{arc_path}" stroke="{color_var}" stroke-width="7" stroke-linecap="round" fill="none"'
         f' stroke-dasharray="{filled * PR:.2f} {PR:.2f}"/>'
         f'<circle cx="{hx:.2f}" cy="{hy:.2f}" r="9" fill="{color_var}"/>'
-        f'<g transform="translate({hx - 6:.2f} {hy - 6:.2f})">{glyph}</g>'
+        f'<g transform="translate({hx - 6:.2f} {hy - 6:.2f})">{glyph_html}</g>'
         f'<text x="{cx}" y="{cy + 4}" text-anchor="middle"'
         f' font-family="\'Plus Jakarta Sans\', sans-serif" font-size="20" fill="var(--ink)"'
         f' font-weight="700" letter-spacing="-0.02em">{score10}</text>'
         f'</svg>'
-        f'<div class="sa-label">{ACTIVITY_LABEL[activity]}</div>'
+        f'<div class="sa-label">{label}</div>'
         f'</div>'
     )
+
+
+# ─────────────────────────────────────────────────────────────
+# Dynamic top-4-of-10 category dial system
+# ─────────────────────────────────────────────────────────────
+
+def render_category_glyph(cat_id, color="currentColor", size=12):
+    s = size
+    if cat_id == "publico":
+        # 3 heads + shoulders
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<circle cx="6" cy="9" r="2.2" stroke="{color}" stroke-width="2" stroke-linecap="round"/>'
+                f'<circle cx="12" cy="7.5" r="2.5" stroke="{color}" stroke-width="2" stroke-linecap="round"/>'
+                f'<circle cx="18" cy="9" r="2.2" stroke="{color}" stroke-width="2" stroke-linecap="round"/>'
+                f'<path d="M2.5 19 q 3.5 -5 9.5 -5 t 9.5 5" stroke="{color}" stroke-width="2" stroke-linecap="round" fill="none"/>'
+                f'</svg>')
+    if cat_id == "ar":
+        # leaf
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<path d="M5 19 C 5 11, 11 5, 19 5 C 19 13, 13 19, 5 19 Z" stroke="{color}" stroke-width="2" stroke-linejoin="round" fill="none"/>'
+                f'<path d="M5 19 L 14 10" stroke="{color}" stroke-width="2" stroke-linecap="round"/>'
+                f'</svg>')
+    if cat_id == "uv":
+        return render_activity_glyph("sol", color=color, size=size)
+    if cat_id == "ondas":
+        return render_activity_glyph("surfar", color=color, size=size)
+    if cat_id == "vento":
+        # wind streaks
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<path d="M3 8 H 14 a 3 3 0 1 0 -3 -3" stroke="{color}" stroke-width="2" stroke-linecap="round" fill="none"/>'
+                f'<path d="M3 13 H 19" stroke="{color}" stroke-width="2" stroke-linecap="round"/>'
+                f'<path d="M3 18 H 16 a 3 3 0 1 1 -3 3" stroke="{color}" stroke-width="2" stroke-linecap="round" fill="none"/>'
+                f'</svg>')
+    if cat_id == "calor":
+        # thermometer
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<path d="M12 3 a 2.5 2.5 0 0 1 2.5 2.5 V 14 a 4 4 0 1 1 -5 0 V 5.5 A 2.5 2.5 0 0 1 12 3 Z" stroke="{color}" stroke-width="2" stroke-linejoin="round" fill="none"/>'
+                f'<circle cx="12" cy="18" r="1.6" fill="{color}"/>'
+                f'</svg>')
+    if cat_id == "mar_quente":
+        return render_activity_glyph("nadar", color=color, size=size)
+    if cat_id == "ceu":
+        # cloud
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<path d="M7 18 a 4 4 0 0 1 -0.6 -7.95 a 5.5 5.5 0 0 1 10.6 1.45 a 3.5 3.5 0 0 1 0 7 Z" stroke="{color}" stroke-width="2" stroke-linejoin="round" fill="none"/>'
+                f'</svg>')
+    if cat_id == "mare":
+        # wave curve + small up arrow
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<path d="M2 16 C 6 12, 10 12, 12 14 S 18 18, 22 14" stroke="{color}" stroke-width="2" stroke-linecap="round" fill="none"/>'
+                f'<path d="M17 8 L 20 5 L 23 8 M 20 5 V 12" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
+                f'</svg>')
+    if cat_id == "agua_limpa":
+        return (f'<svg width="{s}" height="{s}" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+                f'<path d="M12 3 C 12 3, 5 11, 5 16 a 7 7 0 0 0 14 0 C 19 11, 12 3, 12 3 Z" stroke="{color}" stroke-width="2" fill="none"/>'
+                f'<path d="M9 15 L 11 17 L 15 13" stroke="{color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
+                f'</svg>')
+    return ""
+
+
+# ── Scorers: each returns (score_0_to_10 | None, sublabel | None) ──
+
+def _clamp10(v):
+    if v is None: return None
+    return max(0, min(10, round(v)))
+
+
+def score_publico(posto, agito_b):
+    if not agito_b or not agito_b.get("current"):
+        return (None, None)
+    s = agito_b["current"].get("score")
+    if s is None:
+        return (None, None)
+    # invert: emptier = better score on dial? The label is "público" — we show
+    # how crowded it is, with higher = more crowded. Keep raw score for now.
+    return (_clamp10(s * 10), agito_b["current"].get("bucket"))
+
+
+def score_ar(posto):
+    aqi = (posto.get("air") or {}).get("aqi")
+    if aqi is None:
+        return (None, None)
+    # piecewise: 0→10, 50→8, 100→5, 150→3, 200+→1
+    if aqi <= 0: v = 10
+    elif aqi <= 50:  v = 10 - (aqi / 50) * 2
+    elif aqi <= 100: v = 8 - ((aqi - 50) / 50) * 3
+    elif aqi <= 150: v = 5 - ((aqi - 100) / 50) * 2
+    elif aqi <= 200: v = 3 - ((aqi - 150) / 50) * 2
+    else: v = 1
+    return (_clamp10(v), None)
+
+
+def score_uv(posto):
+    uv = (posto.get("weather") or {}).get("uv")
+    if uv is None:
+        return (None, None)
+    if uv <= 2: v = 10
+    elif uv <= 5: v = 8
+    elif uv <= 7: v = 5
+    elif uv <= 10: v = 3
+    else: v = 1
+    return (_clamp10(v), uv_label(uv))
+
+
+def score_ondas(posto):
+    h = (posto.get("surf") or {}).get("wave_height_m")
+    if h is None:
+        return (None, None)
+    # bell ~1.5m → 10, 0 → 1, >3 → ~3
+    if h <= 0:
+        v = 1
+    elif h > 3:
+        v = max(2, 4 - (h - 3))
+    else:
+        v = 1 + 9 * math.exp(-((h - 1.5) ** 2) / (2 * 0.9 ** 2))
+    return (_clamp10(v), f"{h:.1f}m")
+
+
+def score_vento(posto):
+    w = (posto.get("weather") or {}).get("wind_kmh")
+    if w is None:
+        return (None, None)
+    if w < 1:
+        v = 4
+    elif w <= 5:
+        v = 4 + (w - 1) * (6 / 4)  # 4 → 10 at 5
+    elif w <= 15:
+        v = 10
+    elif w <= 30:
+        v = 10 - (w - 15) * (8 / 15)  # → 2 at 30
+    else:
+        v = max(1, 2 - (w - 30) * 0.05)
+    return (_clamp10(v), f"{w:.0f} km/h")
+
+
+def score_calor(posto):
+    t = (posto.get("weather") or {}).get("air_temp_c")
+    if t is None:
+        return (None, None)
+    # bell: 28→10, 20→5, 35→5, <15→1, >40→1
+    if t < 15 or t > 40:
+        v = 1
+    else:
+        v = 1 + 9 * math.exp(-((t - 28) ** 2) / (2 * 5.0 ** 2))
+    return (_clamp10(v), f"{t:.0f}°")
+
+
+def score_mar_quente(posto):
+    t = (posto.get("water") or {}).get("sea_temp_c")
+    if t is None:
+        return (None, None)
+    if t >= 26: v = 10
+    elif t >= 24: v = 8
+    elif t >= 22: v = 6
+    elif t >= 20: v = 4
+    else: v = 2
+    return (_clamp10(v), f"{t:.0f}°")
+
+
+def score_ceu(posto):
+    cl = (posto.get("weather") or {}).get("cloud_pct")
+    if cl is None:
+        return (None, None)
+    v = 10 - (cl / 100) * 9  # 0→10, 100→1
+    return (_clamp10(v), f"{cl:.0f}% nuvem")
+
+
+def score_mare(posto):
+    water = posto.get("water") or {}
+    nh = water.get("next_high_tide") or {}
+    nl = water.get("next_low_tide") or {}
+    nh_t, nl_t = nh.get("time"), nl.get("time")
+    nh_h, nl_h = nh.get("height_m"), nl.get("height_m")
+    if not (nh_t and nl_t and nh_h is not None and nl_h is not None):
+        return (None, None)
+    try:
+        now = datetime.now()
+        th = datetime.fromisoformat(nh_t)
+        tl = datetime.fromisoformat(nl_t)
+    except Exception:
+        return (None, None)
+    # rising if next high is sooner than next low
+    rising = th < tl
+    if rising:
+        # Time since previous low ≈ time from now until tl minus the cycle.
+        # Simpler: position on the rise from low→high. Approximate using
+        # remaining time to next high vs ~6h half-cycle.
+        remaining = (th - now).total_seconds() / 3600
+        frac = max(0.0, min(1.0, 1 - remaining / 6.0))  # 0=just past low, 1=at high
+        status = "subindo"
+    else:
+        remaining = (tl - now).total_seconds() / 3600
+        frac = max(0.0, min(1.0, remaining / 6.0))  # 1=at high, 0=at low
+        status = "descendo"
+    # Map fraction to 0-10 "tide height percentile"
+    v = 1 + 9 * frac
+    return (_clamp10(v), status)
+
+
+def score_agua_limpa(posto):
+    # Not wired yet
+    return (None, None)
+
+
+CATEGORIES = {
+    "publico":    {"label": "público",    "color_var": "var(--accent)", "scorer": score_publico,    "needs_agito": True},
+    "ar":         {"label": "ar",         "color_var": "var(--shade)",  "scorer": score_ar,         "needs_agito": False},
+    "uv":         {"label": "uv",         "color_var": "var(--sun)",    "scorer": score_uv,         "needs_agito": False},
+    "ondas":      {"label": "ondas",      "color_var": "var(--surf)",   "scorer": score_ondas,      "needs_agito": False},
+    "vento":      {"label": "vento",      "color_var": "var(--swim)",   "scorer": score_vento,      "needs_agito": False},
+    "calor":      {"label": "calor",      "color_var": "var(--surf)",   "scorer": score_calor,      "needs_agito": False},
+    "mar_quente": {"label": "mar quente", "color_var": "var(--swim)",   "scorer": score_mar_quente, "needs_agito": False},
+    "ceu":        {"label": "céu",        "color_var": "var(--sun)",    "scorer": score_ceu,        "needs_agito": False},
+    "mare":       {"label": "maré",       "color_var": "var(--swim)",   "scorer": score_mare,       "needs_agito": False},
+    "agua_limpa": {"label": "água limpa", "color_var": "var(--shade)",  "scorer": score_agua_limpa, "needs_agito": False},
+}
+
+
+def _notability(cat_id, posto):
+    """Distance from 'neutral' for this metric. Higher = more notable."""
+    w = posto.get("weather") or {}
+    s = posto.get("surf") or {}
+    a = posto.get("water") or {}
+    air = posto.get("air") or {}
+    # Notability normalized roughly 0-1 per metric.
+    if cat_id == "ondas":
+        h = s.get("wave_height_m") or 0
+        # bigger waves more notable; flat sea also notable
+        return min(1.0, abs(h - 0.8) / 1.5 + h / 4)
+    if cat_id == "vento":
+        v = w.get("wind_kmh")
+        if v is None: return 0
+        return min(1.0, abs(v - 10) / 20)
+    if cat_id == "calor":
+        t = w.get("air_temp_c")
+        if t is None: return 0
+        return min(1.0, abs(t - 25) / 10)
+    if cat_id == "ceu":
+        cl = w.get("cloud_pct")
+        if cl is None: return 0
+        return abs(cl - 50) / 50
+    if cat_id == "mar_quente":
+        t = a.get("sea_temp_c")
+        if t is None: return 0
+        return min(1.0, abs(t - 22) / 6)
+    if cat_id == "ar":
+        aqi = air.get("aqi")
+        if aqi is None: return 0
+        return min(1.0, abs(aqi - 25) / 50)
+    if cat_id == "mare":
+        return 0.4
+    return 0
+
+
+def pick_top_dials(posto, agito_b, n=4):
+    """Return [(cat_id, score10, color_var, label, sublabel)] of length up to n."""
+    scored = {}
+    for cid, meta in CATEGORIES.items():
+        s10, sub = meta["scorer"](posto, agito_b) if meta["needs_agito"] else meta["scorer"](posto)
+        if s10 is None:
+            continue
+        scored[cid] = (s10, sub)
+
+    chosen = []
+    # Always include publico + uv if data exists
+    for must in ("publico", "uv"):
+        if must in scored and must not in chosen:
+            chosen.append(must)
+
+    # Rank remainder by notability
+    rest = [cid for cid in scored if cid not in chosen]
+    rest.sort(key=lambda c: -_notability(c, posto))
+    for cid in rest:
+        if len(chosen) >= n: break
+        chosen.append(cid)
+
+    out = []
+    for cid in chosen[:n]:
+        s10, sub = scored[cid]
+        meta = CATEGORIES[cid]
+        out.append((cid, s10, meta["color_var"], meta["label"], sub))
+    return out
+
+
+def render_dynamic_score_row(posto, agito_b):
+    dials = pick_top_dials(posto, agito_b, n=4)
+    cells = []
+    for cid, s10, color, label, _sub in dials:
+        glyph = render_category_glyph(cid, color="white", size=12)
+        cells.append(render_sun_arc(s10 / 10.0, cid, color, size=76, label=label, glyph_html=glyph))
+    return f'<div class="score-row score-row--arc">{"".join(cells)}</div>'
 
 
 def render_score_row(scores):
@@ -513,7 +811,8 @@ def render_card(p, marks, agito_data=None, now_hour=12):
         "surfar": p["_surf"], "nadar": p["_swim"],
         "sol": p["_sun"], "evitar_sol": p["_shade"],
     }
-    score_row = render_score_row(scores)
+    agito_b = (agito_data or {}).get("by_beach", {}).get(p["id"]) if agito_data else None
+    score_row = render_dynamic_score_row(p, agito_b)
     hourly_html = render_hourly_strip(p["_hourly"], now_hour)
 
     # Best window from the top-scoring activity

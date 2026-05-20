@@ -19,6 +19,11 @@ from build import (
     CATEGORIES, pick_top_dials, render_category_glyph,
     render_agua_box, _BALNE_BY_BEACH,
     AD_HTML,
+    SITE_URL, PRECONNECT_HTML, FAVICON_HTML, FOOTER_HTML, FOOTER_CSS,
+    NEARBY_CSS, FAQ_CSS,
+    render_nearby_section, render_faq_section,
+    breadcrumb_jsonld, video_object_jsonld,
+    CITY_SLUG_BY_BEACH,
 )
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -706,6 +711,7 @@ def render(p, agito_data=None, now_hour=12, ships_data=None, sat_data=None):
         cam = (
             f'<iframe src="https://www.youtube.com/embed/{yt}'
             f'?autoplay=1&mute=1&controls=1&modestbranding=1&playsinline=1" '
+            'loading="lazy" referrerpolicy="strict-origin-when-cross-origin" '
             'allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'
         )
     else:
@@ -860,8 +866,33 @@ def render(p, agito_data=None, now_hour=12, ships_data=None, sat_data=None):
              "value": w.get("air_temp_c")},
         ],
     }
-    ld_html = ('<script type="application/ld+json">'
-               + json.dumps(beach_ld, ensure_ascii=False) + '</script>')
+    # Breadcrumb JSON-LD (Início → Cidade → Beach)
+    city_slug = CITY_SLUG_BY_BEACH.get(p["id"])
+    crumb_items = [("Início", f"{SITE_URL}/")]
+    if city_slug:
+        crumb_items.append((p["beach"], f"{SITE_URL}/{city_slug}/fim-de-semana.html"))
+    crumb_items.append((p["beach"], canonical))
+    breadcrumb_ld = breadcrumb_jsonld(crumb_items)
+
+    # FAQ — visible accordion + JSON-LD
+    faq_visible_html, faq_ld = render_faq_section(p["beach"], state)
+
+    # VideoObject JSON-LD when there's a live cam
+    video_ld = video_object_jsonld(p["beach"], state, yt, canonical) if yt else None
+
+    ld_blocks = ['<script type="application/ld+json">'
+                 + json.dumps(beach_ld, ensure_ascii=False) + '</script>',
+                 '<script type="application/ld+json">'
+                 + json.dumps(breadcrumb_ld, ensure_ascii=False) + '</script>',
+                 '<script type="application/ld+json">'
+                 + json.dumps(faq_ld, ensure_ascii=False) + '</script>']
+    if video_ld:
+        ld_blocks.append('<script type="application/ld+json">'
+                         + json.dumps(video_ld, ensure_ascii=False) + '</script>')
+    ld_html = "\n".join(ld_blocks)
+
+    # Nearby beaches (3 closest, internal-link play)
+    nearby_html = render_nearby_section(p, n=3, link_prefix="../beach/")
 
     # Analytics — Plausible. Swap script tag to change providers.
     analytics_html = ('<script defer data-domain="praiasmart.com" '
@@ -874,13 +905,13 @@ def render(p, agito_data=None, now_hour=12, ships_data=None, sat_data=None):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F4EFE4">
 <title>{page_title}</title>
+{PRECONNECT_HTML}
+{FAVICON_HTML}
 {seo_html}
 {ld_html}
 {analytics_html}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>{CSS}</style>
+<style>{CSS}{FOOTER_CSS}{NEARBY_CSS}{FAQ_CSS}</style>
 </head>
 <body>
 <header class="topbar">
@@ -951,8 +982,12 @@ def render(p, agito_data=None, now_hour=12, ships_data=None, sat_data=None):
 
   {render_satellite(p, sat_data)}
 
+  {faq_visible_html}
+
+  {nearby_html}
+
 </main>
-<div class="footer">dados Open-Meteo · cam YouTube</div>
+{FOOTER_HTML}
 </body>
 </html>"""
 

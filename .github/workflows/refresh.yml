@@ -73,12 +73,13 @@ jobs:
           python web/build.py
           python web/detail.py
           python web/cities.py
+          python web/webcams.py
 
       - name: commit refreshed snapshot
         run: |
           git config user.name "praia-smart-bot"
           git config user.email "bot@praiasmart.local"
-          git add data/ web/index.html web/beach/ web/satellite/ web/sitemap.xml web/*/fim-de-semana.html 2>/dev/null || true
+          git add data/ web/index.html web/beach/ web/satellite/ web/sitemap.xml web/*/fim-de-semana.html web/*/webcam-ao-vivo.html web/favicon.svg 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "no changes"
           else

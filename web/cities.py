@@ -19,6 +19,9 @@ from build import (
     surf_score, swim_score, shade_score,
     render_agua_box, _BALNE_BY_BEACH,
     AD_HTML,
+    SITE_URL as BUILD_SITE_URL,
+    PRECONNECT_HTML, FAVICON_HTML, FOOTER_HTML, FOOTER_CSS, NEARBY_CSS,
+    render_nearby_section, breadcrumb_jsonld,
 )
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -708,7 +711,24 @@ def render_city_page(slug, city_name, state, beaches, blurb, related):
         "includesAttraction": beach_items,
         "dateModified": datetime.now().isoformat(timespec="seconds"),
     }
-    ld_html = f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>'
+    # Breadcrumb JSON-LD
+    crumb_ld = breadcrumb_jsonld([
+        ("Início", f"{SITE_URL}/"),
+        (city_name, canonical),
+    ])
+    ld_html = (
+        f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>\n'
+        f'<script type="application/ld+json">{json.dumps(crumb_ld, ensure_ascii=False)}</script>'
+    )
+
+    # Nearby beaches across cities — exclude this city's own beaches.
+    same_city_ids = {b["id"] for b in beaches}
+    nearby_html = ""
+    if beaches:
+        # Anchor: first beach in the city
+        nearby_html = render_nearby_section(
+            beaches[0], n=3, exclude_ids=list(same_city_ids), link_prefix="../beach/",
+        )
 
     return f"""<!doctype html>
 <html lang="pt-BR">
@@ -717,12 +737,12 @@ def render_city_page(slug, city_name, state, beaches, blurb, related):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F4EFE4">
 <title>{page_title}</title>
+{PRECONNECT_HTML}
+{FAVICON_HTML}
 {og_html}
 {ld_html}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>{CSS}</style>
+<style>{CSS}{FOOTER_CSS}{NEARBY_CSS}</style>
 </head>
 <body>
 <header class="topbar">
@@ -759,9 +779,11 @@ def render_city_page(slug, city_name, state, beaches, blurb, related):
   <div class="section-tag">veja também</div>
   <div class="crosslinks">{related_html}</div>
 
+  {nearby_html}
+
 </main>
 
-<div class="footer">dados Open-Meteo · cam YouTube · atualizado a cada 15 min</div>
+{FOOTER_HTML}
 </body>
 </html>"""
 

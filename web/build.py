@@ -12,6 +12,54 @@ import math
 import os
 from datetime import date, datetime
 
+SITE_URL = "https://praiasmart.com"
+
+# Shared <head> snippets — used by build / detail / cities / webcams
+PRECONNECT_HTML = (
+    '<link rel="preconnect" href="https://i.ytimg.com">\n'
+    '<link rel="preconnect" href="https://www.youtube.com">\n'
+    '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
+    '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+)
+
+FAVICON_HTML = (
+    '<link rel="icon" type="image/svg+xml" href="/favicon.svg">\n'
+    '<link rel="apple-touch-icon" href="/favicon.svg">'
+)
+
+FOOTER_HTML = (
+    '<footer class="footer site-footer">'
+    '<div class="footer-sources">'
+    'dados: '
+    '<a href="https://www.inea.rj.gov.br/ar-agua-e-solo/balneabilidade-das-praias/" target="_blank" rel="noopener">INEA</a>, '
+    '<a href="https://cetesb.sp.gov.br/praias/" target="_blank" rel="noopener">CETESB</a>, '
+    '<a href="https://www.ba.gov.br/inema/banner/balneabilidade" target="_blank" rel="noopener">INEMA</a>, '
+    '<a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>'
+    ' · câmeras: <a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a>'
+    ' · alertas: <a href="https://www.inmet.gov.br/" target="_blank" rel="noopener">INMET</a>'
+    '</div>'
+    '<div class="footer-tag">praia smart · atualizado a cada 15 min</div>'
+    '</footer>'
+)
+
+FOOTER_CSS = """
+.site-footer {
+  text-align: center; padding: 24px var(--pad) 32px;
+  color: var(--mute); font-size: 11px;
+  font-family: var(--font-mono); letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+.site-footer .footer-sources a {
+  color: var(--ink-soft); border-bottom: 1px dotted var(--ink-soft);
+  padding-bottom: 1px;
+}
+.site-footer .footer-sources a:hover { color: var(--accent); border-color: var(--accent); }
+.site-footer .footer-tag {
+  margin-top: 6px; color: var(--mute); font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+"""
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data", "conditions.json")
 ALERTS = os.path.join(ROOT, "data", "alerts.json")
@@ -20,6 +68,273 @@ AGITO = os.path.join(ROOT, "data", "agito.json")
 BALNEABILIDADE = os.path.join(ROOT, "data", "balneabilidade.json")
 OUT = os.path.join(ROOT, "web", "index.html")
 
+# ─────────────────────────────────────────────────────────────
+# Geo / nearest-beach helper (SEO internal linking)
+# ─────────────────────────────────────────────────────────────
+
+def _haversine_km(lat1, lng1, lat2, lng2):
+    if None in (lat1, lng1, lat2, lng2):
+        return float("inf")
+    R = 6371.0
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dp = math.radians(lat2 - lat1)
+    dl = math.radians(lng2 - lng1)
+    a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
+    return 2 * R * math.asin(min(1.0, math.sqrt(a)))
+
+
+_DIST_CACHE = {}
+
+
+def _all_postos_cached():
+    if "postos" not in _DIST_CACHE:
+        try:
+            _DIST_CACHE["postos"] = json.load(open(os.path.join(
+                os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                "data", "conditions.json")))
+        except Exception:
+            _DIST_CACHE["postos"] = []
+    return _DIST_CACHE["postos"]
+
+
+def nearest_beaches(posto, all_postos=None, n=3, exclude_ids=None):
+    """Return the n closest beaches by haversine distance.
+
+    `exclude_ids` skips entries (e.g. same-city beaches on city pages).
+    """
+    all_postos = all_postos or _all_postos_cached()
+    exclude = set(exclude_ids or []) | {posto["id"]}
+    pid = posto["id"]
+    cached = _DIST_CACHE.get(("near", pid, frozenset(exclude), n))
+    if cached is not None:
+        return cached
+    lat, lng = posto.get("lat"), posto.get("lng")
+    scored = []
+    for q in all_postos:
+        if q["id"] in exclude:
+            continue
+        d = _haversine_km(lat, lng, q.get("lat"), q.get("lng"))
+        scored.append((d, q))
+    scored.sort(key=lambda t: t[0])
+    out = [q for _, q in scored[:n]]
+    _DIST_CACHE[("near", pid, frozenset(exclude), n)] = out
+    return out
+
+
+# Slug map for beach → friendly webcam URL (used by webcams.py and detail/city
+# pages that want to link to webcam landings).
+CITY_SLUG_BY_BEACH = {
+    "copa-p5": "copacabana",
+    "leblon-mirante": "leblon",
+    "sao-conrado": "sao-conrado",
+    "cabo-frio-forte": "cabo-frio",
+    "morro-terceira": "morro-de-sao-paulo",
+    "santos-gonzaga": "santos",
+    "guaruja-enseada": "guaruja",
+    "praia-grande-boqueirao": "praia-grande",
+    "balneario-camboriu": "balneario-camboriu",
+    "floripa-barra-lagoa": "floripa",
+    "balneario-rincao": "balneario-rincao",
+    "natal-ponta-negra": "natal",
+}
+
+
+def webcam_url_for(beach_id):
+    slug = CITY_SLUG_BY_BEACH.get(beach_id)
+    return f"/{slug}/webcam-ao-vivo.html" if slug else None
+
+
+def render_nearby_section(posto, all_postos=None, n=3, exclude_ids=None, link_prefix="beach/"):
+    """Compact 'praias próximas' card list — used by detail, cities, webcams.
+
+    link_prefix: prefix for detail-page links. For pages at /beach/foo.html
+    pass "../beach/" (default works from the homepage root).
+    """
+    near = nearest_beaches(posto, all_postos=all_postos, n=n, exclude_ids=exclude_ids)
+    if not near:
+        return ""
+    cards = []
+    for q in near:
+        cards.append(
+            f'<a class="nearby-card" href="{link_prefix}{q["id"]}.html">'
+            f'<div class="nearby-name">{q["beach"]}</div>'
+            f'<div class="nearby-meta">{q.get("posto","")} · {q.get("state","")}</div>'
+            f'<div class="nearby-cta">ver agora →</div>'
+            f'</a>'
+        )
+    return (
+        '<section class="nearby">'
+        '<div class="section-tag">praias próximas</div>'
+        '<div class="nearby-grid">' + "".join(cards) + '</div>'
+        '</section>'
+    )
+
+
+NEARBY_CSS = """
+.nearby { margin-top: 14px; }
+.nearby-grid {
+  display: grid; grid-template-columns: 1fr; gap: 8px;
+}
+@media (min-width: 560px) {
+  .nearby-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.nearby-card {
+  display: block; background: var(--card);
+  border: 1px solid var(--line); border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: 0 6px 16px -14px rgba(31,63,77,0.35);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.nearby-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.nearby-name {
+  font-size: 14px; font-weight: 700; color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.nearby-meta {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.06em; color: var(--ink-soft);
+  text-transform: uppercase; margin-top: 2px;
+}
+.nearby-cta {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.06em; color: var(--accent);
+  margin-top: 6px; font-weight: 700;
+}
+"""
+
+
+# ─────────────────────────────────────────────────────────────
+# Breadcrumb + FAQ helpers (per-page JSON-LD)
+# ─────────────────────────────────────────────────────────────
+
+def breadcrumb_jsonld(items):
+    """items = [(name, url_or_None), ...]"""
+    elements = []
+    for i, (name, url) in enumerate(items, start=1):
+        e = {"@type": "ListItem", "position": i, "name": name}
+        if url:
+            e["item"] = url
+        elements.append(e)
+    return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": elements,
+    }
+
+
+# Parameterized FAQ items used on every beach detail page. The {beach} /
+# {state} placeholders are filled per render; FAQPage JSON-LD is emitted
+# alongside the visible <details>/<summary> block.
+
+FAQ_TEMPLATE = [
+    ("O mar em {beach} tá próprio pra banho hoje?",
+     "O status de balneabilidade fica na caixa <em>água</em> acima — atualizamos a partir do "
+     "boletim oficial mais recente da {agency} para {state}. Veja o status atualizado e a data "
+     "do último laudo. Se tiver chovido forte recentemente, considere esperar 24h: a chuva "
+     "escoa esgoto e materia orgânica pra praia."),
+    ("Qual o melhor horário pra ir em {beach}?",
+     "Logo acima a faixa <em>quando ir · próximas 24h</em> mostra hora a hora as condições pra "
+     "surfar, nadar e tomar sol em {beach}. UV costuma bater pico entre 11h e 14h — se o "
+     "interesse é pegar sol sem queimar, prefira antes das 10h ou depois das 15h. A pill "
+     "<em>melhor horário</em> sugere a janela ideal pelo score que tá mais forte agora."),
+    ("Tem câmera ao vivo em {beach}?",
+     "Sim — a câmera ao vivo de {beach} aparece no topo desta página, transmitida pelo YouTube "
+     "e atualizada em tempo real. Dá pra ver as condições do mar, o agito da areia e o "
+     "movimento da praia antes de sair de casa."),
+    ("Como é a balneabilidade em {beach}?",
+     "Monitoramos {beach} via {agency} — a agência ambiental responsável por {state}. As "
+     "análises são semanais e seguem a Resolução CONAMA 274, que classifica a água como "
+     "<em>própria</em> ou <em>imprópria</em> a partir da contagem de coliformes (E. coli e "
+     "enterococos). O resultado mais recente fica na caixa <em>água</em> acima, com a data do laudo."),
+    ("Qual o melhor dia da semana pra evitar lotação em {beach}?",
+     "Em geral manhãs de dias úteis (terça a quinta) são as menos cheias em {beach}. O medidor "
+     "<em>agito</em> mais abaixo mostra a estimativa de movimento agora — guarda-sóis cheios = "
+     "praia lotada. Confira também a previsão horária de movimento pra escolher uma janela "
+     "tranquila."),
+]
+
+
+def _agency_for_state(state):
+    return {"RJ": "INEA", "SP": "CETESB", "BA": "INEMA"}.get(state or "", "agência ambiental local")
+
+
+def render_faq_section(beach_name, state):
+    """Return (visible_html, ld_dict). Both reference the same Q/A pairs."""
+    agency = _agency_for_state(state)
+    items_html = []
+    ld_items = []
+    for q_tmpl, a_tmpl in FAQ_TEMPLATE:
+        q = q_tmpl.format(beach=beach_name, state=state or "Brasil", agency=agency)
+        a_html = a_tmpl.format(beach=beach_name, state=state or "Brasil", agency=agency)
+        # ld answer: strip simple <em> tags
+        a_text = a_html.replace("<em>", "").replace("</em>", "")
+        items_html.append(
+            f'<details class="faq-item"><summary>{q}</summary>'
+            f'<div class="faq-a">{a_html}</div></details>'
+        )
+        ld_items.append({
+            "@type": "Question", "name": q,
+            "acceptedAnswer": {"@type": "Answer", "text": a_text},
+        })
+    visible = (
+        '<section class="faq">'
+        '<div class="section-tag">perguntas frequentes</div>'
+        + "".join(items_html) +
+        '</section>'
+    )
+    ld = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": ld_items}
+    return visible, ld
+
+
+FAQ_CSS = """
+.faq { display: flex; flex-direction: column; gap: 6px; }
+.faq-item {
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+}
+.faq-item summary {
+  list-style: none; cursor: pointer;
+  padding: 12px 14px;
+  font-size: 14px; font-weight: 600;
+  color: var(--ink); letter-spacing: -0.005em;
+  display: flex; align-items: center; gap: 8px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+"; margin-left: auto;
+  font-family: var(--font-mono); color: var(--accent);
+  font-size: 16px; font-weight: 700;
+  transition: transform 0.18s ease;
+}
+.faq-item[open] summary::after { content: "−"; }
+.faq-item[open] summary { color: var(--accent); }
+.faq-a {
+  padding: 0 14px 14px;
+  font-size: 13px; line-height: 1.55;
+  color: var(--ink-soft);
+}
+.faq-a em { color: var(--accent); font-style: normal; font-weight: 600; }
+"""
+
+
+def video_object_jsonld(beach_name, state, yt_id, page_url):
+    return {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": f"Câmera ao vivo — {beach_name}",
+        "description": (f"Transmissão ao vivo de {beach_name}, {state or 'Brasil'}. "
+                        "Veja em tempo real as condições da praia, ondas e movimento."),
+        "thumbnailUrl": f"https://i.ytimg.com/vi/{yt_id}/maxresdefault.jpg",
+        "uploadDate": date.today().isoformat(),
+        "embedUrl": f"https://www.youtube.com/embed/{yt_id}",
+        "contentUrl": f"https://www.youtube.com/watch?v={yt_id}",
+        "url": page_url,
+    }
+
+
 BUCKET_CLASS = {"vazia": "v", "moderada": "m", "cheia": "c", "lotada": "l"}
 BUCKET_INDEX = {"vazia": 1, "moderada": 2, "cheia": 3, "lotada": 4}
 
@@ -27,6 +342,7 @@ AD_HTML = """
 <div class="ad-slot">
   <div class="ad-slot-tag">anúncio</div>
   <iframe data-aa='2438146' src='//acceptable.a-ads.com/2438146/?size=Adaptive'
+    loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
     style='border:0;padding:0;width:70%;height:90px;overflow:hidden;display:block;margin:auto;background:transparent;'></iframe>
 </div>
 """
@@ -1665,13 +1981,13 @@ def main():
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F4EFE4">
 <title>{page_title}</title>
+{PRECONNECT_HTML}
+{FAVICON_HTML}
 {seo_html}
 {ld_html}
 {analytics_html}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>{CSS}</style>
+<style>{CSS}{FOOTER_CSS}{NEARBY_CSS}</style>
 </head>
 <body>
 <header class="topbar">
@@ -1685,7 +2001,7 @@ def main():
 <main class="feed" id="grid">
 {cards}
 </main>
-<div class="footer">dados Open-Meteo · câmeras YouTube · v0.4</div>
+{FOOTER_HTML}
 <script>
 (()=>{{
   const pills = document.querySelectorAll('.pill[data-st]');
@@ -1714,6 +2030,11 @@ def main():
         "praia-grande", "balneario-camboriu", "floripa", "balneario-rincao", "natal",
     ]
     urls += [f"{SITE_URL}/{s}/fim-de-semana.html" for s in _city_slugs]
+    # Webcam landing pages (one per beach, slugged by city).
+    for p in postos:
+        slug = CITY_SLUG_BY_BEACH.get(p["id"])
+        if slug:
+            urls.append(f"{SITE_URL}/{slug}/webcam-ao-vivo.html")
     sm_entries = "\n".join(
         f"  <url><loc>{u}</loc><lastmod>{lastmod}</lastmod></url>" for u in urls
     )

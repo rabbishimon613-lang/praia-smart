@@ -13,8 +13,9 @@ Everything business / sales / marketing / strategy lives here.
 ## Index
 
 ### business/
-- `revenue-model.md` — pricing tiers, what we sell, ROI math
+- `revenue-model.md` — BR pricing tiers, what we sell, ROI math (Phase 0)
 - `value-prop-for-venues.md` — 10 ways praia smart makes the venue money
+- `global-monetization.md` — per-market pricing, multi-stream ARR projection, sales-motion differences per region, 2026 priorities that unlock the whole arc
 
 ### sales/
 - `outreach-email-renata.md` — PT-BR cold email template from Renata (secretary)

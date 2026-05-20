@@ -27,6 +27,8 @@ Everything business / sales / marketing / strategy lives here.
 - `tiktok-bot.md` — auto-video TikTok bot (parked for summer)
 
 ### strategy/
-- `vision.md` — what praia smart is, the verb test, north-star metric, 3-year arc
+- `vision.md` — multi-market decision layer, verb test in 5 languages, north star, multi-year arc
 - `positioning.md` — who it's for, the wedge, the don't-be list, brand vibe
 - `competitive-landscape.md` — adjacent players, blind spots, what could kill us, moat
+- `expansion-roadmap.md` — phase-by-phase global rollout (BR → PT/CV → ARG/URU → Mediterranean → arbitrage → mature)
+- `brand-architecture.md` — holding co + localized sister brands (praia/playa/spiaggia/plage/paralía/bajja), domain portfolio, IP structure

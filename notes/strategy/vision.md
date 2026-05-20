@@ -2,17 +2,25 @@
 
 ## The one-liner
 
-**praia smart is the decision layer for going to the beach.**
+**We are the decision layer for going to the beach — global, but localized everywhere.**
 
-It's the app you open the morning of — sometimes the night before — when you're choosing where to go, when to leave, and what to do once you're there.
+Each market gets its own native-language brand (praia smart in BR/PT, playa smart in ES-speaking markets, spiaggia smart in Italy, plage smart in France, etc.) — one shared platform underneath. See `brand-architecture.md` and `expansion-roadmap.md` for details.
+
+We start with **praia smart at praiasmart.com — the Brazilian property**. Prove the model here in 2026, then roll out to PT-Atlantic + Argentina in 2027, Mediterranean in 2028.
+
+It's the app you open the morning of — sometimes the night before — when you're choosing where to go, when to leave, and what to do once you're there. Same job in every language.
 
 ## The verb test
 
-Long-term success looks like:
+Long-term success looks like *each regional brand becoming a verb in its market*:
 
-> *"Olha no praia smart antes de ir."*
+> *"Olha no praia smart antes de ir."* (BR — carioca)
+> *"Mirá en playa smart antes de ir."* (Argentina — rioplatense)
+> *"Guarda lo spiaggia smart prima di andare."* (Italia)
+> *"Regarde plage smart avant d'y aller."* (France)
+> *"Check bajja before you go."* (Malta — english)
 
-When that sentence sounds natural to a carioca, paulistano, baiano, or potiguar — we've won the category. Same way *"olha no Google Maps"* replaced "look it up on a map." We want *"praia smart"* to replace whatever fragmented thing people do today (open Climatempo, then INEA PDF, then YouTube live cam, then Instagram).
+When the BR sentence sounds natural to a carioca, paulistano, baiano, or potiguar — we've won the Brazilian category. Same way *"olha no Google Maps"* replaced "look it up on a map." We want *"praia smart"* to replace whatever fragmented thing people do today (open Climatempo, then INEA PDF, then YouTube live cam, then Instagram).
 
 ## North-star metric
 
@@ -40,32 +48,16 @@ That's praia smart.
 
 The discipline of saying "no" to these is how the product stays *good*. Every adjacent thing we don't build is a thing competitors can't out-feature us on, because we're tighter.
 
-## Three-year arc
+## Multi-year arc (summary — full detail in `expansion-roadmap.md`)
 
-### Year 1 — Brazil (2026)
+- **2026 — Brazil only.** Prove the model. 50 paying venues, R$25k/mo recurring.
+- **2027 H1 — Portugal + Cape Verde.** Same language, EU mandated open water-quality data, easy. Same brand: praia smart on .pt / .cv.
+- **2027 H2 — Argentina + Uruguay.** *Inverted seasons* — keeps team busy during BR winter. New brand: **playa smart**.
+- **2028 — Mediterranean (Italy + France + Spain + Malta + Greece).** Four new sister brands launching together: **spiaggia smart**, **plage smart**, **playa smart** (ES), **bajja** (Malta), **paralía** (Greece). EU data advantage makes this faster than expanding within Brazil.
+- **2029 — Tourism arbitrage markets** (Caribbean, Mexico tourist corridor, Bali, Phuket — English wrapper).
+- **2030+ — Mature markets with funding** (US, Australia, UK).
 
-- 12 → 23 beaches (cover top-20 by attendance)
-- Phase 1-3 venue monetization (free directory → claim flow → R$500/mo featured slots)
-- TikTok bot during Dec-Feb busy season
-- ~1k venue listings, ~50 paying
-- Target: profitable on R$25k/mo by March 2027
-
-### Year 2 — Portuguese-speaking Atlantic (2027)
-
-- Portugal (Lisboa, Algarve, Açores) — easy data parity (EMA, IPMA, Open-Meteo)
-- Brazil expansion to 50+ beaches
-- Cape Verde, Madeira — language overlap, tourist destinations
-- iOS + Android wrappers (PWA → native via Capacitor)
-- Target: R$200k/mo on venues + light tourism-board licensing
-
-### Year 3 — Global (2028)
-
-- Beach destinations where decisions are made under uncertainty: Bali, Goa, Phuket, Mediterranean
-- Premium API for tourism boards, hotel chains, surf schools
-- Multi-language (EN, ES, FR) but PT-first DNA preserved
-- Target: $5M ARR, acquisition or scale-up funding
-
-The Brazil dominance has to come first. Without that, expansion is just thrash.
+Brazil dominance comes first. Without that, expansion is just thrash. But the *vision* is global from day one — every architecture decision should support eight languages eventually, even if today only one is live.
 
 ## The bigger philosophical thing
 

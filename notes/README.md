@@ -27,4 +27,6 @@ Everything business / sales / marketing / strategy lives here.
 - `tiktok-bot.md` — auto-video TikTok bot (parked for summer)
 
 ### strategy/
-- (empty for now — fill as decisions get made)
+- `vision.md` — what praia smart is, the verb test, north-star metric, 3-year arc
+- `positioning.md` — who it's for, the wedge, the don't-be list, brand vibe
+- `competitive-landscape.md` — adjacent players, blind spots, what could kill us, moat

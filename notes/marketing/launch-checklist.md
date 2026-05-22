@@ -15,6 +15,8 @@ Site is **live** at praiasmart.com (Cloudflare). Working through pre-busy-season
 - 10 weekly city pages (`/{city}/fim-de-semana.html`)
 - Ads via A-Ads (unit 2438146, homepage cards + 2 per detail page)
 - SEO foundation (titles, meta, OG, canonical, sitemap, schema.org)
+- SEO sprint #2 (commit 4d45f66): FAQ schema, BreadcrumbList, VideoObject, "praias próximas" internal linking, 12 webcam landing pages, lazy-load iframes, preconnect, favicon, data-source footer — sitemap now 37 URLs
+- News filter keyword fix (commit 52cdd76) — word-boundaries + negative blocklist (ticker not rendered yet though)
 - Plausible analytics script (no account signed up yet)
 - Deploy via GitHub Actions every 15 min
 
@@ -29,7 +31,9 @@ Site is **live** at praiasmart.com (Cloudflare). Working through pre-busy-season
 
 ## 🟡 Open eng work (queued)
 
-- [ ] News filter cleanup (substring matching is noisy)
+- [x] ~~News filter cleanup~~ — keyword fix done (52cdd76); LLM classifier still parked, ticker not in UI yet
+- [ ] Image alt text on cam embeds + imagery
+- [ ] i18n the codebase — #1 tech priority for 2027 expansion (see business/global-monetization.md). Target Q3 2026.
 - [ ] Lighthouse / perf audit (mobile-first)
 - [ ] Cams for 11 new top-20 beaches (Ipanema, Barra, Boa Viagem, Pajuçara, Iracema, Jurerê, Porto de Galinhas, Itapuã, Geribá, Tramandaí, Porto Seguro) — água data already wired
 - [ ] INEMA worker quirk: geo-blocked PDFs, currently uses news article (no E.coli numbers)

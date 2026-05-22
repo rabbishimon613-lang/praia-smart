@@ -229,6 +229,15 @@ served from rabbishimon613-lang/praia-smart GH repo, refreshing every 15 min.
 - 12 hand-written ~150-word PT-BR beach descriptions
 - 10 auto-generated city "fim de semana" pages with cross-linking
 - Ads via A-Ads unit 2438146 (homepage card injection + 2 per detail page)
+- FEPAM RS worker (season-aware, off-season stub)
+- SEO sprint #2: FAQ schema (`FAQPage`), BreadcrumbList, VideoObject JSON-LD,
+  "praias próximas" haversine internal linking, 12 `/{city}/webcam-ao-vivo.html`
+  landing pages, lazy-loaded iframes, preconnect hints, favicon (coral half-sun
+  SVG), footer with data-source citations. Sitemap now 37 URLs.
+- News filter keyword fix (word-boundaries + negative blocklist) — note: news
+  ticker is NOT currently rendered in the UI, so this is prep, not live
+- Domain live at praiasmart.com via Cloudflare; canonical/og/analytics all
+  corrected from the wrong .com.br to .com
 
 ## Other parked items
 

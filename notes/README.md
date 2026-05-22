@@ -18,13 +18,19 @@ Everything business / sales / marketing / strategy lives here.
 - `global-monetization.md` — per-market pricing, multi-stream ARR projection, sales-motion differences per region, 2026 priorities that unlock the whole arc
 
 ### sales/
-- `outreach-email-renata.md` — PT-BR cold email template from Renata (secretary)
+- `outreach-email-renata.md` — PT-BR cold email template from Renata (secretary), sales/venue pipeline
+- `outreach-templates.md` — partnership + influencer email/DM templates, shared CRM schema, voice-per-pipeline
 - `target-venues-by-beach.md` — 3 candidate venues per covered beach
 - `call-script-shimon.md` — 20-min video-call agenda for CEO Shimon
 
 ### marketing/
-- `autonomous-growth.md` — **the operating plan.** 6 Claude-run growth machines (data journalism, outreach, recurring content, distribution seeding, programmatic SEO, product-as-distribution), month-by-month timeline May→Feb, decision gates, the email+scheduler API "Tier-1 unlock"
-- `growth-plan.md` — earlier phased GTM (channel priority, r/rio post) — superseded in spirit by autonomous-growth.md but keeps the human-outreach context
+- `autonomous-growth.md` — **the operating plan.** 6 Claude-run growth machines, month-by-month timeline May→Feb, decision gates, the email+scheduler API "Tier-1 unlock"
+- `data-journalism-playbook.md` — Machine 1 turnkey: report structure, journalist CRM schema, pitch email template, follow-up sequence, target outlets
+- `content-playbook.md` — Machines 3+6 turnkey: email digest template, social caption formulas, água-alert broadcast spec, share-card spec, content calendar
+- `growth-plan.md` — earlier phased GTM (channel priority, r/rio post) — context for the human-outreach side
+- `seo-plan.md` — what's shipped, what's parked
+- `launch-checklist.md` — pre-launch task status (user-action + eng)
+- `tiktok-bot.md` — auto-video TikTok bot (parked for summer)
 - `seo-plan.md` — what's shipped, what's parked
 - `launch-checklist.md` — pre-launch task status (user-action + eng)
 - `tiktok-bot.md` — auto-video TikTok bot (parked for summer)

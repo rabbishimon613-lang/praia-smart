@@ -23,6 +23,7 @@ Everything business / sales / marketing / strategy lives here.
 - `call-script-shimon.md` — 20-min video-call agenda for CEO Shimon
 
 ### marketing/
+- `growth-plan.md` — phased GTM to summer (May→Dec): channels, viral mechanics, r/rio post, what Claude builds vs what Pedro does
 - `seo-plan.md` — what's shipped, what's parked
 - `launch-checklist.md` — pre-launch task status (user-action + eng)
 - `tiktok-bot.md` — auto-video TikTok bot (parked for summer)

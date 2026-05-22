@@ -20,17 +20,34 @@ FEEDS = [
     ("veja-rio", "https://vejario.abril.com.br/feed/"),
 ]
 
+# Keywords are matched on WORD BOUNDARIES (\b...\b), case-insensitive.
+# Bare ambiguous aliases ("copa", "barra", "leme", "mar") are deliberately
+# dropped — they collide with Copa do Mundo, Barra Funda, leme de barco, etc.
 BEACH_TAGS = {
-    "copacabana": ["copacabana", "copa"],
+    "copacabana": ["copacabana"],
     "ipanema": ["ipanema"],
     "leblon": ["leblon"],
-    "leme": ["leme"],
+    "leme": ["praia do leme"],
     "arpoador": ["arpoador"],
-    "barra": ["barra da tijuca", "barra"],
-    "recreio": ["recreio"],
+    "barra": ["barra da tijuca"],
+    "recreio": ["recreio dos bandeirantes", "recreio"],
     "prainha": ["prainha"],
-    "general": ["praia", "litoral", "orla", "areia", "ressaca", "mar grosso"],
+    "general": ["litoral", "orla", "ressaca", "mar grosso", "balneabilidade"],
 }
+
+# If any of these appear, the item is rejected outright — common false-positive
+# contexts where a beach-ish word shows up but the story isn't about the beach.
+NEGATIVE_KEYWORDS = [
+    "copa do mundo", "copa américa", "copa america", "copa do brasil",
+    "libertadores", "sul-americana", "champions", "futebol", "campeonato",
+    "barra funda", "barra mansa", "barra de chocolate", "barra de ferro",
+    "barra pesada", "barra do piraí", "barra de são joão",
+    "leme de", "tomar o leme",
+    "praia grande", "praia clube", "praia do flamengo aterro",
+    "praiana", "ferrugem",  # band/event noise
+    "banda de ipanema", "bloco", "blocos de rua", "desfile",  # carnaval noise
+    "garota de ipanema",  # the song / bar, not the beach
+]
 
 UA = "praiasmart/0.1"
 
@@ -46,18 +63,39 @@ def strip_html(s):
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", unescape(s or ""))).strip()
 
 
-BEACH_CONTEXT = ["praia", "orla", "areia", "mar ", "onda", "ressaca",
-                 "litoral", "surf", "marés", "areal"]
+# Beach-context words (word-boundary matched). "mar" alone removed — too noisy
+# (Mar de Espanha, mar de gente, etc.). Require a genuine coastal signal.
+BEACH_CONTEXT = ["praia", "praias", "orla", "areia", "ondas", "ressaca",
+                 "litoral", "surf", "surfe", "maré", "marés", "balneabilidade",
+                 "afogamento", "guarda-vidas", "salva-vidas", "banhistas"]
+
+
+def _has_word(text, phrase):
+    """Word-boundary, case-insensitive match. Multi-word phrases matched literally."""
+    return re.search(r"\b" + re.escape(phrase) + r"\b", text, re.IGNORECASE) is not None
 
 
 def tag_beaches(text):
-    t = text.lower()
-    has_beach_context = any(c in t for c in BEACH_CONTEXT)
-    if not has_beach_context:
+    t = (text or "").lower()
+
+    # Hard reject on negative keywords (football cups, other-city "Barra"s, etc.)
+    if any(_has_word(t, neg) for neg in NEGATIVE_KEYWORDS):
         return []
+
+    # Require a genuine coastal context word
+    if not any(_has_word(t, c) for c in BEACH_CONTEXT):
+        return []
+
     tags = [k for k, kws in BEACH_TAGS.items() if k != "general"
-            and any(kw in t for kw in kws)]
-    return tags or ["general"]
+            and any(_has_word(t, kw) for kw in kws)]
+    if tags:
+        return tags
+
+    # "general" fallback only for items with a STRONG coastal signal:
+    # require 2+ distinct context words, so a single passing mention of
+    # "praia" (e.g. "feriado na praia" in a traffic story) doesn't qualify.
+    ctx_hits = sum(1 for c in BEACH_CONTEXT if _has_word(t, c))
+    return ["general"] if ctx_hits >= 2 else []
 
 
 def parse_feed(source, xml):

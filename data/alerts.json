@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1779470841,
+  "fetched_at": 1779522060,
   "alerts": [
     {
       "title": "Aviso de Tempestade. Severidade Grau: Perigo",
@@ -22,17 +22,6 @@
       "end": "2026-05-24 09:00:00.0",
       "description": "INMET publica aviso iniciando em: 23/05/2026 00:01. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
       "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Oeste Catarinense, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Vale do Itajaí, Leste de Mato Grosso do Sul, Triângulo Mineiro/Alto Paranaíba, Campinas, Bauru, Piracicaba, Grande Florianópolis, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Centro Ocidental Paranaense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Sudoeste Paranaense, Oeste Paranaense, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Sul Goiano, Pantanais Sul Mato-grossense, Centro Oriental Paranaense, Norte Catarinense, Metropolitana de São Paulo, Assis, Centro-Sul Mato-grossense, Litoral Sul Paulista, Centro-Sul Paranaense, Serrana, Metropolitana do Rio de Janeiro, Campo das Vertentes, Oeste de Minas"
-    },
-    {
-      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54454",
-      "event": "Tempestade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-05-22 09:00:00.0",
-      "end": "2026-05-22 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 22/05/2026 09:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
-      "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Oeste Catarinense, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Leste de Mato Grosso do Sul, Campinas, Bauru, Piracicaba, Itapetininga, Sul/Sudoeste de Minas, Centro Ocidental Paranaense, Ribeirão Preto, Araçatuba, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Sudoeste Paranaense, Oeste Paranaense, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Vale do Itajaí, Sul Goiano, Centro Oriental Paranaense, Norte Catarinense, Metropolitana de São Paulo, Assis, Litoral Sul Paulista, Centro-Sul Paranaense, Triângulo Mineiro/Alto Paranaíba, Centro Norte de Mato Grosso do Sul, Grande Florianópolis, Serrana"
     }
   ]
 }

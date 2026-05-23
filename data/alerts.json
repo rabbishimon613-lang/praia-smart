@@ -1,9 +1,9 @@
 {
-  "fetched_at": 1779536701,
+  "fetched_at": 1779566278,
   "alerts": [
     {
       "title": "Aviso de Tempestade. Severidade Grau: Perigo",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54459",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54475",
       "event": "Tempestade",
       "severity": "perigo",
       "severity_rank": 2,
@@ -13,8 +13,30 @@
       "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Leste de Mato Grosso do Sul, Campinas, Bauru, Piracicaba, Itapetininga, Sul/Sudoeste de Minas, Araçatuba, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Araraquara, Sudoeste de Mato Grosso do Sul, Vale do Paraíba Paulista, Centro Oriental Paranaense, Centro Ocidental Paranaense, Metropolitana de São Paulo, Assis, Litoral Sul Paulista, Ribeirão Preto, Centro-Sul Paranaense, Centro Norte de Mato Grosso do Sul, Triângulo Mineiro/Alto Paranaíba, Sudeste Paranaense, Sul Fluminense"
     },
     {
+      "title": "Aviso de Chuvas Intensas. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54481",
+      "event": "Chuvas Intensas",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-05-24 00:00:00.0",
+      "end": "2026-05-24 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 24/05/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h). Baixo risco de corte de energia elétrica, queda de galhos de árvores, alagamentos e de descargas elétricas.",
+      "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Serrana, Oeste Catarinense, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Vale do Itajaí, Leste de Mato Grosso do Sul, Triângulo Mineiro/Alto Paranaíba, Campinas, Oeste de Minas, Bauru, Piracicaba, Grande Florianópolis, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Zona da Mata, Campo das Vertentes, Centro Ocidental Paranaense, Ribeirão Preto, Araçatuba, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Sudoeste Paranaense, Oeste Paranaense, Pantanais Sul Mato-grossense, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Sul Goiano, Centro Oriental Paranaense, Norte Catarinense, Sul Catarinense, Noroeste Rio-grandense, Central Mineira, Centro Fluminense, Metropolitana de São Paulo, Assis, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Metropolitana de Belo Horizonte, Centro-Sul Paranaense, Nordeste Rio-grandense, Baixadas"
+    },
+    {
+      "title": "Aviso de Chuvas Intensas. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54476",
+      "event": "Chuvas Intensas",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-05-23 10:00:00.0",
+      "end": "2026-05-23 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 23/05/2026 10:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h). Baixo risco de corte de energia elétrica, queda de galhos de árvores, alagamentos e de descargas elétricas.",
+      "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Serrana, Oeste Catarinense, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Vale do Itajaí, Leste de Mato Grosso do Sul, Triângulo Mineiro/Alto Paranaíba, Campinas, Oeste de Minas, Bauru, Piracicaba, Grande Florianópolis, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Centro Ocidental Paranaense, Ribeirão Preto, Araçatuba, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Sudoeste Paranaense, Oeste Paranaense, Pantanais Sul Mato-grossense, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Sul Goiano, Centro Oriental Paranaense, Norte Catarinense, Sul Catarinense, Noroeste Rio-grandense, Metropolitana de São Paulo, Assis, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Centro-Sul Paranaense, Nordeste Rio-grandense, Campo das Vertentes, Central Mineira, Zona da Mata"
+    },
+    {
       "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54458",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54474",
       "event": "Tempestade",
       "severity": "perigo potencial",
       "severity_rank": 1,

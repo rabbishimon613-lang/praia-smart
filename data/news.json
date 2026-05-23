@@ -1,4 +1,35 @@
 {
-  "fetched_at": 1779522062,
-  "items": []
+  "fetched_at": 1779536704,
+  "items": [
+    {
+      "source": "catraca-livre",
+      "title": "Areia branca e piscinas flutuantes: o paraíso que está conquistando seus visitantes",
+      "summary": "A Praia Fluvial de Albergaria dos Fusos, no Alentejo Central, atrai turistas com piscinas flutuantes, areia branca e Bandeira Azul. O post Areia branca e piscinas flutuantes: o paraíso que está conquistando seus visitantes apareceu primeiro",
+      "link": "https://catracalivre.com.br/viagem-livre/areia-branca-e-piscinas-flutuantes-o-paraiso-que-esta-conquistando-seus-visitantes/",
+      "pub_date": "Sat, 23 May 2026 09:55:39 +0000",
+      "beaches": [
+        "general"
+      ]
+    },
+    {
+      "source": "veja-rio",
+      "title": "Mario Moscatelli comenta sobre novo desabamento na Praia da Macumba",
+      "summary": "Em hipótese alguma devemos inserir qualquer modificação na área das dunas, principalmente naquelas submetidas às ações das marés mais intensas",
+      "link": "https://vejario.abril.com.br/coluna/lu-lacerda/mario-moscatelli-comenta-sobre-novo-desabamento-na-praia-da-macumba/",
+      "pub_date": "Sat, 23 May 2026 10:10:13 +0000",
+      "beaches": [
+        "general"
+      ]
+    },
+    {
+      "source": "veja-rio",
+      "title": "João Arruda (repórter): “Era apenas uma ameaça a mim mesmo”",
+      "summary": "A única certeza que carrego é que ressaca, no futuro, somente a das ondas",
+      "link": "https://vejario.abril.com.br/coluna/lu-lacerda/joao-arruda-reporter-era-apenas-uma-ameaca-a-mim-mesmo/",
+      "pub_date": "Sat, 23 May 2026 10:00:11 +0000",
+      "beaches": [
+        "general"
+      ]
+    }
+  ]
 }

@@ -1,6 +1,17 @@
 {
-  "fetched_at": 1779623965,
+  "fetched_at": 1779637756,
   "alerts": [
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54486",
+      "event": "Tempestade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-05-26 00:01:00.0",
+      "end": "2026-05-26 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 26/05/2026 00:01. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Serrana, Oeste Catarinense, Sudoeste Rio-grandense, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Vale do Itajaí, Leste de Mato Grosso do Sul, Campinas, Noroeste Rio-grandense, Bauru, Piracicaba, Grande Florianópolis, Centro Ocidental Rio-grandense, Sul/Sudoeste de Minas, Itapetininga, Centro Ocidental Paranaense, Araçatuba, Metropolitana de Porto Alegre, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Sudeste Rio-grandense, Araraquara, Oeste Paranaense, Pantanais Sul Mato-grossense, Nordeste Rio-grandense, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Centro Oriental Paranaense, Norte Catarinense, Sul Catarinense, Centro Oriental Rio-grandense, Metropolitana de São Paulo, Assis, Centro Norte de Mato Grosso do Sul, Litoral Sul Paulista, Ribeirão Preto, Sudoeste Paranaense, Centro-Sul Paranaense, Triângulo Mineiro/Alto Paranaíba, Metropolitana do Rio de Janeiro"
+    },
     {
       "title": "Aviso de Chuvas Intensas. Severidade Grau: Perigo Potencial",
       "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54484",

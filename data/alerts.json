@@ -1,16 +1,4 @@
 {
-  "fetched_at": 1779914032,
-  "alerts": [
-    {
-      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54504",
-      "event": "Tempestade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-05-27 12:00:00.0",
-      "end": "2026-05-27 21:00:00.0",
-      "description": "INMET publica aviso iniciando em: 27/05/2026 12:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
-      "area": "Aviso para as Áreas: Sul/Sudoeste de Minas, Zona da Mata, Sul Fluminense, Campo das Vertentes, Vale do Paraíba Paulista, Noroeste Fluminense, Sul Espírito-santense, Baixadas, Centro Fluminense, Metropolitana do Rio de Janeiro, Norte Fluminense, Metropolitana de São Paulo"
-    }
-  ]
+  "fetched_at": 1779927379,
+  "alerts": []
 }

@@ -1,4 +1,27 @@
 {
-  "fetched_at": 1780358369,
-  "alerts": []
+  "fetched_at": 1780502310,
+  "alerts": [
+    {
+      "title": "Aviso de Declínio de Temperatura. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54550",
+      "event": "Declínio de Temperatura",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-06-04 00:00:00.0",
+      "end": "2026-06-06 12:00:00.0",
+      "description": "INMET publica aviso iniciando em: 04/06/2026 00:00. Leve risco à saúde. Declínio entre 3ºC e 5ºC.",
+      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Centro Sul Baiano, Norte Pioneiro Paranaense, Serrana, Oeste Catarinense, Zona da Mata, Sul Goiano, Vale do Rio Doce, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Central Espírito-santense, Vale do Itajaí, Nordeste Mato-grossense, Noroeste Espírito-santense, Centro Norte Baiano, Campinas, Oeste de Minas, Bauru, Piracicaba, Vale do Mucuri, Grande Florianópolis, Norte de Minas, Sul/Sudoeste de Minas, Itapetininga, Sul Baiano, Sul Espírito-santense, Campo das Vertentes, Oriental do Tocantins, Jequitinhonha, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Norte Goiano, Macro Metropolitana Paulista, Marília, Metropolitana de Belo Horizonte, Ocidental do Tocantins, Metropolitana de Salvador, Araraquara, Extremo Oeste Baiano, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Leste de Mato Grosso do Sul, Noroeste Fluminense, Nordeste Baiano, Litoral Norte Espírito-santense, Noroeste Goiano, Centro Oriental Paranaense, Norte Catarinense, Baixadas, Centro Fluminense, Noroeste de Minas, Sul Catarinense, Metropolitana de São Paulo, Assis, Sudoeste Piauiense, Vale São-Franciscano da Bahia, Noroeste Rio-grandense, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Nordeste Rio-grandense, Distrito Federal, Norte Fluminense, Norte Central Paranaense, Centro-Sul Paranaense"
+    },
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54545",
+      "event": "Tempestade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-06-02 08:00:00.0",
+      "end": "2026-06-03 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 02/06/2026 08:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Zona da Mata, Vale do Rio Doce, Central Espírito-santense, Noroeste Espírito-santense, Oeste de Minas, Sul/Sudoeste de Minas, Sul Espírito-santense, Campo das Vertentes, Metropolitana de Belo Horizonte, Sul Fluminense, Vale do Paraíba Paulista, Noroeste Fluminense, Litoral Norte Espírito-santense, Baixadas, Centro Fluminense, Vale do Mucuri, Metropolitana do Rio de Janeiro, Norte Fluminense, Jequitinhonha, Central Mineira"
+    }
+  ]
 }

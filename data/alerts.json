@@ -1,16 +1,4 @@
 {
-  "fetched_at": 1780750410,
-  "alerts": [
-    {
-      "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54563",
-      "event": "Baixa Umidade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-06-07 12:00:00.0",
-      "end": "2026-06-07 19:00:00.0",
-      "description": "INMET publica aviso iniciando em: 07/06/2026 12:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
-      "area": "Aviso para as Áreas: Centro Goiano, Leste Goiano, Centro-Sul Mato-grossense, Sul Goiano, Presidente Prudente, São José do Rio Preto, Nordeste Mato-grossense, Leste de Mato Grosso do Sul, Triângulo Mineiro/Alto Paranaíba, Campinas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Centro Norte de Mato Grosso do Sul, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Norte Goiano, Marília, Araraquara, Pantanais Sul Mato-grossense, Vale do Paraíba Paulista, Noroeste Goiano, Sudoeste Mato-grossense, Assis, Sudoeste de Mato Grosso do Sul, Macro Metropolitana Paulista, Norte Mato-grossense, Itapetininga, Sul Fluminense, Oeste de Minas"
-    }
-  ]
+  "fetched_at": 1781001784,
+  "alerts": []
 }

@@ -1,9 +1,20 @@
 {
-  "fetched_at": 1781265105,
+  "fetched_at": 1781305520,
   "alerts": [
     {
       "title": "Aviso de Tempestade. Severidade Grau: Perigo",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54605",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54614",
+      "event": "Tempestade",
+      "severity": "perigo",
+      "severity_rank": 2,
+      "start": "2026-06-12 09:30:00.0",
+      "end": "2026-06-13 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 12/06/2026 09:30. Chuva entre 30 e 60 mm/h ou 50 e 100 mm/dia, ventos intensos (60-100 km/h), e queda de granizo. Risco de corte de energia elétrica, estragos em plantações,  queda de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Triângulo Mineiro/Alto Paranaíba, Central Mineira, Zona da Mata, Vale do Rio Doce, Central Espírito-santense, Campinas, Oeste de Minas, Sul/Sudoeste de Minas, Sul Espírito-santense, Campo das Vertentes, São José do Rio Preto, Ribeirão Preto, Metropolitana de Belo Horizonte, Araraquara, Sul Goiano, Vale do Paraíba Paulista, Noroeste Fluminense, Piracicaba, Centro Fluminense, Macro Metropolitana Paulista, Noroeste Espírito-santense, Sul Fluminense, Metropolitana do Rio de Janeiro, Norte Fluminense, Jequitinhonha, Litoral Norte Espírito-santense, Noroeste de Minas, Norte de Minas, Baixadas"
+    },
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54609",
       "event": "Tempestade",
       "severity": "perigo",
       "severity_rank": 2,
@@ -14,18 +25,40 @@
     },
     {
       "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54607",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54615",
+      "event": "Tempestade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-06-12 10:10:00.0",
+      "end": "2026-06-12 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 12/06/2026 10:10. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Norte Pioneiro Paranaense, Serrana, Oeste Catarinense, Zona da Mata, Centro-Sul Mato-grossense, Sul Goiano, Vale do Rio Doce, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Central Espírito-santense, Vale do Itajaí, Nordeste Mato-grossense, Leste de Mato Grosso do Sul, Noroeste Espírito-santense, Campinas, Oeste de Minas, Noroeste Rio-grandense, Bauru, Piracicaba, Grande Florianópolis, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Sul Espírito-santense, Campo das Vertentes, Centro Ocidental Paranaense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Metropolitana de Porto Alegre, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Metropolitana de Belo Horizonte, Norte Central Paranaense, Sudeste Rio-grandense, Araraquara, Pantanais Sul Mato-grossense, Nordeste Rio-grandense, Jequitinhonha, Sudoeste de Mato Grosso do Sul, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Noroeste Fluminense, Litoral Norte Espírito-santense, Noroeste Goiano, Centro Oriental Paranaense, Norte Catarinense, Sul Catarinense, Baixadas, Centro Fluminense, Noroeste de Minas, Centro Oriental Rio-grandense, Metropolitana de São Paulo, Assis, Vale do Mucuri, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Centro-Sul Paranaense, Norte de Minas, Sudoeste Paranaense, Distrito Federal, Norte Fluminense, Oeste Paranaense, Norte Mato-grossense, Norte Goiano"
+    },
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54612",
+      "event": "Tempestade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-06-14 00:00:00.0",
+      "end": "2026-06-14 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 14/06/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Central Mineira, Norte Pioneiro Paranaense, Zona da Mata, Sul Goiano, Vale do Rio Doce, Presidente Prudente, São José do Rio Preto, Central Espírito-santense, Leste de Mato Grosso do Sul, Noroeste Espírito-santense, Campinas, Oeste de Minas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Sul Espírito-santense, Campo das Vertentes, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Metropolitana de Belo Horizonte, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Pantanais Sul Mato-grossense, Jequitinhonha, Sul Fluminense, Vale do Paraíba Paulista, Noroeste Fluminense, Centro Fluminense, Noroeste Goiano, Metropolitana de São Paulo, Assis, Vale do Mucuri, Centro-Sul Mato-grossense, Norte de Minas, Noroeste de Minas, Metropolitana do Rio de Janeiro, Norte Fluminense, Leste Goiano, Centro Ocidental Paranaense, Oeste Paranaense, Litoral Norte Espírito-santense"
+    },
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54611",
       "event": "Tempestade",
       "severity": "perigo potencial",
       "severity_rank": 1,
       "start": "2026-06-13 00:00:00.0",
-      "end": "2026-06-13 18:00:00.0",
+      "end": "2026-06-13 23:59:00.0",
       "description": "INMET publica aviso iniciando em: 13/06/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
-      "area": "Aviso para as Áreas: Zona da Mata, Central Espírito-santense, Oeste de Minas, Vale do Rio Doce, Sul/Sudoeste de Minas, Sul Espírito-santense, Campo das Vertentes, Metropolitana de Belo Horizonte, Sul Fluminense, Vale do Paraíba Paulista, Noroeste Fluminense, Litoral Norte Espírito-santense, Baixadas, Centro Fluminense, Noroeste Espírito-santense, Metropolitana do Rio de Janeiro, Norte Fluminense"
+      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Central Mineira, Norte Pioneiro Paranaense, Zona da Mata, Sul Goiano, Vale do Rio Doce, Presidente Prudente, São José do Rio Preto, Central Espírito-santense, Leste de Mato Grosso do Sul, Noroeste Espírito-santense, Campinas, Oeste de Minas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Sul Espírito-santense, Campo das Vertentes, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Metropolitana de Belo Horizonte, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Pantanais Sul Mato-grossense, Jequitinhonha, Sul Fluminense, Vale do Paraíba Paulista, Noroeste Fluminense, Litoral Norte Espírito-santense, Baixadas, Centro Fluminense, Noroeste Goiano, Metropolitana de São Paulo, Assis, Vale do Mucuri, Centro-Sul Mato-grossense, Metropolitana do Rio de Janeiro, Norte de Minas, Noroeste de Minas, Norte Fluminense, Leste Goiano, Centro Ocidental Paranaense, Sul Baiano"
     },
     {
       "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54599",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54610",
       "event": "Tempestade",
       "severity": "perigo potencial",
       "severity_rank": 1,
@@ -33,6 +66,17 @@
       "end": "2026-06-12 23:59:00.0",
       "description": "INMET publica aviso iniciando em: 12/06/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
       "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Norte Pioneiro Paranaense, Serrana, Oeste Catarinense, Zona da Mata, Centro-Sul Mato-grossense, Sul Goiano, Vale do Rio Doce, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Central Espírito-santense, Vale do Itajaí, Leste de Mato Grosso do Sul, Campinas, Oeste de Minas, Noroeste Rio-grandense, Bauru, Piracicaba, Grande Florianópolis, Noroeste Espírito-santense, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Sul Espírito-santense, Campo das Vertentes, Leste Rondoniense, Centro Ocidental Paranaense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Metropolitana de Porto Alegre, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Metropolitana de Belo Horizonte, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Sudoeste Paranaense, Oeste Paranaense, Pantanais Sul Mato-grossense, Nordeste Rio-grandense, Jequitinhonha, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Noroeste Fluminense, Litoral Norte Espírito-santense, Noroeste Goiano, Nordeste Mato-grossense, Centro Oriental Paranaense, Sudoeste Mato-grossense, Norte Catarinense, Sul Catarinense, Baixadas, Centro Fluminense, Noroeste de Minas, Metropolitana de São Paulo, Assis, Vale do Mucuri, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Centro-Sul Paranaense, Norte de Minas, Distrito Federal, Norte Mato-grossense, Norte Fluminense, Madeira-Guaporé"
+    },
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54608",
+      "event": "Tempestade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-06-13 00:00:00.0",
+      "end": "2026-06-13 18:00:00.0",
+      "description": "INMET publica aviso iniciando em: 13/06/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Zona da Mata, Central Espírito-santense, Oeste de Minas, Vale do Rio Doce, Sul/Sudoeste de Minas, Sul Espírito-santense, Campo das Vertentes, Metropolitana de Belo Horizonte, Sul Fluminense, Vale do Paraíba Paulista, Noroeste Fluminense, Litoral Norte Espírito-santense, Baixadas, Centro Fluminense, Noroeste Espírito-santense, Metropolitana do Rio de Janeiro, Norte Fluminense"
     }
   ]
 }

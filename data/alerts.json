@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1781345340,
+  "fetched_at": 1781365975,
   "alerts": [
     {
       "title": "Aviso de Tempestade. Severidade Grau: Perigo",
@@ -14,7 +14,7 @@
     },
     {
       "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54612",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54618",
       "event": "Tempestade",
       "severity": "perigo potencial",
       "severity_rank": 1,

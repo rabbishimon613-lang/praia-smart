@@ -1,17 +1,6 @@
 {
-  "fetched_at": 1781383771,
+  "fetched_at": 1781427383,
   "alerts": [
-    {
-      "title": "Aviso de Tempestade. Severidade Grau: Perigo",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54614",
-      "event": "Tempestade",
-      "severity": "perigo",
-      "severity_rank": 2,
-      "start": "2026-06-12 09:30:00.0",
-      "end": "2026-06-13 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 12/06/2026 09:30. Chuva entre 30 e 60 mm/h ou 50 e 100 mm/dia, ventos intensos (60-100 km/h), e queda de granizo. Risco de corte de energia elétrica, estragos em plantações,  queda de árvores e de alagamentos.",
-      "area": "Aviso para as Áreas: Triângulo Mineiro/Alto Paranaíba, Central Mineira, Zona da Mata, Vale do Rio Doce, Central Espírito-santense, Campinas, Oeste de Minas, Sul/Sudoeste de Minas, Sul Espírito-santense, Campo das Vertentes, São José do Rio Preto, Ribeirão Preto, Metropolitana de Belo Horizonte, Araraquara, Sul Goiano, Vale do Paraíba Paulista, Noroeste Fluminense, Piracicaba, Centro Fluminense, Macro Metropolitana Paulista, Noroeste Espírito-santense, Sul Fluminense, Metropolitana do Rio de Janeiro, Norte Fluminense, Jequitinhonha, Litoral Norte Espírito-santense, Noroeste de Minas, Norte de Minas, Baixadas"
-    },
     {
       "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
       "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54618",
@@ -22,17 +11,6 @@
       "end": "2026-06-14 23:59:00.0",
       "description": "INMET publica aviso iniciando em: 14/06/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
       "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Central Mineira, Norte Pioneiro Paranaense, Zona da Mata, Sul Goiano, Vale do Rio Doce, Presidente Prudente, São José do Rio Preto, Central Espírito-santense, Leste de Mato Grosso do Sul, Noroeste Espírito-santense, Campinas, Oeste de Minas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Sul Espírito-santense, Campo das Vertentes, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Metropolitana de Belo Horizonte, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Pantanais Sul Mato-grossense, Jequitinhonha, Sul Fluminense, Vale do Paraíba Paulista, Noroeste Fluminense, Centro Fluminense, Noroeste Goiano, Metropolitana de São Paulo, Assis, Vale do Mucuri, Centro-Sul Mato-grossense, Norte de Minas, Noroeste de Minas, Metropolitana do Rio de Janeiro, Norte Fluminense, Leste Goiano, Centro Ocidental Paranaense, Oeste Paranaense, Litoral Norte Espírito-santense"
-    },
-    {
-      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54611",
-      "event": "Tempestade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-06-13 00:00:00.0",
-      "end": "2026-06-13 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 13/06/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
-      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Central Mineira, Norte Pioneiro Paranaense, Zona da Mata, Sul Goiano, Vale do Rio Doce, Presidente Prudente, São José do Rio Preto, Central Espírito-santense, Leste de Mato Grosso do Sul, Noroeste Espírito-santense, Campinas, Oeste de Minas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Sul Espírito-santense, Campo das Vertentes, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Metropolitana de Belo Horizonte, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Pantanais Sul Mato-grossense, Jequitinhonha, Sul Fluminense, Vale do Paraíba Paulista, Noroeste Fluminense, Litoral Norte Espírito-santense, Baixadas, Centro Fluminense, Noroeste Goiano, Metropolitana de São Paulo, Assis, Vale do Mucuri, Centro-Sul Mato-grossense, Metropolitana do Rio de Janeiro, Norte de Minas, Noroeste de Minas, Norte Fluminense, Leste Goiano, Centro Ocidental Paranaense, Sul Baiano"
     }
   ]
 }

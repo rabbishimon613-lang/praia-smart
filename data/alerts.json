@@ -1,27 +1,16 @@
 {
-  "fetched_at": 1781653877,
+  "fetched_at": 1781701329,
   "alerts": [
     {
-      "title": "Aviso de Acumulado de Chuva. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54636",
-      "event": "Acumulado de Chuva",
+      "title": "Aviso de Geada. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54640",
+      "event": "Geada",
       "severity": "perigo potencial",
       "severity_rank": 1,
-      "start": "2026-06-16 09:37:00.0",
-      "end": "2026-06-16 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 16/06/2026 09:37. Chuva entre 20 a 30 mm/h ou até 50 mm/dia. Baixo risco de alagamentos e pequenos deslizamentos, em cidades com tais áreas de risco.",
-      "area": "Aviso para as Áreas: Zona da Mata, Sul Fluminense, Vale do Paraíba Paulista, Baixadas, Centro Fluminense, Metropolitana do Rio de Janeiro, Metropolitana de São Paulo, Sul/Sudoeste de Minas"
-    },
-    {
-      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54629",
-      "event": "Tempestade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-06-16 00:00:00.0",
-      "end": "2026-06-16 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 16/06/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
-      "area": "Aviso para as Áreas: Zona da Mata, Vale do Rio Doce, Central Espírito-santense, Noroeste Espírito-santense, Sul Baiano, Sul Espírito-santense, Noroeste Fluminense, Litoral Norte Espírito-santense, Baixadas, Vale do Mucuri, Centro Fluminense, Norte Fluminense, Metropolitana de Belo Horizonte"
+      "start": "2026-06-18 00:00:00.0",
+      "end": "2026-06-18 07:00:00.0",
+      "description": "INMET publica aviso iniciando em: 18/06/2026 00:00. Risco leve de perda de plantações. Temperatura mínima até 3ºC.",
+      "area": "Aviso para as Áreas: Sul/Sudoeste de Minas, Vale do Paraíba Paulista, Sul Fluminense, Macro Metropolitana Paulista, Campinas"
     }
   ]
 }

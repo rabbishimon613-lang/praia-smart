@@ -1,4 +1,16 @@
 {
-  "fetched_at": 1781870036,
-  "alerts": []
+  "fetched_at": 1781882022,
+  "alerts": [
+    {
+      "title": "Aviso de Chuvas Intensas. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54658",
+      "event": "Chuvas Intensas",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-06-20 00:00:00.0",
+      "end": "2026-06-20 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 20/06/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h). Baixo risco de corte de energia elétrica, queda de galhos de árvores, alagamentos e de descargas elétricas.",
+      "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Serrana, Oeste Catarinense, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Vale do Itajaí, Leste de Mato Grosso do Sul, Campinas, Bauru, Piracicaba, Grande Florianópolis, Itapetininga, Sul/Sudoeste de Minas, Centro Norte de Mato Grosso do Sul, Noroeste Rio-grandense, Centro Ocidental Paranaense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Sudoeste Paranaense, Oeste Paranaense, Pantanais Sul Mato-grossense, Sudeste Paranaense, Vale do Paraíba Paulista, Sul Goiano, Centro Oriental Paranaense, Norte Catarinense, Sul Catarinense, Metropolitana de São Paulo, Assis, Centro-Sul Mato-grossense, Litoral Sul Paulista, Centro-Sul Paranaense, Nordeste Rio-grandense, Triângulo Mineiro/Alto Paranaíba, Sudoeste Mato-grossense, Sul Fluminense"
+    }
+  ]
 }

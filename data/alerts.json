@@ -1,4 +1,16 @@
 {
-  "fetched_at": 1782019075,
-  "alerts": []
+  "fetched_at": 1782042940,
+  "alerts": [
+    {
+      "title": "Aviso de Chuvas Intensas. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54676",
+      "event": "Chuvas Intensas",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-06-23 00:00:00.0",
+      "end": "2026-06-23 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 23/06/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h). Baixo risco de corte de energia elétrica, queda de galhos de árvores, alagamentos e de descargas elétricas.",
+      "area": "Aviso para as Áreas: Presidente Prudente, São José do Rio Preto, Leste de Mato Grosso do Sul, Campinas, Bauru, Piracicaba, Itapetininga, Sul/Sudoeste de Minas, Centro Norte de Mato Grosso do Sul, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Macro Metropolitana Paulista, Marília, Araraquara, Pantanais Sul Mato-grossense, Sul Fluminense, Vale do Paraíba Paulista, Sul Goiano, Metropolitana de São Paulo, Centro-Sul Mato-grossense, Assis, Triângulo Mineiro/Alto Paranaíba, Litoral Sul Paulista, Sudoeste de Mato Grosso do Sul"
+    }
+  ]
 }

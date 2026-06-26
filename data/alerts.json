@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1782427587,
+  "fetched_at": 1782448759,
   "alerts": [
     {
       "title": "Aviso de Acumulado de Chuva. Severidade Grau: Perigo Potencial",
@@ -11,17 +11,6 @@
       "end": "2026-06-26 23:59:00.0",
       "description": "INMET publica aviso iniciando em: 26/06/2026 00:00. Chuva entre 20 a 30 mm/h ou até 50 mm/dia. Baixo risco de alagamentos e pequenos deslizamentos, em cidades com tais áreas de risco.",
       "area": "Aviso para as Áreas: Campinas, Sul/Sudoeste de Minas, Sul Fluminense, Vale do Paraíba Paulista, Metropolitana de São Paulo, Macro Metropolitana Paulista, Metropolitana do Rio de Janeiro"
-    },
-    {
-      "title": "Aviso de Chuvas Intensas. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54714",
-      "event": "Chuvas Intensas",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-06-24 09:20:00.0",
-      "end": "2026-06-25 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 24/06/2026 09:20. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h). Baixo risco de corte de energia elétrica, queda de galhos de árvores, alagamentos e de descargas elétricas.",
-      "area": "Aviso para as Áreas: Centro-Sul Mato-grossense, Presidente Prudente, São José do Rio Preto, Leste de Mato Grosso do Sul, Triângulo Mineiro/Alto Paranaíba, Campinas, Oeste de Minas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Zona da Mata, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Macro Metropolitana Paulista, Marília, Araraquara, Sul Fluminense, Campo das Vertentes, Vale do Paraíba Paulista, Sul Goiano, Pantanais Sul Mato-grossense, Sudoeste Mato-grossense, Baixadas, Centro Fluminense, Metropolitana de São Paulo, Noroeste Goiano, Metropolitana do Rio de Janeiro, Norte Fluminense, Litoral Sul Paulista, Assis"
     }
   ]
 }

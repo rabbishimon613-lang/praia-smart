@@ -1,9 +1,9 @@
 {
-  "fetched_at": 1782461995,
+  "fetched_at": 1782472944,
   "alerts": [
     {
       "title": "Aviso de Acumulado de Chuva. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54717",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54739",
       "event": "Acumulado de Chuva",
       "severity": "perigo potencial",
       "severity_rank": 1,

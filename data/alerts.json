@@ -1,16 +1,4 @@
 {
-  "fetched_at": 1782517600,
-  "alerts": [
-    {
-      "title": "Aviso de Acumulado de Chuva. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54739",
-      "event": "Acumulado de Chuva",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-06-26 00:00:00.0",
-      "end": "2026-06-26 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 26/06/2026 00:00. Chuva entre 20 a 30 mm/h ou até 50 mm/dia. Baixo risco de alagamentos e pequenos deslizamentos, em cidades com tais áreas de risco.",
-      "area": "Aviso para as Áreas: Campinas, Sul/Sudoeste de Minas, Sul Fluminense, Vale do Paraíba Paulista, Metropolitana de São Paulo, Macro Metropolitana Paulista, Metropolitana do Rio de Janeiro"
-    }
-  ]
+  "fetched_at": 1782530510,
+  "alerts": []
 }

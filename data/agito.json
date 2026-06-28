@@ -1,23 +1,18 @@
 {
-  "fetched_at": 1782656138,
+  "fetched_at": 1782661723,
   "by_beach": {
     "copa-p5": {
       "current": {
-        "bucket": "lotada",
-        "score": 0.82,
+        "bucket": "cheia",
+        "score": 0.594,
         "confidence": "estimativa"
       },
       "next_peak": {
-        "time": "2026-06-28T15:00",
-        "bucket": "lotada",
-        "score": 0.82
+        "time": "2026-06-28T16:00",
+        "bucket": "cheia",
+        "score": 0.594
       },
       "hourly": [
-        {
-          "time": "2026-06-28T15:00",
-          "score": 0.82,
-          "bucket": "lotada"
-        },
         {
           "time": "2026-06-28T16:00",
           "score": 0.594,
@@ -132,26 +127,26 @@
           "time": "2026-06-29T14:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-06-29T15:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "morro-terceira": {
       "current": {
-        "bucket": "lotada",
-        "score": 0.775,
+        "bucket": "cheia",
+        "score": 0.553,
         "confidence": "estimativa"
       },
       "next_peak": {
-        "time": "2026-06-28T15:00",
-        "bucket": "lotada",
-        "score": 0.775
+        "time": "2026-06-28T16:00",
+        "bucket": "cheia",
+        "score": 0.553
       },
       "hourly": [
-        {
-          "time": "2026-06-28T15:00",
-          "score": 0.775,
-          "bucket": "lotada"
-        },
         {
           "time": "2026-06-28T16:00",
           "score": 0.553,
@@ -266,26 +261,26 @@
           "time": "2026-06-29T14:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-06-29T15:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "sao-conrado": {
       "current": {
-        "bucket": "lotada",
-        "score": 0.892,
+        "bucket": "cheia",
+        "score": 0.642,
         "confidence": "estimativa"
       },
       "next_peak": {
-        "time": "2026-06-28T15:00",
-        "bucket": "lotada",
-        "score": 0.892
+        "time": "2026-06-28T16:00",
+        "bucket": "cheia",
+        "score": 0.642
       },
       "hourly": [
-        {
-          "time": "2026-06-28T15:00",
-          "score": 0.892,
-          "bucket": "lotada"
-        },
         {
           "time": "2026-06-28T16:00",
           "score": 0.642,
@@ -400,26 +395,26 @@
           "time": "2026-06-29T14:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-06-29T15:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "leblon-mirante": {
       "current": {
-        "bucket": "lotada",
-        "score": 0.82,
+        "bucket": "cheia",
+        "score": 0.594,
         "confidence": "estimativa"
       },
       "next_peak": {
-        "time": "2026-06-28T15:00",
-        "bucket": "lotada",
-        "score": 0.82
+        "time": "2026-06-28T16:00",
+        "bucket": "cheia",
+        "score": 0.594
       },
       "hourly": [
-        {
-          "time": "2026-06-28T15:00",
-          "score": 0.82,
-          "bucket": "lotada"
-        },
         {
           "time": "2026-06-28T16:00",
           "score": 0.594,
@@ -534,26 +529,26 @@
           "time": "2026-06-29T14:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-06-29T15:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "balneario-rincao": {
       "current": {
-        "bucket": "moderada",
-        "score": 0.255,
+        "bucket": "vazia",
+        "score": 0.165,
         "confidence": "estimativa"
       },
       "next_peak": {
-        "time": "2026-06-28T15:00",
-        "bucket": "moderada",
-        "score": 0.255
+        "time": "2026-06-28T16:00",
+        "bucket": "vazia",
+        "score": 0.165
       },
       "hourly": [
-        {
-          "time": "2026-06-28T15:00",
-          "score": 0.255,
-          "bucket": "moderada"
-        },
         {
           "time": "2026-06-28T16:00",
           "score": 0.165,
@@ -668,26 +663,26 @@
           "time": "2026-06-29T14:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-06-29T15:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "praia-grande-boqueirao": {
       "current": {
-        "bucket": "lotada",
-        "score": 0.762,
+        "bucket": "cheia",
+        "score": 0.506,
         "confidence": "estimativa"
       },
       "next_peak": {
-        "time": "2026-06-28T15:00",
-        "bucket": "lotada",
-        "score": 0.762
+        "time": "2026-06-28T16:00",
+        "bucket": "cheia",
+        "score": 0.506
       },
       "hourly": [
-        {
-          "time": "2026-06-28T15:00",
-          "score": 0.762,
-          "bucket": "lotada"
-        },
         {
           "time": "2026-06-28T16:00",
           "score": 0.506,
@@ -802,26 +797,26 @@
           "time": "2026-06-29T14:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-06-29T15:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "cabo-frio-forte": {
       "current": {
-        "bucket": "lotada",
-        "score": 0.795,
+        "bucket": "cheia",
+        "score": 0.553,
         "confidence": "estimativa"
       },
       "next_peak": {
-        "time": "2026-06-28T15:00",
-        "bucket": "lotada",
-        "score": 0.795
+        "time": "2026-06-28T16:00",
+        "bucket": "cheia",
+        "score": 0.553
       },
       "hourly": [
-        {
-          "time": "2026-06-28T15:00",
-          "score": 0.795,
-          "bucket": "lotada"
-        },
         {
           "time": "2026-06-28T16:00",
           "score": 0.553,
@@ -936,26 +931,26 @@
           "time": "2026-06-29T14:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-06-29T15:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "balneario-camboriu": {
       "current": {
-        "bucket": "moderada",
-        "score": 0.199,
+        "bucket": "vazia",
+        "score": 0.05,
         "confidence": "estimativa"
       },
       "next_peak": {
-        "time": "2026-06-28T15:00",
-        "bucket": "moderada",
-        "score": 0.199
+        "time": "2026-06-28T17:00",
+        "bucket": "vazia",
+        "score": 0.063
       },
       "hourly": [
-        {
-          "time": "2026-06-28T15:00",
-          "score": 0.199,
-          "bucket": "moderada"
-        },
         {
           "time": "2026-06-28T16:00",
           "score": 0.05,
@@ -1070,26 +1065,26 @@
           "time": "2026-06-29T14:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-06-29T15:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "santos-gonzaga": {
       "current": {
-        "bucket": "lotada",
-        "score": 0.737,
+        "bucket": "cheia",
+        "score": 0.502,
         "confidence": "estimativa"
       },
       "next_peak": {
-        "time": "2026-06-28T15:00",
-        "bucket": "lotada",
-        "score": 0.737
+        "time": "2026-06-28T16:00",
+        "bucket": "cheia",
+        "score": 0.502
       },
       "hourly": [
-        {
-          "time": "2026-06-28T15:00",
-          "score": 0.737,
-          "bucket": "lotada"
-        },
         {
           "time": "2026-06-28T16:00",
           "score": 0.502,
@@ -1204,26 +1199,26 @@
           "time": "2026-06-29T14:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-06-29T15:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "guaruja-enseada": {
       "current": {
         "bucket": "cheia",
-        "score": 0.644,
+        "score": 0.464,
         "confidence": "estimativa"
       },
       "next_peak": {
-        "time": "2026-06-28T15:00",
+        "time": "2026-06-28T16:00",
         "bucket": "cheia",
-        "score": 0.644
+        "score": 0.464
       },
       "hourly": [
-        {
-          "time": "2026-06-28T15:00",
-          "score": 0.644,
-          "bucket": "cheia"
-        },
         {
           "time": "2026-06-28T16:00",
           "score": 0.464,
@@ -1338,26 +1333,26 @@
           "time": "2026-06-29T14:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-06-29T15:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "floripa-barra-lagoa": {
       "current": {
         "bucket": "vazia",
-        "score": 0.12,
+        "score": 0.066,
         "confidence": "estimativa"
       },
       "next_peak": {
-        "time": "2026-06-28T15:00",
+        "time": "2026-06-28T16:00",
         "bucket": "vazia",
-        "score": 0.12
+        "score": 0.066
       },
       "hourly": [
-        {
-          "time": "2026-06-28T15:00",
-          "score": 0.12,
-          "bucket": "vazia"
-        },
         {
           "time": "2026-06-28T16:00",
           "score": 0.066,
@@ -1472,26 +1467,26 @@
           "time": "2026-06-29T14:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-06-29T15:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "natal-ponta-negra": {
       "current": {
-        "bucket": "lotada",
-        "score": 0.875,
+        "bucket": "cheia",
+        "score": 0.581,
         "confidence": "estimativa"
       },
       "next_peak": {
-        "time": "2026-06-28T15:00",
-        "bucket": "lotada",
-        "score": 0.875
+        "time": "2026-06-28T16:00",
+        "bucket": "cheia",
+        "score": 0.581
       },
       "hourly": [
-        {
-          "time": "2026-06-28T15:00",
-          "score": 0.875,
-          "bucket": "lotada"
-        },
         {
           "time": "2026-06-28T16:00",
           "score": 0.581,
@@ -1604,6 +1599,11 @@
         },
         {
           "time": "2026-06-29T14:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-06-29T15:00",
           "score": 0.0,
           "bucket": "vazia"
         }

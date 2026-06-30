@@ -1,6 +1,17 @@
 {
-  "fetched_at": 1782807623,
+  "fetched_at": 1782825779,
   "alerts": [
+    {
+      "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54798",
+      "event": "Ventos Costeiros",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-07-04 00:00:00.0",
+      "end": "2026-07-04 18:00:00.0",
+      "description": "INMET publica aviso iniciando em: 04/07/2026 00:00. Intensificação dos ventos nas regiões litorâneas, movimentando dunas de areia sobre construções na orla.",
+      "area": "Aviso para as Áreas: Baixadas, Norte Fluminense, Metropolitana do Rio de Janeiro"
+    },
     {
       "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo Potencial",
       "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54773",

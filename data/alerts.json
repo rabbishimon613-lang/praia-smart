@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1783183279,
+  "fetched_at": 1783204167,
   "alerts": [
     {
       "title": "Aviso de Declínio de Temperatura. Severidade Grau: Perigo Potencial",
@@ -11,17 +11,6 @@
       "end": "2026-07-04 23:59:00.0",
       "description": "INMET publica aviso iniciando em: 04/07/2026 00:00. Leve risco à saúde. Declínio entre 3ºC e 5ºC.",
       "area": "Aviso para as Áreas: Metropolitana de Curitiba, Campinas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Zona da Mata, Macro Metropolitana Paulista, Marília, Araraquara, Sul Fluminense, Campo das Vertentes, Vale do Paraíba Paulista, Centro Oriental Paranaense, Baixadas, Centro Fluminense, Metropolitana de São Paulo, Litoral Sul Paulista, Ribeirão Preto, Metropolitana do Rio de Janeiro, Assis, Norte Fluminense, Norte Pioneiro Paranaense, Noroeste Fluminense"
-    },
-    {
-      "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54798",
-      "event": "Ventos Costeiros",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-07-04 00:00:00.0",
-      "end": "2026-07-04 18:00:00.0",
-      "description": "INMET publica aviso iniciando em: 04/07/2026 00:00. Intensificação dos ventos nas regiões litorâneas, movimentando dunas de areia sobre construções na orla.",
-      "area": "Aviso para as Áreas: Baixadas, Norte Fluminense, Metropolitana do Rio de Janeiro"
     }
   ]
 }

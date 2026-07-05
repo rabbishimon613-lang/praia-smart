@@ -1,16 +1,4 @@
 {
-  "fetched_at": 1783208065,
-  "alerts": [
-    {
-      "title": "Aviso de Declínio de Temperatura. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54830",
-      "event": "Declínio de Temperatura",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-07-04 00:00:00.0",
-      "end": "2026-07-04 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 04/07/2026 00:00. Leve risco à saúde. Declínio entre 3ºC e 5ºC.",
-      "area": "Aviso para as Áreas: Metropolitana de Curitiba, Campinas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Zona da Mata, Macro Metropolitana Paulista, Marília, Araraquara, Sul Fluminense, Campo das Vertentes, Vale do Paraíba Paulista, Centro Oriental Paranaense, Baixadas, Centro Fluminense, Metropolitana de São Paulo, Litoral Sul Paulista, Ribeirão Preto, Metropolitana do Rio de Janeiro, Assis, Norte Fluminense, Norte Pioneiro Paranaense, Noroeste Fluminense"
-    }
-  ]
+  "fetched_at": 1783214635,
+  "alerts": []
 }

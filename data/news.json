@@ -1,4 +1,15 @@
 {
-  "fetched_at": 1783347845,
-  "items": []
+  "fetched_at": 1783358423,
+  "items": [
+    {
+      "source": "veja-rio",
+      "title": "Disputa entre facções gera onda de violência na Praia de Copacabana",
+      "summary": "A rivalidade entre o Comando Vermelho (CV) e o Terceiro Comando Puro (TCP) já afeta o dia a dia de quem trabalha na região",
+      "link": "https://vejario.abril.com.br/cidade/disputa-faccoes-praia-copacabana/",
+      "pub_date": "Mon, 06 Jul 2026 14:25:24 +0000",
+      "beaches": [
+        "copacabana"
+      ]
+    }
+  ]
 }

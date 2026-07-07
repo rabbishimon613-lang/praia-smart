@@ -1,4 +1,16 @@
 {
-  "fetched_at": 1783424958,
-  "alerts": []
+  "fetched_at": 1783451262,
+  "alerts": [
+    {
+      "title": "Aviso de Geada. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54922",
+      "event": "Geada",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-07-09 00:00:00.0",
+      "end": "2026-07-09 07:00:00.0",
+      "description": "INMET publica aviso iniciando em: 09/07/2026 00:00. Risco leve de perda de plantações. Temperatura mínima até 3ºC.",
+      "area": "Aviso para as Áreas: Sul/Sudoeste de Minas, Macro Metropolitana Paulista, Vale do Paraíba Paulista, Sul Fluminense, Campinas"
+    }
+  ]
 }

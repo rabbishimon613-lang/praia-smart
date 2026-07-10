@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1783666045,
+  "fetched_at": 1783678951,
   "alerts": [
     {
       "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
@@ -11,17 +11,6 @@
       "end": "2026-07-11 18:00:00.0",
       "description": "INMET publica aviso iniciando em: 11/07/2026 12:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
       "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Sul Cearense, Centro Sul Baiano, Vale São-Franciscano da Bahia, Ocidental do Tocantins, Sudeste Piauiense, Sertões Cearenses, Centro-Sul Mato-grossense, Sul Goiano, Sertão Pernambucano, São Francisco Pernambucano, Nordeste Mato-grossense, Sertão Paraibano, Leste de Mato Grosso do Sul, Campinas, Oeste de Minas, Norte de Minas, Sul/Sudoeste de Minas, Centro Norte de Mato Grosso do Sul, Campo das Vertentes, Oriental do Tocantins, Norte Mato-grossense, São José do Rio Preto, Sudoeste Paraense, Ribeirão Preto, Sudeste Mato-grossense, Norte Goiano, Sul Maranhense, Zona da Mata, Metropolitana de Belo Horizonte, Sudoeste Piauiense, Centro Norte Baiano, Araraquara, Araçatuba, Extremo Oeste Baiano, Centro-Sul Cearense, Vale do Rio Doce, Pantanais Sul Mato-grossense, Jequitinhonha, Noroeste Goiano, Sudoeste Mato-grossense, Piracicaba, Noroeste de Minas, Centro-Norte Piauiense, Macro Metropolitana Paulista, Leste Maranhense, Distrito Federal, Vale do Paraíba Paulista, Sudeste Paraense, Oeste Potiguar, Sul Fluminense, Nordeste Baiano"
-    },
-    {
-      "title": "Aviso de Geada. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54930",
-      "event": "Geada",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-07-10 00:00:00.0",
-      "end": "2026-07-10 09:00:00.0",
-      "description": "INMET publica aviso iniciando em: 10/07/2026 00:00. Risco leve de perda de plantações. Temperatura mínima até 3ºC.",
-      "area": "Aviso para as Áreas: Campinas, Sul/Sudoeste de Minas, Macro Metropolitana Paulista, Vale do Paraíba Paulista, Sul Fluminense, Zona da Mata"
     }
   ]
 }

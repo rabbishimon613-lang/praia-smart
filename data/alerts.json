@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1783792586,
+  "fetched_at": 1783807698,
   "alerts": [
     {
       "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
@@ -11,17 +11,6 @@
       "end": "2026-07-12 23:59:00.0",
       "description": "INMET publica aviso iniciando em: 12/07/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
       "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Leste de Mato Grosso do Sul, Campinas, Bauru, Piracicaba, Itapetininga, Centro Norte de Mato Grosso do Sul, Araçatuba, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Pantanais Sul Mato-grossense, Centro Oriental Paranaense, Sudoeste Mato-grossense, Centro Ocidental Paranaense, Metropolitana de São Paulo, Assis, Centro-Sul Mato-grossense, Litoral Sul Paulista, Ribeirão Preto, Vale do Paraíba Paulista, Sul/Sudoeste de Minas, Triângulo Mineiro/Alto Paranaíba, Sudeste Mato-grossense, Sul Fluminense"
-    },
-    {
-      "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54939",
-      "event": "Baixa Umidade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-07-11 12:00:00.0",
-      "end": "2026-07-11 18:00:00.0",
-      "description": "INMET publica aviso iniciando em: 11/07/2026 12:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
-      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Sul Cearense, Centro Sul Baiano, Vale São-Franciscano da Bahia, Ocidental do Tocantins, Sudeste Piauiense, Sertões Cearenses, Centro-Sul Mato-grossense, Sul Goiano, Sertão Pernambucano, São Francisco Pernambucano, Nordeste Mato-grossense, Sertão Paraibano, Leste de Mato Grosso do Sul, Campinas, Oeste de Minas, Norte de Minas, Sul/Sudoeste de Minas, Centro Norte de Mato Grosso do Sul, Campo das Vertentes, Oriental do Tocantins, Norte Mato-grossense, São José do Rio Preto, Sudoeste Paraense, Ribeirão Preto, Sudeste Mato-grossense, Norte Goiano, Sul Maranhense, Zona da Mata, Metropolitana de Belo Horizonte, Sudoeste Piauiense, Centro Norte Baiano, Araraquara, Araçatuba, Extremo Oeste Baiano, Centro-Sul Cearense, Vale do Rio Doce, Pantanais Sul Mato-grossense, Jequitinhonha, Noroeste Goiano, Sudoeste Mato-grossense, Piracicaba, Noroeste de Minas, Centro-Norte Piauiense, Macro Metropolitana Paulista, Leste Maranhense, Distrito Federal, Vale do Paraíba Paulista, Sudeste Paraense, Oeste Potiguar, Sul Fluminense, Nordeste Baiano"
     }
   ]
 }

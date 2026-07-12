@@ -1,9 +1,31 @@
 {
-  "fetched_at": 1783852003,
+  "fetched_at": 1783856287,
   "alerts": [
     {
+      "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54955",
+      "event": "Ventos Costeiros",
+      "severity": "perigo",
+      "severity_rank": 2,
+      "start": "2026-07-12 12:00:00.0",
+      "end": "2026-07-13 05:00:00.0",
+      "description": "INMET publica aviso iniciando em: 12/07/2026 12:00. Intensificação dos ventos nas regiões litorâneas, movimentando dunas de areia sobre construções na orla.",
+      "area": "Aviso para as Áreas: Central Espírito-santense, Sul Fluminense, Baixadas, Norte Fluminense, Metropolitana do Rio de Janeiro, Sul Espírito-santense, Vale do Paraíba Paulista"
+    },
+    {
       "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54948",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54953",
+      "event": "Tempestade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-07-12 08:20:00.0",
+      "end": "2026-07-12 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 12/07/2026 08:20. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Presidente Prudente, São José do Rio Preto, Leste de Mato Grosso do Sul, Campinas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Zona da Mata, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Macro Metropolitana Paulista, Marília, Araraquara, Pantanais Sul Mato-grossense, Sudoeste de Mato Grosso do Sul, Sul Fluminense, Vale do Paraíba Paulista, Noroeste Fluminense, Sul Espírito-santense, Baixadas, Centro Fluminense, Metropolitana de São Paulo, Assis, Centro-Sul Mato-grossense, Metropolitana do Rio de Janeiro, Norte Pioneiro Paranaense, Norte Fluminense, Campo das Vertentes, Sul Goiano, Triângulo Mineiro/Alto Paranaíba, Sudoeste Mato-grossense, Litoral Sul Paulista"
+    },
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54951",
       "event": "Tempestade",
       "severity": "perigo potencial",
       "severity_rank": 1,

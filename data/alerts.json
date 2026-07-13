@@ -1,4 +1,49 @@
 {
-  "fetched_at": 1783942646,
-  "alerts": []
+  "fetched_at": 1783950560,
+  "alerts": [
+    {
+      "title": "Aviso de Geada. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54966",
+      "event": "Geada",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-07-15 00:01:00.0",
+      "end": "2026-07-15 09:00:00.0",
+      "description": "INMET publica aviso iniciando em: 15/07/2026 00:01. Risco leve de perda de plantações. Temperatura mínima até 3ºC.",
+      "area": "Aviso para as Áreas: Campinas, Sul/Sudoeste de Minas, Vale do Paraíba Paulista, Macro Metropolitana Paulista, Sul Fluminense"
+    },
+    {
+      "title": "Aviso de Geada. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54965",
+      "event": "Geada",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-07-14 00:01:00.0",
+      "end": "2026-07-14 09:00:00.0",
+      "description": "INMET publica aviso iniciando em: 14/07/2026 00:01. Risco leve de perda de plantações. Temperatura mínima até 3ºC.",
+      "area": "Aviso para as Áreas: Campinas, Sul/Sudoeste de Minas, Vale do Paraíba Paulista, Macro Metropolitana Paulista, Sul Fluminense"
+    },
+    {
+      "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54963",
+      "event": "Ventos Costeiros",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-07-14 00:01:00.0",
+      "end": "2026-07-14 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 14/07/2026 00:01. Intensificação dos ventos nas regiões litorâneas, movimentando dunas de areia sobre construções na orla.",
+      "area": "Aviso para as Áreas: Sul Baiano, Central Espírito-santense, Litoral Norte Espírito-santense, Norte Fluminense, Sul Espírito-santense, Metropolitana de Salvador"
+    },
+    {
+      "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54961",
+      "event": "Ventos Costeiros",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-07-13 08:41:00.0",
+      "end": "2026-07-13 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 13/07/2026 08:41. Intensificação dos ventos nas regiões litorâneas, movimentando dunas de areia sobre construções na orla.",
+      "area": "Aviso para as Áreas: Sul Baiano, Central Espírito-santense, Sul Fluminense, Litoral Norte Espírito-santense, Baixadas, Metropolitana do Rio de Janeiro, Norte Fluminense, Vale do Paraíba Paulista, Sul Espírito-santense"
+    }
+  ]
 }

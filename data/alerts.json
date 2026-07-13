@@ -1,16 +1,4 @@
 {
-  "fetched_at": 1783918157,
-  "alerts": [
-    {
-      "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54955",
-      "event": "Ventos Costeiros",
-      "severity": "perigo",
-      "severity_rank": 2,
-      "start": "2026-07-12 12:00:00.0",
-      "end": "2026-07-13 05:00:00.0",
-      "description": "INMET publica aviso iniciando em: 12/07/2026 12:00. Intensificação dos ventos nas regiões litorâneas, movimentando dunas de areia sobre construções na orla.",
-      "area": "Aviso para as Áreas: Central Espírito-santense, Sul Fluminense, Baixadas, Norte Fluminense, Metropolitana do Rio de Janeiro, Sul Espírito-santense, Vale do Paraíba Paulista"
-    }
-  ]
+  "fetched_at": 1783930558,
+  "alerts": []
 }

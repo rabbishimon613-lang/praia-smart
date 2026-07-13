@@ -1,4 +1,15 @@
 {
-  "fetched_at": 1783950564,
-  "items": []
+  "fetched_at": 1783960333,
+  "items": [
+    {
+      "source": "veja-rio",
+      "title": "Rato gigante corre pela Praia do Leblon e assusta banhistas",
+      "summary": "Roedor foi flagrado em plena faixa de areia na manhã de sábado (11) e imagens viralizaram nas redes sociais",
+      "link": "https://vejario.abril.com.br/cidade/rato-praia-leblon-assusta-banhistas/",
+      "pub_date": "Mon, 13 Jul 2026 14:42:36 +0000",
+      "beaches": [
+        "leblon"
+      ]
+    }
+  ]
 }

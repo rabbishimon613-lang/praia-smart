@@ -1,6 +1,17 @@
 {
-  "fetched_at": 1784033601,
+  "fetched_at": 1784040569,
   "alerts": [
+    {
+      "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54990",
+      "event": "Baixa Umidade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-07-17 12:00:00.0",
+      "end": "2026-07-17 18:00:00.0",
+      "description": "INMET publica aviso iniciando em: 17/07/2026 12:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
+      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Norte Pioneiro Paranaense, Zona da Mata, Ocidental do Tocantins, Sul Goiano, Vale do Rio Doce, Presidente Prudente, São José do Rio Preto, Central Espírito-santense, Nordeste Mato-grossense, Leste de Mato Grosso do Sul, Noroeste Espírito-santense, Campinas, Oeste de Minas, Bauru, Piracicaba, Vale do Mucuri, Norte de Minas, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Sul Espírito-santense, Campo das Vertentes, Oriental do Tocantins, Jequitinhonha, Norte Mato-grossense, Sudoeste Paraense, Centro Ocidental Paranaense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Norte Goiano, Noroeste Paranaense, Sul Maranhense, Macro Metropolitana Paulista, Marília, Metropolitana de Belo Horizonte, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Oeste Paranaense, Extremo Oeste Baiano, Vale do Paraíba Paulista, Noroeste Fluminense, Noroeste Goiano, Centro Oriental Paranaense, Centro Fluminense, Noroeste de Minas, Metropolitana de São Paulo, Assis, Sudoeste Piauiense, Vale São-Franciscano da Bahia, Sul Fluminense, Distrito Federal, Metropolitana do Rio de Janeiro, Centro Sul Baiano, Metropolitana de Curitiba, Centro-Sul Mato-grossense, Sudeste Paraense, Centro-Sul Paranaense, Litoral Norte Espírito-santense"
+    },
     {
       "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
       "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54987",

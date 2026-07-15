@@ -1,9 +1,9 @@
 {
-  "fetched_at": 1784116665,
+  "fetched_at": 1784129132,
   "alerts": [
     {
       "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54990",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55002",
       "event": "Baixa Umidade",
       "severity": "perigo potencial",
       "severity_rank": 1,

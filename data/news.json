@@ -1,4 +1,16 @@
 {
-  "fetched_at": 1784129134,
-  "items": []
+  "fetched_at": 1784134252,
+  "items": [
+    {
+      "source": "veja-rio",
+      "title": "Camelôs protestam em Copacabana contra operação “Tolerância Zero”",
+      "summary": "O programa foi anunciado no dia 7 de julho e começa oficialmente nesta quinta (16/07), do Leme ao Leblon, nos calçadões da orla",
+      "link": "https://vejario.abril.com.br/coluna/lu-lacerda/camelos-protestam-em-copacabana-contra-operacao-tolerancia-zero/",
+      "pub_date": "Wed, 15 Jul 2026 15:00:21 +0000",
+      "beaches": [
+        "copacabana",
+        "leblon"
+      ]
+    }
+  ]
 }

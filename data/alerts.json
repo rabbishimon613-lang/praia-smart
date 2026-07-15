@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1784071460,
+  "fetched_at": 1784074378,
   "alerts": [
     {
       "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
@@ -66,17 +66,6 @@
       "end": "2026-07-15 09:00:00.0",
       "description": "INMET publica aviso iniciando em: 15/07/2026 00:00. Risco leve de perda de plantações. Temperatura mínima até 3ºC.",
       "area": "Aviso para as Áreas: Campinas, Sul/Sudoeste de Minas, Vale do Paraíba Paulista, Sul Fluminense, Macro Metropolitana Paulista"
-    },
-    {
-      "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54977",
-      "event": "Ventos Costeiros",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-07-14 00:01:00.0",
-      "end": "2026-07-14 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 14/07/2026 00:01. Intensificação dos ventos nas regiões litorâneas, movimentando dunas de areia sobre construções na orla.",
-      "area": "Aviso para as Áreas: Sul Baiano, Central Espírito-santense, Litoral Norte Espírito-santense, Norte Fluminense, Sul Espírito-santense, Metropolitana de Salvador"
     }
   ]
 }

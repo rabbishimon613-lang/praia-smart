@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1784104142,
+  "fetched_at": 1784116665,
   "alerts": [
     {
       "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
@@ -25,17 +25,6 @@
     },
     {
       "title": "Aviso de Geada. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54983",
-      "event": "Geada",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-07-15 00:01:00.0",
-      "end": "2026-07-15 09:00:00.0",
-      "description": "INMET publica aviso iniciando em: 15/07/2026 00:01. Risco leve de perda de plantações. Temperatura mínima até 3ºC.",
-      "area": "Aviso para as Áreas: Campinas, Sul/Sudoeste de Minas, Vale do Paraíba Paulista, Macro Metropolitana Paulista, Sul Fluminense"
-    },
-    {
-      "title": "Aviso de Geada. Severidade Grau: Perigo Potencial",
       "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54982",
       "event": "Geada",
       "severity": "perigo potencial",
@@ -54,17 +43,6 @@
       "start": "2026-07-16 00:00:00.0",
       "end": "2026-07-16 08:00:00.0",
       "description": "INMET publica aviso iniciando em: 16/07/2026 00:00. Risco leve de perda de plantações. Temperatura mínima até 3ºC.",
-      "area": "Aviso para as Áreas: Campinas, Sul/Sudoeste de Minas, Vale do Paraíba Paulista, Sul Fluminense, Macro Metropolitana Paulista"
-    },
-    {
-      "title": "Aviso de Geada. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/54979",
-      "event": "Geada",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-07-15 00:00:00.0",
-      "end": "2026-07-15 09:00:00.0",
-      "description": "INMET publica aviso iniciando em: 15/07/2026 00:00. Risco leve de perda de plantações. Temperatura mínima até 3ºC.",
       "area": "Aviso para as Áreas: Campinas, Sul/Sudoeste de Minas, Vale do Paraíba Paulista, Sul Fluminense, Macro Metropolitana Paulista"
     }
   ]

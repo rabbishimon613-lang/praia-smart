@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1784224298,
+  "fetched_at": 1784228880,
   "alerts": [
     {
       "title": "Aviso de Geada. Severidade Grau: Perigo Potencial",
@@ -11,28 +11,6 @@
       "end": "2026-07-17 08:00:00.0",
       "description": "INMET publica aviso iniciando em: 17/07/2026 00:00. Risco leve de perda de plantações. Temperatura mínima até 3ºC.",
       "area": "Aviso para as Áreas: Campinas, Sul/Sudoeste de Minas, Vale do Paraíba Paulista, Sul Fluminense, Macro Metropolitana Paulista"
-    },
-    {
-      "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55015",
-      "event": "Baixa Umidade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-07-16 12:00:00.0",
-      "end": "2026-07-16 18:00:00.0",
-      "description": "INMET publica aviso iniciando em: 16/07/2026 12:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
-      "area": "Aviso para as Áreas: Triângulo Mineiro/Alto Paranaíba, Central Mineira, São José do Rio Preto, Leste de Mato Grosso do Sul, Campinas, Sul Goiano, Oeste de Minas, Piracicaba, Sul/Sudoeste de Minas, Centro Norte de Mato Grosso do Sul, Ribeirão Preto, Leste Goiano, Araraquara, Pantanais Sul Mato-grossense, Araçatuba, Sudoeste de Mato Grosso do Sul, Bauru, Noroeste de Minas, Macro Metropolitana Paulista, Extremo Oeste Baiano, Vale São-Franciscano da Bahia, Norte de Minas, Vale do Paraíba Paulista, Campo das Vertentes, Sul Fluminense, Sudeste Mato-grossense, Centro Sul Baiano, Itapetininga, Presidente Prudente"
-    },
-    {
-      "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55013",
-      "event": "Baixa Umidade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-07-16 12:00:00.0",
-      "end": "2026-07-16 18:00:00.0",
-      "description": "INMET publica aviso iniciando em: 16/07/2026 12:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
-      "area": "Aviso para as Áreas: Triângulo Mineiro/Alto Paranaíba, Central Mineira, Presidente Prudente, São José do Rio Preto, Leste de Mato Grosso do Sul, Campinas, Oeste de Minas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Macro Metropolitana Paulista, Marília, Leste Goiano, Araraquara, Pantanais Sul Mato-grossense, Sudoeste de Mato Grosso do Sul, Sul Fluminense, Sul Goiano, Vale do Paraíba Paulista, Noroeste de Minas, Metropolitana de São Paulo, Extremo Oeste Baiano, Centro-Sul Mato-grossense, Norte de Minas, Vale São-Franciscano da Bahia, Centro Sul Baiano, Litoral Sul Paulista, Campo das Vertentes, Metropolitana de Belo Horizonte, Assis"
     },
     {
       "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",

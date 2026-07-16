@@ -1,6 +1,16 @@
 {
-  "fetched_at": 1784224302,
+  "fetched_at": 1784228885,
   "items": [
+    {
+      "source": "veja-rio",
+      "title": "Bombeiros buscam corpo de adolescente que desapareceu no mar de Copacabana",
+      "summary": "O jovem estava com amigos quando foi arrastado pela correnteza; Corpo de Bombeiros já realizou mais de 7,5 mil resgates nas praias do Rio em 2026",
+      "link": "https://vejario.abril.com.br/cidade/jovem-desaparece-mar-copacabana/",
+      "pub_date": "Thu, 16 Jul 2026 18:56:27 +0000",
+      "beaches": [
+        "copacabana"
+      ]
+    },
     {
       "source": "veja-rio",
       "title": "Tolerância zero: acesso às praias da Zona Sul é fechado com grades",

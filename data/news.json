@@ -1,4 +1,15 @@
 {
-  "fetched_at": 1784214050,
-  "items": []
+  "fetched_at": 1784220034,
+  "items": [
+    {
+      "source": "veja-rio",
+      "title": "Tolerância zero: acesso às praias da Zona Sul é fechado com grades",
+      "summary": "No primeiro dia do programa, a orla foi bloqueada por pontos de acesso monitorados do Leme ao Leblon e vendedores de milho sumiram das areias",
+      "link": "https://vejario.abril.com.br/cidade/tolerancia-zero-zona-sul/",
+      "pub_date": "Thu, 16 Jul 2026 16:11:38 +0000",
+      "beaches": [
+        "leblon"
+      ]
+    }
+  ]
 }

@@ -1,14 +1,14 @@
 {
-  "fetched_at": 1784278662,
+  "fetched_at": 1784285499,
   "items": [
     {
-      "source": "catraca-livre",
-      "title": "Alerta no litoral: predador venenoso se espalha pelo Nordeste e Sudeste e ameaça pescadores e banhistas do Brasil",
-      "summary": "Peixe-leão avança pelo litoral brasileiro e preocupa especialistas. Descubra os riscos do predador venenoso para praias e pescadores. O post Alerta no litoral: predador venenoso se espalha pelo Nordeste e Sudeste e ameaça pescadores e banhi",
-      "link": "https://catracalivre.com.br/noticias/alerta-no-litoral-predador-venenoso-se-espalha-pelo-nordeste-e-sudeste-e-ameaca-pescadores-e-banhistas-do-brasil/",
-      "pub_date": "Thu, 16 Jul 2026 21:08:02 +0000",
+      "source": "veja-rio",
+      "title": "Antiguidade é posto: ‘Maracanã’ do vôlei, Copacabana sedia três campeonatos",
+      "summary": "Atletas consagrados e jovens promessas dividem a mesma arena no Circuito Brasileiro, no Circuito Brasileiro Sub-19 e no Circuito Mundial de Vôlei de Praia",
+      "link": "https://vejario.abril.com.br/cidade/praia-copacabana-sedia-tres-campeonatos-volei-praia-circuito/",
+      "pub_date": "Fri, 17 Jul 2026 09:02:49 +0000",
       "beaches": [
-        "general"
+        "copacabana"
       ]
     },
     {
@@ -19,16 +19,6 @@
       "pub_date": "Thu, 16 Jul 2026 18:56:27 +0000",
       "beaches": [
         "copacabana"
-      ]
-    },
-    {
-      "source": "veja-rio",
-      "title": "Tolerância zero: acesso às praias da Zona Sul é fechado com grades",
-      "summary": "No primeiro dia do programa, a orla foi bloqueada por pontos de acesso monitorados do Leme ao Leblon e vendedores de milho sumiram das areias",
-      "link": "https://vejario.abril.com.br/cidade/tolerancia-zero-zona-sul/",
-      "pub_date": "Thu, 16 Jul 2026 16:11:38 +0000",
-      "beaches": [
-        "leblon"
       ]
     }
   ]

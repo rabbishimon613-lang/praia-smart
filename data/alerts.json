@@ -1,4 +1,16 @@
 {
-  "fetched_at": 1784376259,
-  "alerts": []
+  "fetched_at": 1784382519,
+  "alerts": [
+    {
+      "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55046",
+      "event": "Baixa Umidade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-07-18 12:00:00.0",
+      "end": "2026-07-18 18:00:00.0",
+      "description": "INMET publica aviso iniciando em: 18/07/2026 12:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
+      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Norte Pioneiro Paranaense, Ocidental do Tocantins, Centro-Sul Mato-grossense, Sul Goiano, Presidente Prudente, São José do Rio Preto, Nordeste Mato-grossense, Leste de Mato Grosso do Sul, Campinas, Oeste de Minas, Bauru, Piracicaba, Norte de Minas, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Oriental do Tocantins, Norte Mato-grossense, Sudoeste Paraense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Norte Goiano, Noroeste Paranaense, Sul Maranhense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Araraquara, Pantanais Sul Mato-grossense, Sudoeste de Mato Grosso do Sul, Extremo Oeste Baiano, Vale do Paraíba Paulista, Centro Sul Baiano, Noroeste Goiano, Noroeste de Minas, Metropolitana de São Paulo, Assis, Sudoeste Piauiense, Vale São-Franciscano da Bahia, Sudoeste Mato-grossense, Jequitinhonha, Distrito Federal, Campo das Vertentes, Sudeste Paraense, Sul Fluminense"
+    }
+  ]
 }

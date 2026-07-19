@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1784482300,
+  "fetched_at": 1784486336,
   "alerts": [
     {
       "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
@@ -11,17 +11,6 @@
       "end": "2026-07-20 18:00:00.0",
       "description": "INMET publica aviso iniciando em: 20/07/2026 12:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
       "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Centro Sul Baiano, Ocidental do Tocantins, Centro-Sul Mato-grossense, Sul Goiano, Presidente Prudente, São José do Rio Preto, Sudeste Paraense, Nordeste Mato-grossense, Leste de Mato Grosso do Sul, Campinas, Oeste de Minas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Centro Norte de Mato Grosso do Sul, Campo das Vertentes, Oriental do Tocantins, Norte Mato-grossense, Sudoeste Paraense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Norte Goiano, Sul Maranhense, Marília, Sudoeste Piauiense, Centro Norte Baiano, Araraquara, Extremo Oeste Baiano, Sul Fluminense, Vale do Paraíba Paulista, Sul Amazonense, Pantanais Sul Mato-grossense, Noroeste Goiano, Noroeste de Minas, Assis, Macro Metropolitana Paulista, Vale São-Franciscano da Bahia, Sudoeste Mato-grossense, Zona da Mata, Norte de Minas, Metropolitana de Belo Horizonte, Distrito Federal, Sudeste Piauiense, Metropolitana do Rio de Janeiro, Centro Maranhense, Itapetininga, Metropolitana de São Paulo, Centro Amazonense, Leste Maranhense"
-    },
-    {
-      "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55050",
-      "event": "Baixa Umidade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-07-19 12:00:00.0",
-      "end": "2026-07-19 18:00:00.0",
-      "description": "INMET publica aviso iniciando em: 19/07/2026 12:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
-      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Sul Cearense, Vale São-Franciscano da Bahia, Norte Pioneiro Paranaense, Ocidental do Tocantins, Sudeste Piauiense, Centro-Sul Mato-grossense, Sul Goiano, Presidente Prudente, São José do Rio Preto, São Francisco Pernambucano, Sudeste Paraense, Nordeste Mato-grossense, Leste de Mato Grosso do Sul, Campinas, Oeste de Minas, Bauru, Piracicaba, Sertão Paraibano, Sertões Cearenses, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Oriental do Tocantins, Norte Mato-grossense, Sudoeste Paraense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Norte Goiano, Noroeste Paranaense, Sul Maranhense, Macro Metropolitana Paulista, Marília, Sudoeste Piauiense, Norte Central Paranaense, Centro-Norte Piauiense, Araraquara, Sudoeste de Mato Grosso do Sul, Extremo Oeste Baiano, Sul Fluminense, Centro-Sul Cearense, Vale do Paraíba Paulista, Pantanais Sul Mato-grossense, Noroeste Goiano, Sertão Pernambucano, Noroeste de Minas, Metropolitana de São Paulo, Assis, Leste Maranhense, Sudoeste Mato-grossense, Zona da Mata, Norte de Minas, Centro Sul Baiano, Distrito Federal, Centro Norte Baiano, Campo das Vertentes, Centro Maranhense, Metropolitana de Belo Horizonte"
     },
     {
       "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",

@@ -1,16 +1,4 @@
 {
-  "fetched_at": 1784739687,
-  "alerts": [
-    {
-      "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55091",
-      "event": "Baixa Umidade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-07-22 12:00:00.0",
-      "end": "2026-07-22 18:00:00.0",
-      "description": "INMET publica aviso iniciando em: 22/07/2026 12:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
-      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Sul Cearense, Vale São-Franciscano da Bahia, Ocidental do Tocantins, Sudeste Piauiense, Sertões Cearenses, Centro-Sul Mato-grossense, Sul Goiano, São José do Rio Preto, São Francisco Pernambucano, Sudeste Paraense, Nordeste Mato-grossense, Leste de Mato Grosso do Sul, Campinas, Oeste de Minas, Piracicaba, Sul/Sudoeste de Minas, Centro Norte de Mato Grosso do Sul, Campo das Vertentes, Oriental do Tocantins, Norte Mato-grossense, Sudoeste Paraense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Norte Goiano, Sul Maranhense, Zona da Mata, Metropolitana de Belo Horizonte, Sudoeste Piauiense, Centro-Norte Piauiense, Centro Norte Baiano, Araraquara, Extremo Oeste Baiano, Sul Fluminense, Bauru, Centro-Sul Cearense, Vale do Paraíba Paulista, Sul Amazonense, Noroeste Goiano, Sudoeste Mato-grossense, Sertão Pernambucano, Noroeste de Minas, Metropolitana de São Paulo, Macro Metropolitana Paulista, Leste Maranhense, Centro Maranhense, Norte de Minas, Centro Sul Baiano, Distrito Federal, Leste Rondoniense, Sertão Paraibano, Jequitinhonha, Vale do Rio Doce, Centro Fluminense, Pantanais Sul Mato-grossense, Metropolitana do Rio de Janeiro, Oeste Maranhense, Centro Amazonense"
-    }
-  ]
+  "fetched_at": 1784745219,
+  "alerts": []
 }

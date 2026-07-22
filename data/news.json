@@ -1,4 +1,25 @@
 {
-  "fetched_at": 1784721187,
-  "items": []
+  "fetched_at": 1784734856,
+  "items": [
+    {
+      "source": "veja-rio",
+      "title": "Em qual quiosque do Recreio Vini Jr. e Virginia curtiram tarde de praia",
+      "summary": "Casal foi fotografado aos beijos em beach club na Praia da Reserva durante tarde de sol ao lado de amigos",
+      "link": "https://vejario.abril.com.br/beira-mar/quiosque-barra-vini-jr-virginia/",
+      "pub_date": "Wed, 22 Jul 2026 14:05:22 +0000",
+      "beaches": [
+        "recreio"
+      ]
+    },
+    {
+      "source": "veja-rio",
+      "title": "Tumulto no Arpoador: tarde de praia cheia termina em confusão e correria",
+      "summary": "Durante a algazarra desta terça-feira (21), as janelas de um ônibus foram quebradas e, além do quebra-quebra, relatos apontam roubo de colares e celulares",
+      "link": "https://vejario.abril.com.br/cidade/tumulto-arpoador-praia/",
+      "pub_date": "Wed, 22 Jul 2026 13:55:54 +0000",
+      "beaches": [
+        "arpoador"
+      ]
+    }
+  ]
 }

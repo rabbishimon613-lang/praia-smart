@@ -1,27 +1,16 @@
 {
-  "fetched_at": 1784497016,
+  "fetched_at": 1784704874,
   "alerts": [
     {
       "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55051",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55091",
       "event": "Baixa Umidade",
       "severity": "perigo potencial",
       "severity_rank": 1,
-      "start": "2026-07-20 12:00:00.0",
-      "end": "2026-07-20 18:00:00.0",
-      "description": "INMET publica aviso iniciando em: 20/07/2026 12:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
-      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Centro Sul Baiano, Ocidental do Tocantins, Centro-Sul Mato-grossense, Sul Goiano, Presidente Prudente, São José do Rio Preto, Sudeste Paraense, Nordeste Mato-grossense, Leste de Mato Grosso do Sul, Campinas, Oeste de Minas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Centro Norte de Mato Grosso do Sul, Campo das Vertentes, Oriental do Tocantins, Norte Mato-grossense, Sudoeste Paraense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Norte Goiano, Sul Maranhense, Marília, Sudoeste Piauiense, Centro Norte Baiano, Araraquara, Extremo Oeste Baiano, Sul Fluminense, Vale do Paraíba Paulista, Sul Amazonense, Pantanais Sul Mato-grossense, Noroeste Goiano, Noroeste de Minas, Assis, Macro Metropolitana Paulista, Vale São-Franciscano da Bahia, Sudoeste Mato-grossense, Zona da Mata, Norte de Minas, Metropolitana de Belo Horizonte, Distrito Federal, Sudeste Piauiense, Metropolitana do Rio de Janeiro, Centro Maranhense, Itapetininga, Metropolitana de São Paulo, Centro Amazonense, Leste Maranhense"
-    },
-    {
-      "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55049",
-      "event": "Baixa Umidade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-07-19 00:00:00.0",
-      "end": "2026-07-19 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 19/07/2026 00:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
-      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Sul Cearense, Vale São-Franciscano da Bahia, Norte Pioneiro Paranaense, Ocidental do Tocantins, Sudeste Piauiense, Sertões Cearenses, Centro-Sul Mato-grossense, Sul Goiano, Presidente Prudente, São José do Rio Preto, Sertão Pernambucano, São Francisco Pernambucano, Sudeste Paraense, Nordeste Mato-grossense, Sertão Paraibano, Leste de Mato Grosso do Sul, Campinas, Oeste de Minas, Oeste Potiguar, Bauru, Piracicaba, Sul/Sudoeste de Minas, Centro Norte de Mato Grosso do Sul, Campo das Vertentes, Oriental do Tocantins, Norte Mato-grossense, Sudoeste Paraense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Norte Goiano, Noroeste Paranaense, Sul Maranhense, Marília, Sudoeste Piauiense, Norte Central Paranaense, Centro-Norte Piauiense, Araraquara, Pantanais Sul Mato-grossense, Itapetininga, Sudoeste de Mato Grosso do Sul, Extremo Oeste Baiano, Sul Fluminense, Centro-Sul Cearense, Vale do Paraíba Paulista, Metropolitana de Belo Horizonte, Macro Metropolitana Paulista, Noroeste Goiano, Noroeste de Minas, Metropolitana de São Paulo, Assis, Leste Maranhense, Sudoeste Mato-grossense, Zona da Mata, Norte de Minas, Distrito Federal, Centro Sul Baiano, Metropolitana do Rio de Janeiro, Jaguaribe, Centro Maranhense, Centro Norte Baiano, Borborema, Central Potiguar"
+      "start": "2026-07-22 12:00:00.0",
+      "end": "2026-07-22 18:00:00.0",
+      "description": "INMET publica aviso iniciando em: 22/07/2026 12:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
+      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Sul Cearense, Vale São-Franciscano da Bahia, Ocidental do Tocantins, Sudeste Piauiense, Sertões Cearenses, Centro-Sul Mato-grossense, Sul Goiano, São José do Rio Preto, São Francisco Pernambucano, Sudeste Paraense, Nordeste Mato-grossense, Leste de Mato Grosso do Sul, Campinas, Oeste de Minas, Piracicaba, Sul/Sudoeste de Minas, Centro Norte de Mato Grosso do Sul, Campo das Vertentes, Oriental do Tocantins, Norte Mato-grossense, Sudoeste Paraense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Norte Goiano, Sul Maranhense, Zona da Mata, Metropolitana de Belo Horizonte, Sudoeste Piauiense, Centro-Norte Piauiense, Centro Norte Baiano, Araraquara, Extremo Oeste Baiano, Sul Fluminense, Bauru, Centro-Sul Cearense, Vale do Paraíba Paulista, Sul Amazonense, Noroeste Goiano, Sudoeste Mato-grossense, Sertão Pernambucano, Noroeste de Minas, Metropolitana de São Paulo, Macro Metropolitana Paulista, Leste Maranhense, Centro Maranhense, Norte de Minas, Centro Sul Baiano, Distrito Federal, Leste Rondoniense, Sertão Paraibano, Jequitinhonha, Vale do Rio Doce, Centro Fluminense, Pantanais Sul Mato-grossense, Metropolitana do Rio de Janeiro, Oeste Maranhense, Centro Amazonense"
     }
   ]
 }

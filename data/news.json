@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1784832339,
+  "fetched_at": 1784837484,
   "items": [
     {
       "source": "veja-rio",
@@ -9,26 +9,6 @@
       "pub_date": "Thu, 23 Jul 2026 15:01:38 +0000",
       "beaches": [
         "copacabana"
-      ]
-    },
-    {
-      "source": "veja-rio",
-      "title": "Carioca não perde dia de sol: se o Arpoador anda confuso, São Conrado lota",
-      "summary": "As duas praias ficam na Zona Sul, separadas por apenas 9 km",
-      "link": "https://vejario.abril.com.br/coluna/lu-lacerda/carioca-nao-perde-dia-de-sol-se-o-arpoador-anda-confuso-sao-conrado-lota/",
-      "pub_date": "Wed, 22 Jul 2026 20:29:14 +0000",
-      "beaches": [
-        "arpoador"
-      ]
-    },
-    {
-      "source": "veja-rio",
-      "title": "Depois da confusão no Arpoador, Flávio Valle encaminha ofício a secretário",
-      "summary": "A confusão começou na areia e depois se espalhou pelo calçadão e por ruas próximas",
-      "link": "https://vejario.abril.com.br/coluna/lu-lacerda/depois-da-confusao-no-arpoador-flavio-valle-encaminha-oficio-a-secretario/",
-      "pub_date": "Wed, 22 Jul 2026 18:23:53 +0000",
-      "beaches": [
-        "arpoador"
       ]
     }
   ]

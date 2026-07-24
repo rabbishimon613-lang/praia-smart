@@ -1,4 +1,27 @@
 {
-  "fetched_at": 1784893251,
-  "alerts": []
+  "fetched_at": 1784905523,
+  "alerts": [
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55124",
+      "event": "Tempestade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-07-25 09:00:00.0",
+      "end": "2026-07-25 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 25/07/2026 09:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Triângulo Mineiro/Alto Paranaíba, Central Mineira, Norte Pioneiro Paranaense, Oeste Catarinense, Zona da Mata, Vale do Rio Doce, Presidente Prudente, São José do Rio Preto, Central Espírito-santense, Leste de Mato Grosso do Sul, Campinas, Sul Goiano, Oeste de Minas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Sul Espírito-santense, Campo das Vertentes, Noroeste Rio-grandense, Centro Ocidental Paranaense, Ribeirão Preto, Araçatuba, Noroeste Paranaense, Marília, Metropolitana de Belo Horizonte, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Sudoeste Paranaense, Oeste Paranaense, Pantanais Sul Mato-grossense, Noroeste Fluminense, Vale do Paraíba Paulista, Centro Fluminense, Assis, Macro Metropolitana Paulista, Noroeste Espírito-santense, Sul Fluminense, Centro-Sul Paranaense, Centro Norte de Mato Grosso do Sul, Jequitinhonha, Noroeste de Minas, Itapetininga, Metropolitana do Rio de Janeiro, Centro Oriental Paranaense, Norte Fluminense"
+    },
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55123",
+      "event": "Tempestade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-07-24 10:00:00.0",
+      "end": "2026-07-24 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 24/07/2026 10:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Serrana, Oeste Catarinense, Presidente Prudente, São José do Rio Preto, Campinas, Noroeste Rio-grandense, Bauru, Piracicaba, Centro Ocidental Rio-grandense, Sul/Sudoeste de Minas, Itapetininga, Centro Ocidental Paranaense, Ribeirão Preto, Araçatuba, Metropolitana de Porto Alegre, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Sudoeste Paranaense, Oeste Paranaense, Leste de Mato Grosso do Sul, Nordeste Rio-grandense, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Centro Oriental Paranaense, Centro Oriental Rio-grandense, Metropolitana de São Paulo, Assis, Norte Catarinense, Metropolitana do Rio de Janeiro, Centro-Sul Paranaense, Metropolitana de Curitiba, Sudoeste Rio-grandense, Litoral Sul Paulista, Campo das Vertentes, Zona da Mata"
+    }
+  ]
 }

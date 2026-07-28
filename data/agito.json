@@ -1,10 +1,10 @@
 {
-  "fetched_at": 1785223006,
+  "fetched_at": 1785233092,
   "by_beach": {
     "copa-p5": {
       "current": {
-        "bucket": "vazia",
-        "score": 0.034,
+        "bucket": "cheia",
+        "score": 0.496,
         "confidence": "estimativa"
       },
       "next_peak": {
@@ -13,21 +13,6 @@
         "score": 0.881
       },
       "hourly": [
-        {
-          "time": "2026-07-28T08:00",
-          "score": 0.034,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T09:00",
-          "score": 0.123,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T10:00",
-          "score": 0.278,
-          "bucket": "moderada"
-        },
         {
           "time": "2026-07-28T11:00",
           "score": 0.496,
@@ -132,13 +117,28 @@
           "time": "2026-07-29T07:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T08:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T09:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T10:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "morro-terceira": {
       "current": {
-        "bucket": "vazia",
-        "score": 0.063,
+        "bucket": "cheia",
+        "score": 0.458,
         "confidence": "estimativa"
       },
       "next_peak": {
@@ -147,21 +147,6 @@
         "score": 0.689
       },
       "hourly": [
-        {
-          "time": "2026-07-28T08:00",
-          "score": 0.063,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T09:00",
-          "score": 0.141,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T10:00",
-          "score": 0.28,
-          "bucket": "moderada"
-        },
         {
           "time": "2026-07-28T11:00",
           "score": 0.458,
@@ -266,13 +251,28 @@
           "time": "2026-07-29T07:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T08:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T09:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T10:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "sao-conrado": {
       "current": {
-        "bucket": "vazia",
-        "score": 0.045,
+        "bucket": "cheia",
+        "score": 0.533,
         "confidence": "estimativa"
       },
       "next_peak": {
@@ -281,21 +281,6 @@
         "score": 0.946
       },
       "hourly": [
-        {
-          "time": "2026-07-28T08:00",
-          "score": 0.045,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T09:00",
-          "score": 0.137,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T10:00",
-          "score": 0.302,
-          "bucket": "moderada"
-        },
         {
           "time": "2026-07-28T11:00",
           "score": 0.533,
@@ -400,13 +385,28 @@
           "time": "2026-07-29T07:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T08:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T09:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T10:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "leblon-mirante": {
       "current": {
-        "bucket": "vazia",
-        "score": 0.034,
+        "bucket": "cheia",
+        "score": 0.496,
         "confidence": "estimativa"
       },
       "next_peak": {
@@ -415,21 +415,6 @@
         "score": 0.881
       },
       "hourly": [
-        {
-          "time": "2026-07-28T08:00",
-          "score": 0.034,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T09:00",
-          "score": 0.123,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T10:00",
-          "score": 0.278,
-          "bucket": "moderada"
-        },
         {
           "time": "2026-07-28T11:00",
           "score": 0.496,
@@ -534,13 +519,28 @@
           "time": "2026-07-29T07:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T08:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T09:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T10:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "balneario-rincao": {
       "current": {
         "bucket": "vazia",
-        "score": 0.013,
+        "score": 0.105,
         "confidence": "estimativa"
       },
       "next_peak": {
@@ -549,21 +549,6 @@
         "score": 0.147
       },
       "hourly": [
-        {
-          "time": "2026-07-28T08:00",
-          "score": 0.013,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T09:00",
-          "score": 0.032,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T10:00",
-          "score": 0.063,
-          "bucket": "vazia"
-        },
         {
           "time": "2026-07-28T11:00",
           "score": 0.105,
@@ -668,13 +653,28 @@
           "time": "2026-07-29T07:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T08:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T09:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T10:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "praia-grande-boqueirao": {
       "current": {
-        "bucket": "vazia",
-        "score": 0.054,
+        "bucket": "cheia",
+        "score": 0.548,
         "confidence": "estimativa"
       },
       "next_peak": {
@@ -683,21 +683,6 @@
         "score": 0.914
       },
       "hourly": [
-        {
-          "time": "2026-07-28T08:00",
-          "score": 0.054,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T09:00",
-          "score": 0.146,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T10:00",
-          "score": 0.314,
-          "bucket": "moderada"
-        },
         {
           "time": "2026-07-28T11:00",
           "score": 0.548,
@@ -802,13 +787,28 @@
           "time": "2026-07-29T07:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T08:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T09:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T10:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "cabo-frio-forte": {
       "current": {
-        "bucket": "vazia",
-        "score": 0.056,
+        "bucket": "cheia",
+        "score": 0.473,
         "confidence": "estimativa"
       },
       "next_peak": {
@@ -817,21 +817,6 @@
         "score": 0.859
       },
       "hourly": [
-        {
-          "time": "2026-07-28T08:00",
-          "score": 0.056,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T09:00",
-          "score": 0.132,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T10:00",
-          "score": 0.27,
-          "bucket": "moderada"
-        },
         {
           "time": "2026-07-28T11:00",
           "score": 0.473,
@@ -936,13 +921,28 @@
           "time": "2026-07-29T07:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T08:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T09:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T10:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "balneario-camboriu": {
       "current": {
-        "bucket": "vazia",
-        "score": 0.012,
+        "bucket": "cheia",
+        "score": 0.47,
         "confidence": "estimativa"
       },
       "next_peak": {
@@ -951,21 +951,6 @@
         "score": 0.675
       },
       "hourly": [
-        {
-          "time": "2026-07-28T08:00",
-          "score": 0.012,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T09:00",
-          "score": 0.06,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T10:00",
-          "score": 0.211,
-          "bucket": "moderada"
-        },
         {
           "time": "2026-07-28T11:00",
           "score": 0.47,
@@ -1070,13 +1055,28 @@
           "time": "2026-07-29T07:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T08:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T09:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T10:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "santos-gonzaga": {
       "current": {
-        "bucket": "vazia",
-        "score": 0.053,
+        "bucket": "cheia",
+        "score": 0.552,
         "confidence": "estimativa"
       },
       "next_peak": {
@@ -1085,21 +1085,6 @@
         "score": 0.909
       },
       "hourly": [
-        {
-          "time": "2026-07-28T08:00",
-          "score": 0.053,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T09:00",
-          "score": 0.143,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T10:00",
-          "score": 0.318,
-          "bucket": "moderada"
-        },
         {
           "time": "2026-07-28T11:00",
           "score": 0.552,
@@ -1204,13 +1189,28 @@
           "time": "2026-07-29T07:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T08:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T09:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T10:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "guaruja-enseada": {
       "current": {
-        "bucket": "vazia",
-        "score": 0.052,
+        "bucket": "cheia",
+        "score": 0.528,
         "confidence": "estimativa"
       },
       "next_peak": {
@@ -1219,21 +1219,6 @@
         "score": 0.887
       },
       "hourly": [
-        {
-          "time": "2026-07-28T08:00",
-          "score": 0.052,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T09:00",
-          "score": 0.143,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T10:00",
-          "score": 0.318,
-          "bucket": "moderada"
-        },
         {
           "time": "2026-07-28T11:00",
           "score": 0.528,
@@ -1338,13 +1323,28 @@
           "time": "2026-07-29T07:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T08:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T09:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T10:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "floripa-barra-lagoa": {
       "current": {
         "bucket": "vazia",
-        "score": 0.009,
+        "score": 0.134,
         "confidence": "estimativa"
       },
       "next_peak": {
@@ -1353,21 +1353,6 @@
         "score": 0.49
       },
       "hourly": [
-        {
-          "time": "2026-07-28T08:00",
-          "score": 0.009,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T09:00",
-          "score": 0.026,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T10:00",
-          "score": 0.064,
-          "bucket": "vazia"
-        },
         {
           "time": "2026-07-28T11:00",
           "score": 0.134,
@@ -1472,13 +1457,28 @@
           "time": "2026-07-29T07:00",
           "score": 0.0,
           "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T08:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T09:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T10:00",
+          "score": 0.0,
+          "bucket": "vazia"
         }
       ]
     },
     "natal-ponta-negra": {
       "current": {
-        "bucket": "vazia",
-        "score": 0.051,
+        "bucket": "moderada",
+        "score": 0.436,
         "confidence": "estimativa"
       },
       "next_peak": {
@@ -1487,21 +1487,6 @@
         "score": 0.772
       },
       "hourly": [
-        {
-          "time": "2026-07-28T08:00",
-          "score": 0.051,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T09:00",
-          "score": 0.129,
-          "bucket": "vazia"
-        },
-        {
-          "time": "2026-07-28T10:00",
-          "score": 0.27,
-          "bucket": "moderada"
-        },
         {
           "time": "2026-07-28T11:00",
           "score": 0.436,
@@ -1604,6 +1589,21 @@
         },
         {
           "time": "2026-07-29T07:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T08:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T09:00",
+          "score": 0.0,
+          "bucket": "vazia"
+        },
+        {
+          "time": "2026-07-29T10:00",
           "score": 0.0,
           "bucket": "vazia"
         }

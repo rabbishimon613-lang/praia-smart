@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1785357406,
+  "fetched_at": 1785360997,
   "items": [
     {
       "source": "catraca-livre",
@@ -9,6 +9,16 @@
       "pub_date": "Wed, 29 Jul 2026 18:14:34 +0000",
       "beaches": [
         "general"
+      ]
+    },
+    {
+      "source": "veja-rio",
+      "title": "Ventos de 90 quilômetros por hora “expulsam” banhistas da Praia de Ipanema",
+      "summary": "O paradisíaco destino turístico foi tomado por um mar extremamente agitado e uma revoada de guarda-sóis e cadeiras, que tornaram insegura a estadia nas areias",
+      "link": "https://vejario.abril.com.br/cidade/ventos-praia-de-ipanema/",
+      "pub_date": "Wed, 29 Jul 2026 21:26:13 +0000",
+      "beaches": [
+        "ipanema"
       ]
     }
   ]

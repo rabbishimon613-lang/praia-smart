@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1785338919,
+  "fetched_at": 1785357402,
   "alerts": [
     {
       "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo",
@@ -24,6 +24,17 @@
       "area": "Aviso para as Áreas: Sul Fluminense, Metropolitana de Curitiba, Metropolitana de São Paulo, Litoral Sul Paulista, Vale do Paraíba Paulista, Metropolitana do Rio de Janeiro"
     },
     {
+      "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55189",
+      "event": "Ventos Costeiros",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-07-29 17:25:00.0",
+      "end": "2026-07-30 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 29/07/2026 17:25. Intensificação dos ventos nas regiões litorâneas, movimentando dunas de areia sobre construções na orla.",
+      "area": "Aviso para as Áreas: Sul Baiano, Central Espírito-santense, Litoral Norte Espírito-santense, Baixadas, Norte Fluminense, Sul Espírito-santense"
+    },
+    {
       "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
       "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55179",
       "event": "Baixa Umidade",
@@ -33,17 +44,6 @@
       "end": "2026-07-30 19:00:00.0",
       "description": "INMET publica aviso iniciando em: 30/07/2026 10:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
       "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Sul Cearense, Centro Sul Baiano, Vale São-Franciscano da Bahia, Zona da Mata, Ocidental do Tocantins, Central Potiguar, Sudeste Piauiense, Sertões Cearenses, Sul Goiano, Vale do Rio Doce, Sertão Pernambucano, São Francisco Pernambucano, Centro-Norte Piauiense, Sudeste Paraense, Nordeste Mato-grossense, Sertão Paraibano, Noroeste Espírito-santense, Campinas, Oeste de Minas, Oeste Potiguar, Vale do Mucuri, Norte de Minas, Sul/Sudoeste de Minas, Sul Espírito-santense, Campo das Vertentes, Oriental do Tocantins, Jequitinhonha, São José do Rio Preto, Sudoeste Paraense, Ribeirão Preto, Sudeste Mato-grossense, Norte Goiano, Sul Maranhense, Metropolitana de Belo Horizonte, Sudoeste Piauiense, Centro Norte Baiano, Araraquara, Extremo Oeste Baiano, Centro-Sul Cearense, Leste de Mato Grosso do Sul, Noroeste Goiano, Noroeste de Minas, Leste Maranhense, Centro Maranhense, Sul Fluminense, Distrito Federal, Vale do Paraíba Paulista, Nordeste Baiano, Centro Fluminense, Centro-Sul Mato-grossense, Norte Mato-grossense, Jaguaribe, Noroeste Fluminense, Oeste Maranhense, Piracicaba, Borborema"
-    },
-    {
-      "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55169",
-      "event": "Baixa Umidade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-07-29 11:00:00.0",
-      "end": "2026-07-29 19:00:00.0",
-      "description": "INMET publica aviso iniciando em: 29/07/2026 11:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
-      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Sul Cearense, Centro Sul Baiano, Vale São-Franciscano da Bahia, Zona da Mata, Ocidental do Tocantins, Sudeste Piauiense, Sertões Cearenses, Sul Goiano, Vale do Rio Doce, São José do Rio Preto, Sertão Pernambucano, São Francisco Pernambucano, Nordeste Mato-grossense, Sertão Paraibano, Campinas, Oeste de Minas, Oeste Potiguar, Norte de Minas, Sul/Sudoeste de Minas, Campo das Vertentes, Oriental do Tocantins, Ribeirão Preto, Norte Goiano, Sul Maranhense, Metropolitana de Belo Horizonte, Sudoeste Piauiense, Centro Norte Baiano, Araraquara, Jequitinhonha, Extremo Oeste Baiano, Centro-Sul Cearense, Leste de Mato Grosso do Sul, Noroeste Goiano, Piracicaba, Noroeste de Minas, Centro-Norte Piauiense, Sul Fluminense, Bauru, Distrito Federal, Araçatuba, Vale do Paraíba Paulista, Central Potiguar, Nordeste Baiano, Vale do Mucuri, Centro Fluminense, Jaguaribe, Norte Mato-grossense, Sudeste Mato-grossense, Sudeste Paraense, Metropolitana do Rio de Janeiro, Borborema"
     }
   ]
 }

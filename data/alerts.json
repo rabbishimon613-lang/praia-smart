@@ -1,6 +1,17 @@
 {
-  "fetched_at": 1785331400,
+  "fetched_at": 1785338919,
   "alerts": [
+    {
+      "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55188",
+      "event": "Ventos Costeiros",
+      "severity": "perigo",
+      "severity_rank": 2,
+      "start": "2026-07-29 10:00:00.0",
+      "end": "2026-07-29 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 29/07/2026 10:00. Intensificação dos ventos nas regiões litorâneas, movimentando dunas de areia sobre construções na orla.",
+      "area": "Aviso para as Áreas: Sul Fluminense, Baixadas, Metropolitana de São Paulo, Litoral Sul Paulista, Vale do Paraíba Paulista, Metropolitana de Curitiba, Metropolitana do Rio de Janeiro"
+    },
     {
       "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo",
       "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55175",
@@ -11,17 +22,6 @@
       "end": "2026-07-29 23:59:00.0",
       "description": "INMET publica aviso iniciando em: 29/07/2026 00:00. Intensificação dos ventos nas regiões litorâneas, movimentando dunas de areia sobre construções na orla.",
       "area": "Aviso para as Áreas: Sul Fluminense, Metropolitana de Curitiba, Metropolitana de São Paulo, Litoral Sul Paulista, Vale do Paraíba Paulista, Metropolitana do Rio de Janeiro"
-    },
-    {
-      "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55187",
-      "event": "Ventos Costeiros",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-07-29 10:00:00.0",
-      "end": "2026-07-29 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 29/07/2026 10:00. Intensificação dos ventos nas regiões litorâneas, movimentando dunas de areia sobre construções na orla.",
-      "area": "Aviso para as Áreas: Sul Fluminense, Baixadas, Metropolitana de São Paulo, Litoral Sul Paulista, Vale do Paraíba Paulista, Metropolitana de Curitiba, Metropolitana do Rio de Janeiro"
     },
     {
       "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",

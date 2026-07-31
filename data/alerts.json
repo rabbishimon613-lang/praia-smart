@@ -1,16 +1,4 @@
 {
-  "fetched_at": 1785451566,
-  "alerts": [
-    {
-      "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55189",
-      "event": "Ventos Costeiros",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-07-29 17:25:00.0",
-      "end": "2026-07-30 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 29/07/2026 17:25. Intensificação dos ventos nas regiões litorâneas, movimentando dunas de areia sobre construções na orla.",
-      "area": "Aviso para as Áreas: Sul Baiano, Central Espírito-santense, Litoral Norte Espírito-santense, Baixadas, Norte Fluminense, Sul Espírito-santense"
-    }
-  ]
+  "fetched_at": 1785469389,
+  "alerts": []
 }

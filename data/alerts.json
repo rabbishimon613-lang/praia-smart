@@ -1,16 +1,4 @@
 {
-  "fetched_at": 1785712252,
-  "alerts": [
-    {
-      "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55221",
-      "event": "Ventos Costeiros",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-08-01 08:00:00.0",
-      "end": "2026-08-02 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 01/08/2026 08:00. Intensificação dos ventos nas regiões litorâneas, movimentando dunas de areia sobre construções na orla.",
-      "area": "Aviso para as Áreas: Sul Fluminense, Baixadas, Norte Fluminense, Vale do Paraíba Paulista, Metropolitana do Rio de Janeiro, Sul Espírito-santense"
-    }
-  ]
+  "fetched_at": 1785715934,
+  "alerts": []
 }

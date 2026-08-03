@@ -1,17 +1,6 @@
 {
-  "fetched_at": 1785791266,
+  "fetched_at": 1785795429,
   "alerts": [
-    {
-      "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55236",
-      "event": "Baixa Umidade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-08-03 10:00:00.0",
-      "end": "2026-08-03 22:00:00.0",
-      "description": "INMET publica aviso iniciando em: 03/08/2026 10:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
-      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Sudeste Paraense, Ocidental do Tocantins, Oeste Maranhense, Sudeste Piauiense, Sertões Cearenses, Sul Goiano, Presidente Prudente, São José do Rio Preto, Leste Maranhense, São Francisco Pernambucano, Centro-Norte Piauiense, Nordeste Mato-grossense, Leste de Mato Grosso do Sul, Campinas, Oeste de Minas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Oriental do Tocantins, Norte Mato-grossense, Sudoeste Paraense, Sul Cearense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Norte Goiano, Sul Maranhense, Macro Metropolitana Paulista, Marília, Sudoeste Piauiense, Centro Norte Baiano, Araraquara, Extremo Oeste Baiano, Centro-Sul Cearense, Campo das Vertentes, Vale do Paraíba Paulista, Metropolitana de Belo Horizonte, Noroeste Goiano, Centro Maranhense, Sertão Pernambucano, Noroeste de Minas, Metropolitana de São Paulo, Centro-Sul Mato-grossense, Vale São-Franciscano da Bahia, Norte Piauiense, Norte de Minas, Centro Sul Baiano, Distrito Federal, Pantanais Sul Mato-grossense, Noroeste Cearense, Jequitinhonha, Assis, Sul Fluminense, Zona da Mata"
-    },
     {
       "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
       "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55233",

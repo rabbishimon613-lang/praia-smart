@@ -1,4 +1,15 @@
 {
-  "fetched_at": 1785845892,
-  "items": []
+  "fetched_at": 1785855599,
+  "items": [
+    {
+      "source": "veja-rio",
+      "title": "Baleia-franca e filhote dão espetáculo no Arpoador (vídeo!)",
+      "summary": "Essa espécie gosta de chegar bem perto da praia para alimentar seus filhotes com segurança",
+      "link": "https://vejario.abril.com.br/coluna/lu-lacerda/baleia-franca-e-filhote-dao-espetaculo-no-arpoador-video/",
+      "pub_date": "Tue, 04 Aug 2026 13:51:22 +0000",
+      "beaches": [
+        "arpoador"
+      ]
+    }
+  ]
 }

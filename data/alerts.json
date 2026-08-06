@@ -1,6 +1,39 @@
 {
-  "fetched_at": 1786001098,
+  "fetched_at": 1786018716,
   "alerts": [
+    {
+      "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55275",
+      "event": "Ventos Costeiros",
+      "severity": "perigo",
+      "severity_rank": 2,
+      "start": "2026-08-07 00:00:00.0",
+      "end": "2026-08-07 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 07/08/2026 00:00. Intensificação dos ventos nas regiões litorâneas, movimentando dunas de areia sobre construções na orla.",
+      "area": "Aviso para as Áreas: Central Espírito-santense, Baixadas, Norte Fluminense, Sul Espírito-santense"
+    },
+    {
+      "title": "Aviso de Vendaval. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55279",
+      "event": "Vendaval",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-08-08 00:00:00.0",
+      "end": "2026-08-08 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 08/08/2026 00:00. Vento variando entre 40 km/h e 60 km/h. Baixo risco de queda de galhos de árvores.",
+      "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Serrana, Oeste Catarinense, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Vale do Itajaí, Leste de Mato Grosso do Sul, Triângulo Mineiro/Alto Paranaíba, Campinas, Noroeste Rio-grandense, Bauru, Piracicaba, Grande Florianópolis, Centro Ocidental Rio-grandense, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Sul Baiano, Centro Ocidental Paranaense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Metropolitana de Porto Alegre, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Sudeste Rio-grandense, Araraquara, Sudoeste Paranaense, Oeste Paranaense, Pantanais Sul Mato-grossense, Central Espírito-santense, Nordeste Rio-grandense, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Sul Goiano, Litoral Norte Espírito-santense, Centro Oriental Paranaense, Sudoeste Mato-grossense, Norte Catarinense, Sul Catarinense, Baixadas, Centro Fluminense, Centro Oriental Rio-grandense, Metropolitana de São Paulo, Assis, Centro-Sul Mato-grossense, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Centro-Sul Paranaense, Norte Fluminense, Sul Espírito-santense"
+    },
+    {
+      "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55278",
+      "event": "Baixa Umidade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-08-07 10:30:00.0",
+      "end": "2026-08-07 22:00:00.0",
+      "description": "INMET publica aviso iniciando em: 07/08/2026 10:30. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
+      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Sul Cearense, Vale São-Franciscano da Bahia, Zona da Mata, Ocidental do Tocantins, Central Potiguar, Sudeste Piauiense, Sertões Cearenses, Centro-Sul Mato-grossense, Sul Goiano, Oeste Potiguar, Vale do Rio Doce, Sertão Pernambucano, São Francisco Pernambucano, Centro-Norte Piauiense, Sudeste Paraense, Nordeste Mato-grossense, Sertão Paraibano, Oeste de Minas, Norte de Minas, Campo das Vertentes, Oriental do Tocantins, Sul/Sudoeste de Minas, Norte Mato-grossense, Sudoeste Paraense, Sudeste Mato-grossense, Norte Goiano, Sul Maranhense, Jaguaribe, Metropolitana de Belo Horizonte, Sudoeste Piauiense, Oeste Maranhense, Centro Norte Baiano, Borborema, Jequitinhonha, Extremo Oeste Baiano, Centro-Sul Cearense, Noroeste Fluminense, Sul Amazonense, Noroeste Goiano, Centro Fluminense, Noroeste de Minas, Leste Maranhense, Sudoeste Mato-grossense, Centro Maranhense, Centro Sul Baiano, Distrito Federal, Noroeste Cearense, Vale do Mucuri, Centro Amazonense, Metropolitana do Rio de Janeiro, Sul Fluminense, Centro Norte de Mato Grosso do Sul"
+    },
     {
       "title": "Aviso de Vendaval. Severidade Grau: Perigo Potencial",
       "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55270",

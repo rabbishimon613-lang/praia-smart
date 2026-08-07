@@ -7,19 +7,19 @@
     "lat": -22.9817,
     "lng": -43.1907,
     "youtube_id": "qShdkqvyCww",
-    "fetched_at": 1786132873,
+    "fetched_at": 1786136297,
     "weather": {
-      "air_temp_c": 23.8,
-      "wind_kmh": 1.8,
-      "wind_dir": 37,
-      "uv": 0.45,
+      "air_temp_c": 23.7,
+      "wind_kmh": 7.4,
+      "wind_dir": 39,
+      "uv": 0.0,
       "cloud_pct": 100,
       "precip_mm": 0.0
     },
     "surf": {
-      "wave_height_m": 0.92,
-      "wave_period_s": 7.35,
-      "wave_dir": 129
+      "wave_height_m": 0.94,
+      "wave_period_s": 7.25,
+      "wave_dir": 130
     },
     "water": {
       "sea_temp_c": 23.4,
@@ -312,22 +312,22 @@
     "lat": -13.385,
     "lng": -38.911,
     "youtube_id": "f2qPp97kJ_I",
-    "fetched_at": 1786132873,
+    "fetched_at": 1786136297,
     "weather": {
-      "air_temp_c": 25.3,
-      "wind_kmh": 11.7,
-      "wind_dir": 85,
-      "uv": 0.4,
-      "cloud_pct": 5,
+      "air_temp_c": 24.5,
+      "wind_kmh": 11.3,
+      "wind_dir": 81,
+      "uv": 0.0,
+      "cloud_pct": 2,
       "precip_mm": 0.0
     },
     "surf": {
       "wave_height_m": 0.66,
-      "wave_period_s": 7.1,
-      "wave_dir": 102
+      "wave_period_s": 7.0,
+      "wave_dir": 101
     },
     "water": {
-      "sea_temp_c": 26.7,
+      "sea_temp_c": 26.6,
       "next_high_tide": {
         "time": "2026-08-07T23:00",
         "height_m": 0.56
@@ -617,19 +617,19 @@
     "lat": -23.0024,
     "lng": -43.268,
     "youtube_id": "yugTx66OKu4",
-    "fetched_at": 1786132873,
+    "fetched_at": 1786136297,
     "weather": {
-      "air_temp_c": 24.4,
-      "wind_kmh": 4.6,
-      "wind_dir": 21,
-      "uv": 0.45,
+      "air_temp_c": 24.2,
+      "wind_kmh": 7.6,
+      "wind_dir": 28,
+      "uv": 0.0,
       "cloud_pct": 100,
       "precip_mm": 0.0
     },
     "surf": {
-      "wave_height_m": 0.9,
-      "wave_period_s": 7.5,
-      "wave_dir": 129
+      "wave_height_m": 0.92,
+      "wave_period_s": 7.35,
+      "wave_dir": 130
     },
     "water": {
       "sea_temp_c": 23.3,
@@ -919,19 +919,19 @@
     "lat": -22.9888,
     "lng": -43.223,
     "youtube_id": null,
-    "fetched_at": 1786132873,
+    "fetched_at": 1786136297,
     "weather": {
-      "air_temp_c": 23.8,
-      "wind_kmh": 1.8,
-      "wind_dir": 37,
-      "uv": 0.45,
+      "air_temp_c": 23.7,
+      "wind_kmh": 7.4,
+      "wind_dir": 39,
+      "uv": 0.0,
       "cloud_pct": 100,
       "precip_mm": 0.0
     },
     "surf": {
-      "wave_height_m": 0.92,
-      "wave_period_s": 7.35,
-      "wave_dir": 129
+      "wave_height_m": 0.94,
+      "wave_period_s": 7.25,
+      "wave_dir": 130
     },
     "water": {
       "sea_temp_c": 23.4,
@@ -1224,22 +1224,22 @@
     "lat": -28.83,
     "lng": -49.2333,
     "youtube_id": "mWsPnnbHKE0",
-    "fetched_at": 1786132873,
+    "fetched_at": 1786136297,
     "weather": {
-      "air_temp_c": 16.4,
-      "wind_kmh": 16.0,
-      "wind_dir": 178,
-      "uv": 0.65,
-      "cloud_pct": 66,
+      "air_temp_c": 15.8,
+      "wind_kmh": 12.6,
+      "wind_dir": 181,
+      "uv": 0.05,
+      "cloud_pct": 18,
       "precip_mm": 0.0
     },
     "surf": {
-      "wave_height_m": 2.18,
-      "wave_period_s": 6.9,
+      "wave_height_m": 2.22,
+      "wave_period_s": 7.0,
       "wave_dir": 187
     },
     "water": {
-      "sea_temp_c": 19.1,
+      "sea_temp_c": 19.0,
       "next_high_tide": {
         "time": "2026-08-08T13:00",
         "height_m": 0.59
@@ -1526,19 +1526,19 @@
     "lat": -24.005,
     "lng": -46.404,
     "youtube_id": "afk7Axyf6vI",
-    "fetched_at": 1786132873,
+    "fetched_at": 1786136297,
     "weather": {
-      "air_temp_c": 23.9,
-      "wind_kmh": 1.7,
-      "wind_dir": 288,
-      "uv": 0.2,
-      "cloud_pct": 100,
+      "air_temp_c": 22.9,
+      "wind_kmh": 1.4,
+      "wind_dir": 320,
+      "uv": 0.0,
+      "cloud_pct": 71,
       "precip_mm": 0.0
     },
     "surf": {
-      "wave_height_m": 0.74,
+      "wave_height_m": 0.72,
       "wave_period_s": 7.95,
-      "wave_dir": 123
+      "wave_dir": 122
     },
     "water": {
       "sea_temp_c": 21.9,
@@ -1831,19 +1831,19 @@
     "lat": -22.895,
     "lng": -42.015,
     "youtube_id": "p6ppa-V3-KQ",
-    "fetched_at": 1786132873,
+    "fetched_at": 1786136297,
     "weather": {
-      "air_temp_c": 25.4,
-      "wind_kmh": 10.9,
-      "wind_dir": 207,
-      "uv": 0.15,
-      "cloud_pct": 33,
+      "air_temp_c": 24.1,
+      "wind_kmh": 9.5,
+      "wind_dir": 205,
+      "uv": 0.0,
+      "cloud_pct": 74,
       "precip_mm": 0.0
     },
     "surf": {
-      "wave_height_m": 0.76,
-      "wave_period_s": 6.45,
-      "wave_dir": 110
+      "wave_height_m": 0.78,
+      "wave_period_s": 6.25,
+      "wave_dir": 112
     },
     "water": {
       "sea_temp_c": 22.9,
@@ -2136,22 +2136,22 @@
     "lat": -26.99,
     "lng": -48.63,
     "youtube_id": "j4Wne61IJ3I",
-    "fetched_at": 1786132873,
+    "fetched_at": 1786136297,
     "weather": {
-      "air_temp_c": 17.7,
-      "wind_kmh": 19.6,
-      "wind_dir": 131,
-      "uv": 0.65,
-      "cloud_pct": 31,
+      "air_temp_c": 17.0,
+      "wind_kmh": 20.5,
+      "wind_dir": 135,
+      "uv": 0.05,
+      "cloud_pct": 36,
       "precip_mm": 0.0
     },
     "surf": {
-      "wave_height_m": 0.9,
-      "wave_period_s": 4.9,
-      "wave_dir": 105
+      "wave_height_m": 0.94,
+      "wave_period_s": 4.8,
+      "wave_dir": 113
     },
     "water": {
-      "sea_temp_c": 19.2,
+      "sea_temp_c": 19.1,
       "next_high_tide": {
         "time": "2026-08-08T02:00",
         "height_m": 0.28
@@ -2441,22 +2441,22 @@
     "lat": -23.97,
     "lng": -46.33,
     "youtube_id": "l69Dc4s9qxk",
-    "fetched_at": 1786132873,
+    "fetched_at": 1786136297,
     "weather": {
-      "air_temp_c": 24.6,
-      "wind_kmh": 4.1,
-      "wind_dir": 105,
-      "uv": 0.2,
-      "cloud_pct": 93,
+      "air_temp_c": 23.6,
+      "wind_kmh": 3.8,
+      "wind_dir": 161,
+      "uv": 0.0,
+      "cloud_pct": 63,
       "precip_mm": 0.0
     },
     "surf": {
-      "wave_height_m": 0.74,
+      "wave_height_m": 0.72,
       "wave_period_s": 7.85,
-      "wave_dir": 120
+      "wave_dir": 119
     },
     "water": {
-      "sea_temp_c": 22.1,
+      "sea_temp_c": 22.0,
       "next_high_tide": {
         "time": "2026-08-08T00:00",
         "height_m": 0.35
@@ -2746,19 +2746,19 @@
     "lat": -23.995,
     "lng": -46.22,
     "youtube_id": "v5Y6WsD577M",
-    "fetched_at": 1786132873,
+    "fetched_at": 1786136297,
     "weather": {
-      "air_temp_c": 23.9,
-      "wind_kmh": 10.2,
-      "wind_dir": 58,
-      "uv": 0.2,
-      "cloud_pct": 90,
+      "air_temp_c": 23.2,
+      "wind_kmh": 1.4,
+      "wind_dir": 90,
+      "uv": 0.0,
+      "cloud_pct": 66,
       "precip_mm": 0.0
     },
     "surf": {
-      "wave_height_m": 0.76,
+      "wave_height_m": 0.74,
       "wave_period_s": 7.85,
-      "wave_dir": 120
+      "wave_dir": 119
     },
     "water": {
       "sea_temp_c": 22.0,
@@ -3051,22 +3051,22 @@
     "lat": -27.575,
     "lng": -48.426,
     "youtube_id": "v9ne2bJD01U",
-    "fetched_at": 1786132873,
+    "fetched_at": 1786136297,
     "weather": {
-      "air_temp_c": 16.7,
-      "wind_kmh": 22.8,
-      "wind_dir": 166,
-      "uv": 0.6,
-      "cloud_pct": 80,
+      "air_temp_c": 16.3,
+      "wind_kmh": 25.1,
+      "wind_dir": 167,
+      "uv": 0.05,
+      "cloud_pct": 39,
       "precip_mm": 0.0
     },
     "surf": {
-      "wave_height_m": 1.0,
-      "wave_period_s": 5.35,
-      "wave_dir": 160
+      "wave_height_m": 1.02,
+      "wave_period_s": 5.45,
+      "wave_dir": 162
     },
     "water": {
-      "sea_temp_c": 19.3,
+      "sea_temp_c": 19.2,
       "next_high_tide": {
         "time": "2026-08-08T01:00",
         "height_m": 0.29
@@ -3356,19 +3356,19 @@
     "lat": -5.876,
     "lng": -35.165,
     "youtube_id": "yenIUzAsiBY",
-    "fetched_at": 1786132873,
+    "fetched_at": 1786136297,
     "weather": {
-      "air_temp_c": 26.5,
-      "wind_kmh": 12.9,
-      "wind_dir": 111,
-      "uv": 0.4,
-      "cloud_pct": 48,
+      "air_temp_c": 25.9,
+      "wind_kmh": 11.5,
+      "wind_dir": 113,
+      "uv": 0.0,
+      "cloud_pct": 45,
       "precip_mm": 0.0
     },
     "surf": {
       "wave_height_m": 0.84,
       "wave_period_s": 5.9,
-      "wave_dir": 98
+      "wave_dir": 97
     },
     "water": {
       "sea_temp_c": 27.3,

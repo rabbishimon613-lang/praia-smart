@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1786100914,
+  "fetched_at": 1786112330,
   "alerts": [
     {
       "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo",
@@ -14,6 +14,28 @@
     },
     {
       "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55290",
+      "event": "Tempestade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-08-07 00:00:00.0",
+      "end": "2026-08-07 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 07/08/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Oeste Catarinense, Presidente Prudente, Metropolitana de Curitiba, Vale do Itajaí, Campinas, Bauru, Piracicaba, Grande Florianópolis, Sul/Sudoeste de Minas, Itapetininga, Centro Ocidental Paranaense, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Sudoeste Paranaense, Oeste Paranaense, Araraquara, Pantanais Sul Mato-grossense, Leste de Mato Grosso do Sul, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Centro Oriental Paranaense, Norte Catarinense, Baixadas, Centro Fluminense, Sul Catarinense, Metropolitana de São Paulo, Assis, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Zona da Mata, Centro-Sul Paranaense, Serrana, Centro Norte de Mato Grosso do Sul, Campo das Vertentes, Araçatuba"
+    },
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55289",
+      "event": "Tempestade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-08-07 08:40:00.0",
+      "end": "2026-08-07 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 07/08/2026 08:40. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Oeste Catarinense, Presidente Prudente, Metropolitana de Curitiba, Campinas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Itapetininga, Centro Ocidental Paranaense, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Sudoeste Paranaense, Oeste Paranaense, Araraquara, Pantanais Sul Mato-grossense, Leste de Mato Grosso do Sul, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Centro Oriental Paranaense, Norte Catarinense, Baixadas, Centro Fluminense, Metropolitana de São Paulo, Assis, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Zona da Mata, Centro-Sul Paranaense, Centro Norte de Mato Grosso do Sul, Campo das Vertentes, Araçatuba"
+    },
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
       "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55287",
       "event": "Tempestade",
       "severity": "perigo potencial",
@@ -22,17 +44,6 @@
       "end": "2026-08-07 23:53:00.0",
       "description": "INMET publica aviso iniciando em: 07/08/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
       "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Oeste Catarinense, Metropolitana de Curitiba, Campinas, Bauru, Sul/Sudoeste de Minas, Itapetininga, Noroeste Rio-grandense, Centro Ocidental Paranaense, Noroeste Paranaense, Macro Metropolitana Paulista, Presidente Prudente, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Sudoeste Paranaense, Oeste Paranaense, Leste de Mato Grosso do Sul, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Centro Oriental Paranaense, Metropolitana de São Paulo, Assis, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Centro-Sul Paranaense, Norte Catarinense, Piracicaba, Zona da Mata"
-    },
-    {
-      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55286",
-      "event": "Tempestade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-08-07 00:00:00.0",
-      "end": "2026-08-07 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 07/08/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
-      "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Oeste Catarinense, Presidente Prudente, Metropolitana de Curitiba, Vale do Itajaí, Campinas, Bauru, Piracicaba, Grande Florianópolis, Sul/Sudoeste de Minas, Itapetininga, Centro Ocidental Paranaense, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Sudoeste Paranaense, Oeste Paranaense, Araraquara, Pantanais Sul Mato-grossense, Leste de Mato Grosso do Sul, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Centro Oriental Paranaense, Norte Catarinense, Baixadas, Centro Fluminense, Sul Catarinense, Metropolitana de São Paulo, Assis, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Zona da Mata, Centro-Sul Paranaense, Serrana, Centro Norte de Mato Grosso do Sul, Campo das Vertentes, Araçatuba"
     },
     {
       "title": "Aviso de Vendaval. Severidade Grau: Perigo Potencial",

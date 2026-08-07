@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1786027981,
+  "fetched_at": 1786062199,
   "alerts": [
     {
       "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo",
@@ -77,28 +77,6 @@
       "end": "2026-08-07 22:00:00.0",
       "description": "INMET publica aviso iniciando em: 07/08/2026 10:30. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
       "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Sul Cearense, Vale São-Franciscano da Bahia, Zona da Mata, Ocidental do Tocantins, Central Potiguar, Sudeste Piauiense, Sertões Cearenses, Centro-Sul Mato-grossense, Sul Goiano, Oeste Potiguar, Vale do Rio Doce, Sertão Pernambucano, São Francisco Pernambucano, Centro-Norte Piauiense, Sudeste Paraense, Nordeste Mato-grossense, Sertão Paraibano, Oeste de Minas, Norte de Minas, Campo das Vertentes, Oriental do Tocantins, Sul/Sudoeste de Minas, Norte Mato-grossense, Sudoeste Paraense, Sudeste Mato-grossense, Norte Goiano, Sul Maranhense, Jaguaribe, Metropolitana de Belo Horizonte, Sudoeste Piauiense, Oeste Maranhense, Centro Norte Baiano, Borborema, Jequitinhonha, Extremo Oeste Baiano, Centro-Sul Cearense, Noroeste Fluminense, Sul Amazonense, Noroeste Goiano, Centro Fluminense, Noroeste de Minas, Leste Maranhense, Sudoeste Mato-grossense, Centro Maranhense, Centro Sul Baiano, Distrito Federal, Noroeste Cearense, Vale do Mucuri, Centro Amazonense, Metropolitana do Rio de Janeiro, Sul Fluminense, Centro Norte de Mato Grosso do Sul"
-    },
-    {
-      "title": "Aviso de Vendaval. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55267",
-      "event": "Vendaval",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-08-06 00:00:00.0",
-      "end": "2026-08-06 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 06/08/2026 00:00. Vento variando entre 40 km/h e 60 km/h. Baixo risco de queda de galhos de árvores.",
-      "area": "Aviso para as Áreas: Zona da Mata, Sul Goiano, Central Espírito-santense, Leste de Mato Grosso do Sul, Triângulo Mineiro/Alto Paranaíba, Oeste de Minas, Campinas, Noroeste Espírito-santense, Vale do Rio Doce, Sul/Sudoeste de Minas, Centro Norte de Mato Grosso do Sul, Sul Espírito-santense, Campo das Vertentes, São José do Rio Preto, Ribeirão Preto, Sudeste Mato-grossense, Sul Fluminense, Noroeste Fluminense, Pantanais Sul Mato-grossense, Litoral Norte Espírito-santense, Vale do Paraíba Paulista, Baixadas, Centro Fluminense, Noroeste Goiano, Centro-Sul Mato-grossense, Sudoeste Mato-grossense, Metropolitana do Rio de Janeiro, Norte Fluminense, Metropolitana de Belo Horizonte, Sul Baiano"
-    },
-    {
-      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55266",
-      "event": "Tempestade",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-08-06 00:00:00.0",
-      "end": "2026-08-06 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 06/08/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
-      "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Vale do Itajaí, Leste de Mato Grosso do Sul, Campinas, Bauru, Piracicaba, Grande Florianópolis, Itapetininga, Sul/Sudoeste de Minas, Araçatuba, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Araraquara, Pantanais Sul Mato-grossense, Sudoeste de Mato Grosso do Sul, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Centro Oriental Paranaense, Norte Catarinense, Sul Catarinense, Centro Ocidental Paranaense, Metropolitana de São Paulo, Assis, Centro Norte de Mato Grosso do Sul, Litoral Sul Paulista, Ribeirão Preto, Centro-Sul Paranaense, Serrana, Triângulo Mineiro/Alto Paranaíba"
     }
   ]
 }

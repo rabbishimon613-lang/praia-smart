@@ -1,6 +1,17 @@
 {
-  "fetched_at": 1786189331,
+  "fetched_at": 1786190557,
   "alerts": [
+    {
+      "title": "Aviso de Baixa Umidade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55306",
+      "event": "Baixa Umidade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-08-09 12:00:00.0",
+      "end": "2026-08-09 18:00:00.0",
+      "description": "INMET publica aviso iniciando em: 09/08/2026 12:00. Umidade relativa do ar variando entre 30% e 20%. Baixo risco de incêndios florestais e à saúde.",
+      "area": "Aviso para as Áreas: Centro Goiano, Triângulo Mineiro/Alto Paranaíba, Leste Goiano, Central Mineira, Sul Cearense, Vale São-Franciscano da Bahia, Zona da Mata, Ocidental do Tocantins, Sudeste Piauiense, Sertões Cearenses, Centro-Sul Mato-grossense, Sul Goiano, Vale do Rio Doce, Presidente Prudente, São José do Rio Preto, São Francisco Pernambucano, Centro-Norte Piauiense, Nordeste Mato-grossense, Sertão Paraibano, Leste de Mato Grosso do Sul, Campinas, Oeste de Minas, Oeste Potiguar, Bauru, Piracicaba, Sul/Sudoeste de Minas, Centro Norte de Mato Grosso do Sul, Campo das Vertentes, Oriental do Tocantins, Norte Mato-grossense, Leste Rondoniense, Sudoeste Paraense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Norte Goiano, Sul Maranhense, Macro Metropolitana Paulista, Marília, Metropolitana de Belo Horizonte, Sudoeste Piauiense, Araraquara, Pantanais Sul Mato-grossense, Extremo Oeste Baiano, Sul Fluminense, Centro-Sul Cearense, Vale do Paraíba Paulista, Sul Amazonense, Noroeste Goiano, Sudoeste Mato-grossense, Sertão Pernambucano, Noroeste de Minas, Metropolitana de São Paulo, Assis, Sudeste Paraense, Leste Maranhense, Norte de Minas, Sudoeste de Mato Grosso do Sul, Itapetininga, Centro Sul Baiano, Distrito Federal, Centro Norte Baiano, Jequitinhonha, Centro Fluminense, Madeira-Guaporé, Jaguaribe, Centro Maranhense, Sul Espírito-santense, Central Potiguar, Noroeste Cearense"
+    },
     {
       "title": "Aviso de Vendaval. Severidade Grau: Perigo Potencial",
       "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55304",

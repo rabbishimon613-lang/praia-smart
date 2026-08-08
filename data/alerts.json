@@ -1,6 +1,50 @@
 {
-  "fetched_at": 1786185051,
+  "fetched_at": 1786189331,
   "alerts": [
+    {
+      "title": "Aviso de Vendaval. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55304",
+      "event": "Vendaval",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-08-09 00:00:00.0",
+      "end": "2026-08-09 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 09/08/2026 00:00. Vento variando entre 40 km/h e 60 km/h. Baixo risco de queda de galhos de árvores.",
+      "area": "Aviso para as Áreas: Presidente Prudente, São José do Rio Preto, Leste de Mato Grosso do Sul, Campinas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Centro Norte de Mato Grosso do Sul, Zona da Mata, Araçatuba, Marília, Sudoeste de Mato Grosso do Sul, Noroeste Paranaense, Araraquara, Pantanais Sul Mato-grossense, Sul Fluminense, Vale do Paraíba Paulista, Baixadas, Centro Fluminense, Assis, Macro Metropolitana Paulista, Sul Espírito-santense, Metropolitana do Rio de Janeiro, Ribeirão Preto, Norte Fluminense, Triângulo Mineiro/Alto Paranaíba, Campo das Vertentes, Norte Central Paranaense, Noroeste Fluminense, Itapetininga"
+    },
+    {
+      "title": "Aviso de Vendaval. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55303",
+      "event": "Vendaval",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-08-08 08:32:00.0",
+      "end": "2026-08-08 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 08/08/2026 08:32. Vento variando entre 40 km/h e 60 km/h. Baixo risco de queda de galhos de árvores.",
+      "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Serrana, Oeste Catarinense, Centro-Sul Mato-grossense, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Vale do Itajaí, Leste de Mato Grosso do Sul, Triângulo Mineiro/Alto Paranaíba, Campinas, Oeste de Minas, Bauru, Piracicaba, Grande Florianópolis, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Noroeste Rio-grandense, Centro Ocidental Paranaense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Araraquara, Sudoeste Paranaense, Oeste Paranaense, Pantanais Sul Mato-grossense, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Sul Goiano, Centro Oriental Paranaense, Sudoeste Mato-grossense, Norte Catarinense, Sul Catarinense, Centro Fluminense, Metropolitana de Porto Alegre, Metropolitana de São Paulo, Assis, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Zona da Mata, Centro-Sul Paranaense, Nordeste Rio-grandense, Norte Mato-grossense, Campo das Vertentes, Sudeste Rio-grandense, Baixadas"
+    },
+    {
+      "title": "Aviso de Tempestade. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55302",
+      "event": "Tempestade",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-08-08 08:30:00.0",
+      "end": "2026-08-08 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 08/08/2026 08:30. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia elétrica, estragos em plantações, queda de galhos de árvores e de alagamentos.",
+      "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Oeste Catarinense, Metropolitana de Curitiba, Vale do Itajaí, Bauru, Grande Florianópolis, Itapetininga, Centro Ocidental Paranaense, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Campinas, Sudoeste Paranaense, Oeste Paranaense, Sul Fluminense, Presidente Prudente, Sudeste Paranaense, Vale do Paraíba Paulista, Centro Oriental Paranaense, Norte Catarinense, Metropolitana de São Paulo, Assis, Litoral Sul Paulista, Leste de Mato Grosso do Sul, Centro-Sul Paranaense, Serrana, Piracicaba, Sul/Sudoeste de Minas, Sul Catarinense, Metropolitana do Rio de Janeiro"
+    },
+    {
+      "title": "Aviso de Vendaval. Severidade Grau: Perigo Potencial",
+      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55300",
+      "event": "Vendaval",
+      "severity": "perigo potencial",
+      "severity_rank": 1,
+      "start": "2026-08-08 00:00:00.0",
+      "end": "2026-08-08 23:59:00.0",
+      "description": "INMET publica aviso iniciando em: 08/08/2026 00:00. Vento variando entre 40 km/h e 60 km/h. Baixo risco de queda de galhos de árvores.",
+      "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Serrana, Oeste Catarinense, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Vale do Itajaí, Leste de Mato Grosso do Sul, Triângulo Mineiro/Alto Paranaíba, Campinas, Noroeste Rio-grandense, Bauru, Piracicaba, Grande Florianópolis, Centro Ocidental Rio-grandense, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Sul Baiano, Centro Ocidental Paranaense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Metropolitana de Porto Alegre, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Sudeste Rio-grandense, Araraquara, Sudoeste Paranaense, Oeste Paranaense, Pantanais Sul Mato-grossense, Central Espírito-santense, Nordeste Rio-grandense, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Sul Goiano, Litoral Norte Espírito-santense, Centro Oriental Paranaense, Sudoeste Mato-grossense, Norte Catarinense, Sul Catarinense, Baixadas, Centro Fluminense, Centro Oriental Rio-grandense, Metropolitana de São Paulo, Assis, Centro-Sul Mato-grossense, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Centro-Sul Paranaense, Norte Fluminense, Sul Espírito-santense"
+    },
     {
       "title": "Aviso de Vendaval. Severidade Grau: Perigo Potencial",
       "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55282",
@@ -11,17 +55,6 @@
       "end": "2026-08-08 23:59:00.0",
       "description": "INMET publica aviso iniciando em: 07/08/2026 00:00. Vento variando entre 40 km/h e 60 km/h. Baixo risco de queda de galhos de árvores.",
       "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Serrana, Oeste Catarinense, Sudoeste Rio-grandense, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Vale do Itajaí, Leste de Mato Grosso do Sul, Triângulo Mineiro/Alto Paranaíba, Campinas, Noroeste Rio-grandense, Bauru, Piracicaba, Grande Florianópolis, Centro Ocidental Rio-grandense, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Centro Ocidental Paranaense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Metropolitana de Porto Alegre, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Sudeste Rio-grandense, Araraquara, Sudoeste Paranaense, Oeste Paranaense, Pantanais Sul Mato-grossense, Nordeste Rio-grandense, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Sul Goiano, Centro Oriental Paranaense, Sudoeste Mato-grossense, Norte Catarinense, Sul Catarinense, Centro Oriental Rio-grandense, Metropolitana de São Paulo, Assis, Centro-Sul Mato-grossense, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Centro-Sul Paranaense, Campo das Vertentes, Zona da Mata"
-    },
-    {
-      "title": "Aviso de Vendaval. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55279",
-      "event": "Vendaval",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-08-08 00:00:00.0",
-      "end": "2026-08-08 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 08/08/2026 00:00. Vento variando entre 40 km/h e 60 km/h. Baixo risco de queda de galhos de árvores.",
-      "area": "Aviso para as Áreas: Norte Pioneiro Paranaense, Serrana, Oeste Catarinense, Presidente Prudente, São José do Rio Preto, Metropolitana de Curitiba, Vale do Itajaí, Leste de Mato Grosso do Sul, Triângulo Mineiro/Alto Paranaíba, Campinas, Noroeste Rio-grandense, Bauru, Piracicaba, Grande Florianópolis, Centro Ocidental Rio-grandense, Sul/Sudoeste de Minas, Itapetininga, Centro Norte de Mato Grosso do Sul, Sul Baiano, Centro Ocidental Paranaense, Ribeirão Preto, Araçatuba, Sudeste Mato-grossense, Metropolitana de Porto Alegre, Noroeste Paranaense, Macro Metropolitana Paulista, Marília, Norte Central Paranaense, Sudoeste de Mato Grosso do Sul, Sudeste Rio-grandense, Araraquara, Sudoeste Paranaense, Oeste Paranaense, Pantanais Sul Mato-grossense, Central Espírito-santense, Nordeste Rio-grandense, Sul Fluminense, Sudeste Paranaense, Vale do Paraíba Paulista, Sul Goiano, Litoral Norte Espírito-santense, Centro Oriental Paranaense, Sudoeste Mato-grossense, Norte Catarinense, Sul Catarinense, Baixadas, Centro Fluminense, Centro Oriental Rio-grandense, Metropolitana de São Paulo, Assis, Centro-Sul Mato-grossense, Litoral Sul Paulista, Metropolitana do Rio de Janeiro, Centro-Sul Paranaense, Norte Fluminense, Sul Espírito-santense"
     }
   ]
 }

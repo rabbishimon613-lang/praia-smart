@@ -7,18 +7,18 @@
     "lat": -22.9817,
     "lng": -43.1907,
     "youtube_id": "qShdkqvyCww",
-    "fetched_at": 1786309944,
+    "fetched_at": 1786312123,
     "weather": {
-      "air_temp_c": 22.6,
-      "wind_kmh": 12.9,
-      "wind_dir": 200,
+      "air_temp_c": 22.4,
+      "wind_kmh": 13.5,
+      "wind_dir": 199,
       "uv": 0.0,
       "cloud_pct": 100,
       "precip_mm": 0.1
     },
     "surf": {
-      "wave_height_m": 2.12,
-      "wave_period_s": 10.8,
+      "wave_height_m": 2.1,
+      "wave_period_s": 10.6,
       "wave_dir": 188
     },
     "water": {
@@ -312,18 +312,18 @@
     "lat": -13.385,
     "lng": -38.911,
     "youtube_id": "f2qPp97kJ_I",
-    "fetched_at": 1786309944,
+    "fetched_at": 1786312123,
     "weather": {
-      "air_temp_c": 24.6,
-      "wind_kmh": 9.2,
-      "wind_dir": 89,
+      "air_temp_c": 24.3,
+      "wind_kmh": 9.0,
+      "wind_dir": 90,
       "uv": 0.0,
-      "cloud_pct": 20,
+      "cloud_pct": 13,
       "precip_mm": 0.0
     },
     "surf": {
       "wave_height_m": 0.66,
-      "wave_period_s": 6.0,
+      "wave_period_s": 5.95,
       "wave_dir": 93
     },
     "water": {
@@ -617,18 +617,18 @@
     "lat": -23.0024,
     "lng": -43.268,
     "youtube_id": "yugTx66OKu4",
-    "fetched_at": 1786309944,
+    "fetched_at": 1786312123,
     "weather": {
-      "air_temp_c": 22.9,
-      "wind_kmh": 11.2,
-      "wind_dir": 195,
+      "air_temp_c": 22.7,
+      "wind_kmh": 11.3,
+      "wind_dir": 188,
       "uv": 0.0,
-      "cloud_pct": 94,
+      "cloud_pct": 100,
       "precip_mm": 0.0
     },
     "surf": {
-      "wave_height_m": 2.1,
-      "wave_period_s": 10.75,
+      "wave_height_m": 2.08,
+      "wave_period_s": 10.55,
       "wave_dir": 188
     },
     "water": {
@@ -922,18 +922,18 @@
     "lat": -22.9888,
     "lng": -43.223,
     "youtube_id": null,
-    "fetched_at": 1786309944,
+    "fetched_at": 1786312123,
     "weather": {
-      "air_temp_c": 22.6,
-      "wind_kmh": 12.9,
-      "wind_dir": 200,
+      "air_temp_c": 22.4,
+      "wind_kmh": 13.5,
+      "wind_dir": 199,
       "uv": 0.0,
       "cloud_pct": 100,
       "precip_mm": 0.1
     },
     "surf": {
-      "wave_height_m": 2.12,
-      "wave_period_s": 10.8,
+      "wave_height_m": 2.1,
+      "wave_period_s": 10.6,
       "wave_dir": 188
     },
     "water": {
@@ -1227,18 +1227,18 @@
     "lat": -28.83,
     "lng": -49.2333,
     "youtube_id": "mWsPnnbHKE0",
-    "fetched_at": 1786309944,
+    "fetched_at": 1786312123,
     "weather": {
-      "air_temp_c": 13.6,
-      "wind_kmh": 11.7,
-      "wind_dir": 190,
+      "air_temp_c": 13.2,
+      "wind_kmh": 8.1,
+      "wind_dir": 211,
       "uv": 0.0,
       "cloud_pct": 2,
       "precip_mm": 0.0
     },
     "surf": {
       "wave_height_m": 2.0,
-      "wave_period_s": 9.05,
+      "wave_period_s": 9.1,
       "wave_dir": 174
     },
     "water": {
@@ -1532,17 +1532,17 @@
     "lat": -24.005,
     "lng": -46.404,
     "youtube_id": "afk7Axyf6vI",
-    "fetched_at": 1786309944,
+    "fetched_at": 1786312123,
     "weather": {
-      "air_temp_c": 19.3,
-      "wind_kmh": 5.4,
-      "wind_dir": 143,
+      "air_temp_c": 19.1,
+      "wind_kmh": 4.8,
+      "wind_dir": 138,
       "uv": 0.0,
       "cloud_pct": 100,
-      "precip_mm": 0.2
+      "precip_mm": 0.3
     },
     "surf": {
-      "wave_height_m": 1.94,
+      "wave_height_m": 1.96,
       "wave_period_s": 8.8,
       "wave_dir": 175
     },
@@ -1837,19 +1837,19 @@
     "lat": -22.895,
     "lng": -42.015,
     "youtube_id": "p6ppa-V3-KQ",
-    "fetched_at": 1786309944,
+    "fetched_at": 1786312123,
     "weather": {
-      "air_temp_c": 23.4,
-      "wind_kmh": 16.0,
+      "air_temp_c": 23.2,
+      "wind_kmh": 16.5,
       "wind_dir": 230,
       "uv": 0.0,
-      "cloud_pct": 19,
+      "cloud_pct": 22,
       "precip_mm": 0.0
     },
     "surf": {
-      "wave_height_m": 1.58,
-      "wave_period_s": 10.4,
-      "wave_dir": 200
+      "wave_height_m": 1.56,
+      "wave_period_s": 10.25,
+      "wave_dir": 199
     },
     "water": {
       "sea_temp_c": 22.8,
@@ -2142,19 +2142,19 @@
     "lat": -26.99,
     "lng": -48.63,
     "youtube_id": "j4Wne61IJ3I",
-    "fetched_at": 1786309944,
+    "fetched_at": 1786312123,
     "weather": {
       "air_temp_c": 13.1,
-      "wind_kmh": 18.2,
-      "wind_dir": 148,
+      "wind_kmh": 17.0,
+      "wind_dir": 144,
       "uv": 0.0,
-      "cloud_pct": 100,
-      "precip_mm": 0.1
+      "cloud_pct": 99,
+      "precip_mm": 0.0
     },
     "surf": {
-      "wave_height_m": 0.9,
+      "wave_height_m": 0.88,
       "wave_period_s": 4.95,
-      "wave_dir": 129
+      "wave_dir": 128
     },
     "water": {
       "sea_temp_c": 18.7,
@@ -2447,17 +2447,17 @@
     "lat": -23.97,
     "lng": -46.33,
     "youtube_id": "l69Dc4s9qxk",
-    "fetched_at": 1786309944,
+    "fetched_at": 1786312123,
     "weather": {
-      "air_temp_c": 19.8,
-      "wind_kmh": 3.6,
-      "wind_dir": 153,
+      "air_temp_c": 19.9,
+      "wind_kmh": 3.3,
+      "wind_dir": 151,
       "uv": 0.0,
       "cloud_pct": 100,
       "precip_mm": 0.2
     },
     "surf": {
-      "wave_height_m": 1.94,
+      "wave_height_m": 1.96,
       "wave_period_s": 8.7,
       "wave_dir": 176
     },
@@ -2752,17 +2752,17 @@
     "lat": -23.995,
     "lng": -46.22,
     "youtube_id": "v5Y6WsD577M",
-    "fetched_at": 1786309944,
+    "fetched_at": 1786312123,
     "weather": {
       "air_temp_c": 19.4,
-      "wind_kmh": 7.3,
-      "wind_dir": 142,
+      "wind_kmh": 5.9,
+      "wind_dir": 133,
       "uv": 0.0,
       "cloud_pct": 100,
-      "precip_mm": 0.2
+      "precip_mm": 0.1
     },
     "surf": {
-      "wave_height_m": 1.94,
+      "wave_height_m": 1.96,
       "wave_period_s": 8.65,
       "wave_dir": 176
     },
@@ -3057,19 +3057,19 @@
     "lat": -27.575,
     "lng": -48.426,
     "youtube_id": "v9ne2bJD01U",
-    "fetched_at": 1786309944,
+    "fetched_at": 1786312123,
     "weather": {
-      "air_temp_c": 12.3,
-      "wind_kmh": 15.1,
+      "air_temp_c": 12.4,
+      "wind_kmh": 16.3,
       "wind_dir": 172,
       "uv": 0.0,
-      "cloud_pct": 100,
-      "precip_mm": 0.4
+      "cloud_pct": 68,
+      "precip_mm": 0.3
     },
     "surf": {
-      "wave_height_m": 0.94,
-      "wave_period_s": 6.55,
-      "wave_dir": 161
+      "wave_height_m": 0.92,
+      "wave_period_s": 6.6,
+      "wave_dir": 160
     },
     "water": {
       "sea_temp_c": 19.0,
@@ -3362,13 +3362,13 @@
     "lat": -5.876,
     "lng": -35.165,
     "youtube_id": "yenIUzAsiBY",
-    "fetched_at": 1786309944,
+    "fetched_at": 1786312123,
     "weather": {
-      "air_temp_c": 26.3,
-      "wind_kmh": 14.3,
-      "wind_dir": 126,
+      "air_temp_c": 26.2,
+      "wind_kmh": 14.4,
+      "wind_dir": 130,
       "uv": 0.0,
-      "cloud_pct": 63,
+      "cloud_pct": 67,
       "precip_mm": 0.0
     },
     "surf": {

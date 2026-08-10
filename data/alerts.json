@@ -1,5 +1,5 @@
 {
-  "fetched_at": 1786316488,
+  "fetched_at": 1786326100,
   "alerts": [
     {
       "title": "Aviso de Ventos Costeiros. Severidade Grau: Perigo Potencial",
@@ -11,17 +11,6 @@
       "end": "2026-08-10 23:59:00.0",
       "description": "INMET publica aviso iniciando em: 09/08/2026 08:30. Intensificação dos ventos nas regiões litorâneas, movimentando dunas de areia sobre construções na orla.",
       "area": "Aviso para as Áreas: Sul Baiano, Metropolitana de Porto Alegre, Central Espírito-santense, Sul Fluminense, Litoral Norte Espírito-santense, Norte Catarinense, Sul Catarinense, Baixadas, Sudeste Rio-grandense, Vale do Itajaí, Vale do Paraíba Paulista, Metropolitana de São Paulo, Grande Florianópolis, Nordeste Rio-grandense, Norte Fluminense, Litoral Sul Paulista, Metropolitana de Curitiba, Metropolitana do Rio de Janeiro, Sul Espírito-santense"
-    },
-    {
-      "title": "Aviso de Vendaval. Severidade Grau: Perigo Potencial",
-      "link": "https://apiprevmet3.inmet.gov.br/avisos/rss/55308",
-      "event": "Vendaval",
-      "severity": "perigo potencial",
-      "severity_rank": 1,
-      "start": "2026-08-09 00:00:00.0",
-      "end": "2026-08-09 23:59:00.0",
-      "description": "INMET publica aviso iniciando em: 09/08/2026 00:00. Vento variando entre 40 km/h e 60 km/h. Baixo risco de queda de galhos de árvores.",
-      "area": "Aviso para as Áreas: Presidente Prudente, São José do Rio Preto, Leste de Mato Grosso do Sul, Campinas, Bauru, Piracicaba, Sul/Sudoeste de Minas, Centro Norte de Mato Grosso do Sul, Zona da Mata, Araçatuba, Marília, Sudoeste de Mato Grosso do Sul, Noroeste Paranaense, Araraquara, Pantanais Sul Mato-grossense, Sul Fluminense, Vale do Paraíba Paulista, Baixadas, Centro Fluminense, Assis, Macro Metropolitana Paulista, Sul Espírito-santense, Metropolitana do Rio de Janeiro, Ribeirão Preto, Norte Fluminense, Triângulo Mineiro/Alto Paranaíba, Campo das Vertentes, Norte Central Paranaense, Noroeste Fluminense, Itapetininga"
     }
   ]
 }
